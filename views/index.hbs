@@ -1,0 +1,176 @@
+<!-- main of the page -->
+<main id="main">
+  <!-- banner of the page -->
+  {{#if randomBanner}}
+  <section class="banner bg-full overlay" style="background-image: url(/uploads/{{randomBanner.filePath}});">
+    <div class="holder">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 text-left">
+            <h1 class="text-uppercase">
+              {{randomBanner.description}}
+            </h1>
+            <div class="text-left">
+              <a href="{{randomBanner.url}}" class="btn-primary text-center text-uppercase md-round">Visit all stores
+                <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{else}}
+  <section class="banner bg-full overlay">
+    <div class="holder">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 text-left">
+            <h1 class="text-uppercase">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam optio,
+            </h1>
+            <div class="text-left">
+              <a href="#" class="btn-primary text-center text-uppercase md-round">Visit all stores
+                <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{/if}}
+
+  <!-- latest coupon of the page -->
+  <section class="latest-coupon container pad-top-lg pad-bottom-md">
+    <div class="row">
+      <header class="col-xs-12 text-center header">
+        <h2 class="heading">Latest Coupon Codes &amp; Deals</h2>
+      </header>
+    </div>
+    <div class="row">
+      {{#each offers}}
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="coupon-box mar-bottom-xs">
+          <div class="img-holder">
+            <img src="{{Poster}}" alt="image description" class="img-resposnive" />
+          </div>
+          <div class="txt-holder">
+            <h3 class="heading6" style="">
+              <a href="coupon-detail.html">{{Description}}</a>
+            </h3>
+            <ul class="list-unstyled list-show">
+              <li><a href="#"><i class="icon icon-smile"></i> Verified</a></li>
+              <li><a href="#"><i class="icon icon-user"></i> Used</a></li>
+            </ul>
+            <a href="/offers-details/{{_id}}" class="btn-primary md-round text-center text-uppercase">Get Offer</a>
+            <time class="time text-center" datetime="{{Start_date}}">Expires On: {{End_date}}</time>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </section>
+
+  {{!-- <!-- blog sec of the page -->
+  <section class="blog-sec container pad-top-lg pad-bottom-md">
+    <div class="row">
+      <div class="header col-xs-12 header text-center">
+        <h3 class="heading">Latest Updates From Coupmy</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <!-- blog holder of the page -->
+        <div class="blog-holder mar-bottom-xs">
+          <div class="img-holder">
+            <a href="blog-detail.html"><img src="/user/images/img17.jpg" alt="image description"
+                class="img-resposnive" /></a>
+            <time class="time text-center" datetime="2017-02-03 20:00">12
+              <span class="txt">Sep</span></time>
+          </div>
+          <h4 class="heading3"><a href="blog-detail.html">Sed ut perspiciatis
+              unde omnis</a></h4>
+          <p>Lorem ipsum dolor sit amet onsect adipiscing elit sed do eiusmod
+            tempor incididun.</p>
+          <a href="blog-detail.html" class="btn-primary text-center text-uppercase">read more</a>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <!-- blog holder of the page -->
+        <div class="blog-holder mar-bottom-xs">
+          <div class="img-holder">
+            <a href="blog-detail.html"><img src="/user/images/img18.jpg" alt="image description"
+                class="img-resposnive" /></a>
+            <time class="time text-center" datetime="2017-02-03 20:00">12
+              <span class="txt">Sep</span></time>
+          </div>
+          <h4 class="heading3"><a href="blog-detail.html">Sed ut perspiciatis
+              unde omnis</a></h4>
+          <p>Lorem ipsum dolor sit amet onsect adipiscing elit sed do eiusmod
+            tempor incididun.</p>
+          <a href="blog-detail.html" class="btn-primary text-center text-uppercase">read more</a>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <!-- blog holder of the page -->
+        <div class="blog-holder mar-bottom-xs">
+          <div class="img-holder">
+            <a href="blog-detail.html"><img src="/user/images/img19.jpg" alt="image description"
+                class="img-resposnive" /></a>
+            <time class="time text-center" datetime="2017-02-03 20:00">12
+              <span class="txt">Sep</span></time>
+          </div>
+          <h4 class="heading3"><a href="blog-detail.html">Sed ut perspiciatis
+              unde omnis</a></h4>
+          <p>Lorem ipsum dolor sit amet onsect adipiscing elit sed do eiusmod
+            tempor incididun.</p>
+          <a href="blog-detail.html" class="btn-primary text-center text-uppercase">read more</a>
+        </div>
+      </div>
+    </div>
+  </section> --}}
+  <!-- store sec of the page -->
+  <section class="store-sec bg-grey pad-top-lg pad-bottom-lg">
+    <div class="container">
+      <div class="row">
+        <header class="col-xs-12 text-center header">
+          <h3 class="heading">More Than
+            <span class="clr">3000+ Stores</span>
+            In One Place!
+          </h3>
+          <p>Search your favourite store &amp; get many deals</p>
+        </header>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <ul class="list-unstyled store-logo">
+            <li><a href="#"><img src="/user/images/logo01.png" alt="LOGO" class="img-responsive" /></a></li>
+            <li><a href="#"><img src="/user/images/logo02.png" alt="LOGO" class="img-responsive" /></a></li>
+            <li><a href="#"><img src="/user/images/logo03.png" alt="LOGO" class="img-responsive" /></a></li>
+          </ul>
+          <div class="text-center">
+            <a href="#" class="btn-primary text-center text-uppercase md-round">Visit all stores</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- subscribe sec of the page -->
+  <section class="subscribe-sec bg-full" style="background-image: url(/user/images/img20.jpg);">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 text-center">
+          <h5>Subscribe To Our Newsletter</h5>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <form action="#" class="subscribe-form">
+            <fieldset>
+              <input type="email" class="form-control" placeholder="Email Address" />
+              <button type="submit" class="sub-btn"><i class="icon-airoplane"></i></button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- main of the page end -->

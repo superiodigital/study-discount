@@ -1,0 +1,96 @@
+<!-- Start Content-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Banners Table</h4>
+                    <a href="/admin/add-banners" class="btn btn-success waves-effect waves-light">
+                        <span class="btn-label"><i class="fa-solid fa-plus"></i></span>Add New
+                    </a>
+                    </p>
+
+                    <!-- Assuming you have included the necessary layout and header/footer -->
+
+                    <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Image</th>
+                                <th>Description</th>
+                                <th>Url</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each banner}}
+                            <tr>
+                                <td>{{@index}}</td>
+                                <td>
+                                    <img style="height: 50px; width: 80px;" src="/uploads/{{filePath}}" alt="Banner" />
+                                </td>
+                                <td
+                                    style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; word-wrap: break-word; line-height: 1.2;">
+                                    {{description}}
+                                </td>
+                                <td
+                                    style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; word-wrap: break-word; line-height: 1.2;">
+                                    {{url}}
+                                </td>
+                                <td>
+                                    {{!-- edit button --}}
+                                    <button type="button" class="btn btn-info waves-effect waves-light">
+                                        <i class="fa-solid fa-pencil"></i></button>
+                                    {{!-- delete button --}}
+                                    <button type="button" class="btn btn-danger waves-effect waves-light"
+                                        onclick="deleteBanner('{{_id}}')">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {{else}}
+                            <tr>
+                                <td colspan="6">No Banners available.</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+
+                    </table>
+
+                </div>
+                <!-- end card body-->
+            </div>
+            <!-- end card -->
+        </div><!-- end col-->
+        <!-- end col -->
+    </div>
+    <!-- end row -->
+</div>
+
+<script>
+    function deleteBanner(bannerId) {
+        if (confirm("Are you sure you want to delete this item?")) {
+            // User clicked OK, perform the delete action here
+            $.ajax({
+                url: '/admin/delete-banner/' + bannerId, // Replace with your backend endpoint URL
+                method: 'DELETE', // or 'POST', 'PUT', etc., depending on your backend
+                success: function (response) {
+                    if (response.status) {
+                        alert("Item not found!");
+                    } else {
+                        alert("Item deleted!");
+                        location.reload()
+                    }
+                    // Handle success response from the server
+                },
+                error: function (error) {
+                    alert("Error deleting item: " + error);
+                    // Handle error response from the server
+                }
+            });
+        } else {
+            // User clicked Cancel, do nothing or handle accordingly
+            alert("Item not deleted.");
+        }
+    }
+</script>

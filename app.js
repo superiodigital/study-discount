@@ -1,0 +1,53 @@
+import express from "express";
+import exphbs from "express-handlebars";
+import bodyParser from "body-parser";
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
+import userRoutes from "./routes/user/user.js";
+import adminRoutes from "./routes/admin/admin.js";
+import { connectDb } from "./config/database.js";
+import { config } from "dotenv";
+
+const app = express();
+
+// Load environment variables from .env file
+config();
+
+// database configuration
+connectDb()
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+
+app.use(session({
+  secret: 'secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
+
+
+// Set up Handlebars as the view engine
+app.engine(".hbs", exphbs.engine({ extname: ".hbs" }));
+app.set("view engine", ".hbs");
+app.set("view options", { layout: false });
+
+app.use(express.static("public"));
+
+// Parse JSON request bodies
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/',userRoutes)
+
+app.use("/admin",adminRoutes);
+
+// app.post("/submit-form", (req, res) => {
+//   res.send(req.body);
+// });
+
+// Start the server
+app.listen(3001, () => {
+  console.log("Server started on port 3001");
+});
