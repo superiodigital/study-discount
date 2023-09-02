@@ -47,26 +47,48 @@
       </header>
     </div>
     <div class="row">
+      {{#if offers}}
       {{#each offers}}
       <div class="col-xs-12 col-sm-6 col-md-3">
         <div class="coupon-box mar-bottom-xs">
           <div class="img-holder">
-            <img src="{{Poster}}" alt="image description" class="img-resposnive" />
+            <img src="/uploads/{{offerImage}}" alt="image description" class="img-resposnive" />
           </div>
           <div class="txt-holder">
             <h3 class="heading6" style="">
-              <a href="coupon-detail.html">{{Description}}</a>
+              <a href="coupon-detail.html">{{shortDescription}}</a>
             </h3>
             <ul class="list-unstyled list-show">
               <li><a href="#"><i class="icon icon-smile"></i> Verified</a></li>
               <li><a href="#"><i class="icon icon-user"></i> Used</a></li>
             </ul>
             <a href="/offers-details/{{_id}}" class="btn-primary md-round text-center text-uppercase">Get Offer</a>
-            <time class="time text-center" datetime="{{Start_date}}">Expires On: {{End_date}}</time>
+            <time class="time text-center" datetime="{{expiresFrom}}">Expires On: {{expiresTo}}</time>
           </div>
         </div>
       </div>
       {{/each}}
+      {{else}}
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="coupon-box mar-bottom-xs">
+          <div class="img-holder">
+            <img src="/offer_posters/demo_size_for_offer_poster.png" alt="image description" class="img-resposnive" />
+          </div>
+          <div class="txt-holder">
+            <h3 class="heading6" style="">
+              <a href="#">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+            </h3>
+            <ul class="list-unstyled list-show">
+              <li><a href="#"><i class="icon icon-smile"></i> Verified</a></li>
+              <li><a href="#"><i class="icon icon-user"></i> Used</a></li>
+            </ul>
+            <a href="#" class="btn-primary md-round text-center text-uppercase">Get Offer</a>
+            <time class="time text-center" datetime="0000-00-00">Expires On: 0000-00-00</time>
+          </div>
+        </div>
+      </div>
+      {{/if}}
+
     </div>
   </section>
 
@@ -129,7 +151,7 @@
     </div>
   </section> --}}
   <!-- store sec of the page -->
-  <section class="store-sec bg-grey pad-top-lg pad-bottom-lg">
+  {{!-- <section class="store-sec bg-grey pad-top-lg pad-bottom-lg">
     <div class="container">
       <div class="row">
         <header class="col-xs-12 text-center header">
@@ -153,7 +175,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
   <!-- subscribe sec of the page -->
   <section class="subscribe-sec bg-full" style="background-image: url(/user/images/img20.jpg);">
     <div class="container">

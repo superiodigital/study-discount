@@ -1,6 +1,6 @@
 import express from "express";
 import { getAdminHome, getAdminLogin, getCompanyUpdatesPage, postAdminLogin } from "../../controller/admin/adminController.js";
-import { deleteOfferFun, getAddOfferForm, getOfferManager } from "../../controller/admin/offerController.js";
+import { deleteOfferFun, getAddOfferForm, getEditOfferForm, getOfferManager, postAddOfferForm, postEditOfferForm } from "../../controller/admin/offerController.js";
 import { deleteBannerFun, getAddBannerPage, getBannerManger, postAddBanners } from "../../controller/admin/bannerController.js";
 import { isAdminAuthorize } from '../../middleware/admin-authorize.js'
 import { multerMiddleware } from "../../middleware/multer.js"
@@ -11,7 +11,8 @@ router.route("/login",).get(getAdminLogin).post(postAdminLogin);
 
 // offer routes
 router.get("/offers", getOfferManager);
-router.route("/add-offers").get(getAddOfferForm).post(multerMiddleware.single('file'))
+router.route("/add-offers").get(getAddOfferForm).post(multerMiddleware.single('file'), postAddOfferForm);
+router.route('/edit-offer/:offerId').get(getEditOfferForm).post(multerMiddleware.single('file'),postEditOfferForm)
 router.delete('/delete-offer/:offerId', deleteOfferFun)
 
 //banner routes

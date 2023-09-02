@@ -87,16 +87,41 @@
               <!-- nav of the page -->
               <nav id="nav">
                 <ul class="list-unstyled">
+                  {{#if homePage}}
                   <li class="active">
                     <a href="/">Home</a>
                   </li>
+                  {{else}}
+                  <li class="">
+                    <a href="/">Home</a>
+                  </li>
+                  {{/if}}
+                  {{#if aboutPage}}
+                  <li class="active"><a href="/about">About Us</a></li>
+                  {{else}}
                   <li><a href="/about">About Us</a></li>
+                  {{/if}}
+
+                  {{#if offerPage}}
+                  <li class="active"><a href="/offers">Offers</a></li>
+                  {{else}}
                   <li><a href="/offers">Offers</a></li>
-                  {{!-- <li><a href="/blog-updates">Updates</a></li> --}}
-                  {{!-- <li><a href="/">Offers</a></li> --}}
+                  {{/if}}
+
+                  {{#if contactPage}}
+                  <li class="active">
+                    <a href="/contact">Contact Us</a>
+                  </li>
+                  {{else}}
                   <li>
                     <a href="/contact">Contact Us</a>
                   </li>
+                  {{/if}}
+
+
+                  {{!-- <li><a href="/blog-updates">Updates</a></li> --}}
+                  {{!-- <li><a href="/">Offers</a></li> --}}
+
                 </ul>
               </nav>
             </div>

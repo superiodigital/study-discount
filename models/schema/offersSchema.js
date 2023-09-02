@@ -1,31 +1,26 @@
 import mongoose from 'mongoose';
 
 const offerSchema = new mongoose.Schema({
-  title: {
+  longDescription: {
     type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  discountPercentage: {
-    type: Number,
     required: true,
-    min: 0,
-    max: 100
   },
-  startDate: {
+  shortDescription: {
+    type: String,
+    required: true,
+  },
+  expiresFrom: {
     type: Date,
-    required: true
+    required: true,
   },
-  endDate: {
+  expiresTo: {
     type: Date,
-    required: true
+    required: true,
   },
-  imageUrl: {
-    type: String
-  }, // Assuming you store the image URL here
+  offerImage: {
+    type: String,
+    required: true,
+  },
 });
 
 const Offer = mongoose.model('Offer', offerSchema);

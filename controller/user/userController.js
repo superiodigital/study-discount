@@ -8,15 +8,20 @@ export const getHomePage = async (req, res) => {
     try {
         const banners = await Banner.find().lean()
         const randomBanner = banners[0]
-        const offers = await Offer.find().lean()
-        res.render('index', { randomBanner, offers })
+        const offers = await Offer.find().lean();
+        // Format the date strings in the offers array
+        offers.forEach((offer) => {
+            offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
+            offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
+        });
+        res.render('index', { randomBanner, offers, homePage: true })
     } catch (error) {
         res.status(500).send(error)
     }
 }
 
 export const getLoginPage = async (req, res) => {
-  res.render('login')
+    res.render('login')
 }
 
 export const postUserLogin = async (req, res) => {
@@ -110,7 +115,7 @@ export const postUserRegister = async (req, res) => {
 
 export const getAboutPage = async (req, res) => {
     try {
-        res.render('about')
+        res.render('about', { aboutPage: true })
     } catch (error) {
         res.status(500).send(error)
     }
@@ -118,7 +123,7 @@ export const getAboutPage = async (req, res) => {
 
 export const getContactPage = async (req, res) => {
     try {
-        res.render('contact')
+        res.render('contact',{contactPage:true })
     } catch (error) {
         res.status(500).send(error)
     }
@@ -126,7 +131,7 @@ export const getContactPage = async (req, res) => {
 
 export const getOffersPage = async (req, res) => {
     try {
-        res.render('offers')
+        res.render('offers',{offerPage:true})
     } catch (error) {
         res.status(500).send(error)
     }

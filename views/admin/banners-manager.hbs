@@ -76,10 +76,10 @@
                 method: 'DELETE', // or 'POST', 'PUT', etc., depending on your backend
                 success: function (response) {
                     if (response.status) {
-                        alert("Item not found!");
-                    } else {
                         alert("Item deleted!");
                         location.reload()
+                    } else {
+                        alert("Item not found!");
                     }
                     // Handle success response from the server
                 },

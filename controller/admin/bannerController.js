@@ -24,7 +24,7 @@ export const deleteBannerFun = async (req, res) => {
         const banner = await Banner.findById(bannerId);
 
         if (!banner) {
-            return res.status(404).json({ error: 'Banner not found' });
+            return res.status(404).json({ status: false, error: 'Banner not found' });
         }
 
         // Get the filename associated with the banner
@@ -35,11 +35,11 @@ export const deleteBannerFun = async (req, res) => {
 
         // Remove the file from the uploads folder
         await fs.unlink(`public/uploads/${filename}`);
-    
-        res.status(200).json({ message: 'Banner deleted successfully' });
+
+        res.status(200).json({ status: true, message: 'Banner deleted successfully' });
     } catch (error) {
         console.error(error); // Log the error for debugging
-        res.status(500).json({ error: 'Server error' });
+        res.status(500).json({ status: false, error: 'Server error' });
     }
 }
 
@@ -47,7 +47,6 @@ export const postAddBanners = async (req, res) => {
     try {
         const { description, url } = req.body;
         const imageUrl = req.file.filename; // The uploaded image filename
-        console.log(imageUrl);
 
         const newBanner = new Banner({ description, filePath: imageUrl, url });
         await newBanner.save();

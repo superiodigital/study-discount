@@ -6,7 +6,7 @@
                 <p class="sub-header">
                     Fill the fields with following the instructions
                 </p>
-                <form action="/admin/add-offers" method="POST" enctype="multipart/form-data">
+                <form action="/admin/edit-offer/{{offer._id}}" method="post" enctype="multipart/form-data">
 
                     <div class="col-12 mt-3" style="border: 2px dotted #ccc; padding: 15px;">
                         <label for="fileInput" class="btn btn-primary d-block mx-auto">
@@ -22,22 +22,25 @@
 
                     <div id="imagePreview" class="text-center mt-3">
                         <!-- The selected image will be displayed here -->
+                        <img style="height: 300px; " src="/uploads/{{offer.offerImage}}" alt="offImg">
                     </div>
 
                     <div class="mb-3">
                         <label for="message" class="form-label">Short Description</label>
-                        <textarea class="form-control" id="example-textarea" rows="3" name="shortDescription"></textarea>
+                        <textarea class="form-control" id="example-textarea" rows="3"
+                            name="shortDescription">{{offer.shortDescription}}</textarea>
                     </div>
 
                     <div class="mb-3">
                         <label for="message" class="form-label">Long Description</label>
-                        <textarea class="form-control" id="example-textarea" rows="5" name="longDescription"></textarea>
+                        <textarea class="form-control" id="example-textarea" rows="5"
+                            name="longDescription">{{offer.longDescription}}</textarea>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Expires from-to</label>
+                        <label class="form-label">Current:-{{offer.expiresFrom}} to {{offer.expiresTo}}</label>
                         <input type="text" id="range-datepicker" class="form-control"
-                            placeholder="2018-10-03 to 2018-10-10" name="fromTo">
+                            placeholder="Set empty for continue with old date" name="fromTo">
                     </div>
                     <button type="submit" class="btn btn--md btn-pink waves-effect waves-light"><span><i
                                 class="fa-solid fa-floppy-disk"></i></span> Save</button>
