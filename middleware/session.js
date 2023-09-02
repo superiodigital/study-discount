@@ -20,7 +20,6 @@ export const isAuthorize = (req, res, next) => {
 
     // User is authenticated, you can attach user information to the request if needed
     req.user = decodedToken; // Assuming your decoded token contains user info
-    console.log(decodedToken);
     // Call the next middleware
     next();
   } catch (error) {

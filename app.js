@@ -40,7 +40,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/',userRoutes)
-
 app.use("/admin",adminRoutes);
 
 // app.post("/submit-form", (req, res) => {
