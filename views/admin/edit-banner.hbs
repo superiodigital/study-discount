@@ -6,7 +6,7 @@
                 <p class="sub-header">
                     Fill the fields with following the instructions
                 </p>
-                <form action="/admin/add-banners" method="POST" enctype="multipart/form-data">
+                <form action="/admin/edit-banner/{{banner._id}}" method="POST" enctype="multipart/form-data">
 
                     <div class="col-12 mt-3" style="border: 2px dotted #ccc; padding: 15px;">
                         <label for="fileInput" class="btn btn-primary d-block mx-auto">
@@ -22,19 +22,19 @@
 
                     <div id="imagePreview" class="text-center mt-3">
                         <!-- The selected image will be displayed here -->
-                        <img src="" alt="image">
+                        <img style="height: 300px; " src="/uploads/{{banner.filePath}}" alt="offImg">
                     </div>
 
                     <div class="mb-3">
                         <label for="message" class="form-label">Short Description</label>
-                        <textarea class="form-control" id="example-textarea" rows="3" name="description"></textarea>
+                        <textarea class="form-control" id="example-textarea" rows="3" name="description">{{banner.description}}</textarea>
                     </div>
-                    
+
                     <div class="row mb-3">
                         <div class="">
                             <label for="message" class="form-label">Button URL:</label>
                             <input type="url" required parsley-type="url" name="url" class="form-control" id="webSite"
-                                placeholder="URL" />
+                                placeholder="URL" value="{{banner.url}}"/>
                         </div>
                     </div>
                     <button type="submit" class="btn btn--md btn-pink waves-effect waves-light"><span><i
@@ -46,31 +46,31 @@
     </div><!-- end col -->
 </div>
 
- <script>
-        function displayImage() {
-            const fileInput = document.getElementById('fileInput');
-            const imagePreview = document.getElementById('imagePreview');
-            const file = fileInput.files[0];
+<script>
+    function displayImage() {
+        const fileInput = document.getElementById('fileInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const file = fileInput.files[0];
 
-            if (file) {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
+        if (file) {
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
 
-                    reader.onload = function (e) {
-                        const img = new Image();
-                        img.src = e.target.result;
-                        img.style.maxWidth = '100%';
-                        img.style.maxHeight = '300px'; // Adjust the maximum height as needed
-                        imagePreview.innerHTML = '';
-                        imagePreview.appendChild(img);
-                    };
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.style.maxWidth = '100%';
+                    img.style.maxHeight = '300px'; // Adjust the maximum height as needed
+                    imagePreview.innerHTML = '';
+                    imagePreview.appendChild(img);
+                };
 
-                    reader.readAsDataURL(file);
-                } else {
-                    alert('Please select an image file.');
-                    fileInput.value = ''; // Reset the file input
-                    imagePreview.innerHTML = ''; // Clear the image preview
-                }
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please select an image file.');
+                fileInput.value = ''; // Reset the file input
+                imagePreview.innerHTML = ''; // Clear the image preview
             }
         }
-    </script>
+    }
+</script>

@@ -27,7 +27,7 @@ export const getAddOfferForm = async (req, res) => {
 export const postAddOfferForm = async (req, res) => {
     try {
         // Extract form data
-        const { longDescription, shortDescription, fromTo } = req.body;
+        const { longDescription, shortDescription, fromTo, offerPrice, realPrice, offerPercent } = req.body;
 
         // Access the new name of the uploaded offer image
         const newFileName = req.file.filename;
@@ -41,6 +41,7 @@ export const postAddOfferForm = async (req, res) => {
             shortDescription,
             expiresFrom, // Add expiresFrom field
             expiresTo,   // Add expiresTo field
+            offerPrice, realPrice, offerPercent,
             offerImage: newFileName, // Assuming your Offer model has an 'offerImage' field for the image name
         });
 
@@ -85,7 +86,7 @@ export const postEditOfferForm = async (req, res) => {
     try {
         console.log(req.body);
         const { offerId } = req.params
-        const { shortDescription, longDescription, fromTo,offerPrice,realPrice,offerPercent } = req.body;
+        const { shortDescription, longDescription, fromTo, offerPrice, realPrice, offerPercent } = req.body;
 
         const offer = await Offer.findById(offerId)
         if (!offer) {
@@ -93,6 +94,9 @@ export const postEditOfferForm = async (req, res) => {
         }
         offer.shortDescription = shortDescription
         offer.longDescription = longDescription
+        offer.offerPrice = offerPrice
+        offer.realPrice = realPrice
+        offer.offerPercent = offerPercent
         if (req.file?.filename) {
             console.log(req.file.filename);
             await fs.unlink(`public/uploads/${offer.offerImage}`);
@@ -104,7 +108,7 @@ export const postEditOfferForm = async (req, res) => {
             offer.expiresTo = expiresTo
         }
         offer.save()
-res.redirect('/admin/offers')
+        res.redirect('/admin/offers')
     } catch (error) {
         console.log(error);
         res.status(500).json({ status: false, error: 'Server error' });

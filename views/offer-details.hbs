@@ -53,26 +53,31 @@
           <aside id="sidebar">
             <section class="widget popular-widget">
               <h3 class="heading4">Register for this offer</h3>
-              <form action="">
-                <div class="col" style="margin-top: 15px; ">
-                  <input type="text" id="text" class="form-control" style="background-color:white ;"
-                    placeholder="Name*" />
+              <form id="offerForm" >
+                <div class="col" style="margin-top: 15px;">
+                  <input type="text" class="form-control" style="background-color:white;" placeholder="Name*"
+                    name="name" required />
+                  <span class="error-message" id="name-error"></span>
                 </div>
-                <div class="col" style="margin-top: 15px; ">
+                <div class="col" style="margin-top: 15px;">
+                  <input type="text" class="form-control" style="background-color:white;" placeholder="Email*"
+                    name="email" required />
+                  <span class="error-message" id="email-error"></span>
+                </div>
+                <div class="col" style="margin-top: 15px;">
+                  <input type="text" class="form-control" style="background-color:white;" placeholder="Phone*"
+                    name="phone" required />
+                  <span class="error-message" id="phone-error"></span>
+                </div>
+                {{!-- offerId --}}
+                <input type="text" value="{{offer._id}}" name="offerId" readonly hidden />
 
-                  <input type="text" id="text" class="form-control" style="background-color:white ;"
-                    placeholder="Email*" />
+                <div class="col d-flex" style="margin-top: 15px;">
+                  <button class="btn-primary text-center text-uppercase" style="width: 100%;" type="button"
+                    id="submitDetails">Submit Details</button>
                 </div>
-                <div class="col" style="margin-top: 15px; ">
-                  <input type="text" id="text" class="form-control" style="background-color:white ;"
-                    placeholder="Phone*" />
-                </div>
-                <div class="col d-flex " style="margin-top: 15px; ">
-                  <button class="btn-primary text-center text-uppercase" style="width: 100%;">Submit
-                    Details</button>
-                </div>
-
               </form>
+
             </section>
           </aside>
         </div>
@@ -80,3 +85,81 @@
     </div>
   </div>
 </main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    // Handle form submission via AJAX
+    $("#submitDetails").click(function () {
+      // Reset previous error messages
+      $(".error-message").text("");
+
+      // Validate the form fields
+      var name = $("input[name='name']").val();
+      var email = $("input[name='email']").val();
+      var phone = $("input[name='phone']").val();
+
+      var isValid = true;
+
+      // Validate name (required)
+      if (name === "") {
+        isValid = false;
+        $("#name-error").text("Name is required");
+      }
+
+      // Validate email (required and basic format)
+      if (email === "") {
+        isValid = false;
+        $("#email-error").text("Email is required");
+      } else if (!isValidEmail(email)) {
+        isValid = false;
+        $("#email-error").text("Invalid email format");
+      }
+
+      // Validate phone (required and numeric)
+      if (phone === "") {
+        isValid = false;
+        $("#phone-error").text("Phone is required");
+      } else if (!isValidPhone(phone)) {
+        isValid = false;
+        $("#phone-error").text("Invalid phone number format");
+      }
+
+      // If the form is valid, submit it via AJAX
+      if (isValid) {
+        var formData = $("#offerForm").serialize();
+
+        $.ajax({
+          type: "POST",
+          url: "/offers-registration",
+          data: formData,
+          success: function (response) {
+            if (response.status === true){
+            console.log("Form submitted successfully");
+            alert("Form submitted successfully!");
+            location.reload()
+            }
+          },
+          error: function (error) {
+            console.error("Error submitting form:", error);
+            alert("An error occurred while submitting the form. Please try again.");
+          }
+        });
+      }
+    });
+
+    // Helper functions for email and phone validation
+    function isValidEmail(email) {
+      // You can implement a more robust email validation regex if needed
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function isValidPhone(phone) {
+      // You can implement more specific phone number validation if needed
+      var phoneRegex = /^[0-9]+$/;
+      return phoneRegex.test(phone);
+    }
+  });
+</script>

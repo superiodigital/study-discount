@@ -36,9 +36,7 @@
   <!-- include the site stylesheet -->
   <style class="color_css"></style>
 
-  <link rel="shortcut icon"
-    href="https://static.vecteezy.com/system/resources/previews/011/883/287/original/modern-letter-c-colorful-logo-with-watter-drop-good-for-technology-logo-company-logo-dummy-logo-bussiness-logo-free-vector.jpg"
-    type="image/x-icon">
+  <link rel="shortcut icon" href="/logos/fav-icon.png" type="image/x-icon">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -50,6 +48,7 @@
     <!-- header of the page -->
     <header id="header">
       <!-- header top of the page -->
+      {{#if homePage}}
       <div class="header-top">
         <div class="container">
           <div class="row">
@@ -65,14 +64,27 @@
           </div>
         </div>
       </div>
+      {{/if}}
       <!-- header holder of the page -->
       <div class="header-holder container">
         <div class="row">
           <div class="col-xs-12">
             <div class="logo">
-              <a href="/"><img
-                  src="https://softr-assets-eu-shared.s3.eu-central-1.amazonaws.com/studio/blocks/assets/logo-placeholder.png"
-                  alt="Logo" class="img-responsive" /></a>
+              <a href="/"><img src="/logos/study-discount.png" alt="logo" class="img-responsive"></a>
+            </div>
+            <div class="search-cart hidden-xs">
+              <form action="#" class="search-form">
+                <fieldset>
+                  <select>
+                    <option value="0">Select Category</option>
+                    {{!-- <option value="1">Select Category</option>
+                    <option value="2">Select Category</option> --}}
+                  </select>
+                  <input type="search" class="form-control" placeholder="Enter Keyword . . .">
+                  <button type="submit" class="sub-btn"><i class="icon-search"></i></button>
+                </fieldset>
+              </form>
+              <a href="#" class="cart"><i class="fa-solid fa-percent"></i><span class="num round"></span></a>
             </div>
             <a href="#" class="nav-opener text-center pull-right hidden visible-xs"><i class="fa fa-bars"></i></a>
           </div>
@@ -196,7 +208,8 @@
     </footer>
     <!-- footer of the page end -->
   </div>
-  <script src="/scripts/main.js"></script>
+  {{!--
+  <script src="/user/scripts/main.js"></script> --}}
   <!-- include jQuery -->
   <script src="/user/js/jquery.js"></script>
   <!-- include jQuery -->

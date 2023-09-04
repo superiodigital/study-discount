@@ -56,3 +56,39 @@ export const postAddBanners = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+export const getEditBannerForm = async (req, res) => {
+    try {
+        const { bannerId } = req.params
+        const banner = await Banner.findById(bannerId).lean()
+        banner.expiresFrom = new Date(banner.expiresFrom).toLocaleDateString('en-GB');
+        banner.expiresTo = new Date(banner.expiresTo).toLocaleDateString('en-GB');
+        res.render('admin/edit-banner', { layout: 'admin-layout', banner })
+    } catch (error) {
+        res.status(500).json({ status: false, error: 'Server error' });
+    }
+}
+
+export const postEditBannerForm = async (req, res) => {
+    try {
+        const { bannerId } = req.params
+        const { description, url } = req.body;
+
+        const banner = await Banner.findById(bannerId)
+        if (!banner) {
+            res.status(404).send('not fount ')
+        }
+        banner.description = description
+        banner.url = url
+        if (req.file?.filename) {
+            console.log(req.file.filename);
+            await fs.unlink(`public/uploads/${banner.filePath}`);
+            banner.filePath = req.file.filename
+        }
+        banner.save()
+        res.redirect('/admin/banners')
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ status: false, error: 'Server error' });
+    }
+}

@@ -607,15 +607,13 @@ a:hover, a:focus, a.active {
 5. Logo / .logo
 -------------------------------------------------------------------*/
 .logo {
-  width: 100%;
+  width: 221px;
+  float: left;
   margin: 0 10px 0 0;
-  display: flex;
-  justify-content: center;
 }
 
 .logo img {
   width: 100%;
-  height: 50px;
 }
 
 /*------------------------------------------------------------------
