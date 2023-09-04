@@ -9,6 +9,15 @@ const offerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  realPrice: {
+    type: Number,
+  },
+  offerPrice: {
+    type: Number,
+  },
+  offerPercent: {
+    type: Number,
+  },
   expiresFrom: {
     type: Date,
     required: true,

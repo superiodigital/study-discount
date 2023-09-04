@@ -21,27 +21,23 @@
             <!-- post detail of the page -->
             <div class="post-detail style2">
               <div class="img-holder">
-                <img src="/user/images/img61.jpg" alt="image description" class="img-responsive">
+                <img src="/uploads/{{offer.offerImage}}" alt="image description" class="img-responsive">
               </div>
               <div class="txt-holder">
                 <header class="header">
-                  <div class="coupon-logo">
+                  {{!-- <div class="coupon-logo">
                     <img src="/user/images/logo01.png" alt="Red Cart" class="img-responsive">
-                  </div>
+                  </div> --}}
                   <div class="align-left">
-                    <h3 class="heading3">Upto 15% + Extra 10% Off Home &amp; Kitchen Appliances</h3>
+                    <h3 class="heading3">{{offer.shortDescription}}</h3>
                     <ul class="list-unstyled list-show">
                       <li><a href="#"><i class="icon icon-smile"></i> Verified</a></li>
                       <li><a href="#"><i class="icon icon-user"></i> 35 Used</a></li>
                     </ul>
                   </div>
                 </header>
-                <p><i>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.</i></p>
-                <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <footer class="footer">
+                <p>{{offer.longDescription}}</p>
+                {{!-- <footer class="footer">
                   <a href="#" class="btn-primary text-center text-uppercase">Get Coupon Code</a>
                   <ul class="list-unstyled social-network">
                     <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -49,7 +45,7 @@
                     <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                     <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                   </ul>
-                </footer>
+                </footer> --}}
               </div>
             </div>
           </article>

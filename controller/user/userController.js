@@ -7,7 +7,10 @@ import jwt from 'jsonwebtoken'
 export const getHomePage = async (req, res) => {
     try {
         const banners = await Banner.find().lean()
-        const randomBanner = banners[0]
+        const randomIndex = Math.floor(Math.random() * banners?.length);
+
+        const randomBanner = banners[randomIndex]
+        
         const offers = await Offer.find().lean();
         // Format the date strings in the offers array
         offers.forEach((offer) => {
@@ -123,7 +126,7 @@ export const getAboutPage = async (req, res) => {
 
 export const getContactPage = async (req, res) => {
     try {
-        res.render('contact',{contactPage:true })
+        res.render('contact', { contactPage: true })
     } catch (error) {
         res.status(500).send(error)
     }
@@ -131,7 +134,13 @@ export const getContactPage = async (req, res) => {
 
 export const getOffersPage = async (req, res) => {
     try {
-        res.render('offers',{offerPage:true})
+        const offers = await Offer.find().lean();
+        // Format the date strings in the offers array
+        offers.forEach((offer) => {
+            offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
+            offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
+        });
+        res.render('offers', { offerPage: true, offers })
     } catch (error) {
         res.status(500).send(error)
     }
@@ -139,7 +148,12 @@ export const getOffersPage = async (req, res) => {
 
 export const getSingleOfferPage = async (req, res) => {
     try {
-        res.render('offer-details')
+        const { offerId } = req.params
+        const offer = await Offer.findOne({ offerId }).lean()
+        if (!offer) {
+            return res.status(404).send({ message: 'No such offer found' })
+        }
+        res.render('offer-details', { offer })
     } catch (error) {
         res.status(500).send(error)
     }

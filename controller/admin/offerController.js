@@ -85,9 +85,7 @@ export const postEditOfferForm = async (req, res) => {
     try {
         console.log(req.body);
         const { offerId } = req.params
-        const { shortDescription, longDescription, fromTo } = req.body;
-
-
+        const { shortDescription, longDescription, fromTo,offerPrice,realPrice,offerPercent } = req.body;
 
         const offer = await Offer.findById(offerId)
         if (!offer) {
