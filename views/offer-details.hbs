@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12 text-center">
-            <h1>Coupon Single</h1>
+            <h1>Offer details</h1>
           </div>
         </div>
       </div>
@@ -53,21 +53,21 @@
           <aside id="sidebar">
             <section class="widget popular-widget">
               <h3 class="heading4">Register for this offer</h3>
-              <form id="offerForm" >
+              <form id="offerForm">
                 <div class="col" style="margin-top: 15px;">
                   <input type="text" class="form-control" style="background-color:white;" placeholder="Name*"
                     name="name" required />
-                  <span class="error-message" id="name-error"></span>
+                  <span class="error-message" id="name-error" style="color: red; font-size: 12px;"></span>
                 </div>
                 <div class="col" style="margin-top: 15px;">
                   <input type="text" class="form-control" style="background-color:white;" placeholder="Email*"
                     name="email" required />
-                  <span class="error-message" id="email-error"></span>
+                  <span class="error-message" id="email-error" style="color: red; font-size: 12px;"></span>
                 </div>
                 <div class="col" style="margin-top: 15px;">
                   <input type="text" class="form-control" style="background-color:white;" placeholder="Phone*"
                     name="phone" required />
-                  <span class="error-message" id="phone-error"></span>
+                  <span class="error-message" id="phone-error" style="color: red; font-size: 12px;"></span>
                 </div>
                 {{!-- offerId --}}
                 <input type="text" value="{{offer._id}}" name="offerId" readonly hidden />
@@ -135,10 +135,10 @@
           url: "/offers-registration",
           data: formData,
           success: function (response) {
-            if (response.status === true){
-            console.log("Form submitted successfully");
-            alert("Form submitted successfully!");
-            location.reload()
+            if (response.status === true) {
+              console.log("Form submitted successfully");
+              alert("Form submitted successfully!");
+              location.reload()
             }
           },
           error: function (error) {

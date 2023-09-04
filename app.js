@@ -13,13 +13,12 @@ const app = express();
 // Load environment variables from .env file
 config();
 
-// database configuration
-connectDb()
+// Database configuration
+connectDb();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
 
 app.use(session({
   secret: 'secret-key',
@@ -27,9 +26,18 @@ app.use(session({
   saveUninitialized: true
 }));
 
+// Create a Handlebars instance with custom helpers
+const hbs = exphbs.create({
+  extname: ".hbs",
+  helpers: {
+    incrementedIndex: function (index) {
+      return index + 1;
+    },
+  },
+});
 
 // Set up Handlebars as the view engine
-app.engine(".hbs", exphbs.engine({ extname: ".hbs" }));
+app.engine(".hbs", hbs.engine);
 app.set("view engine", ".hbs");
 app.set("view options", { layout: false });
 
@@ -39,12 +47,8 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/',userRoutes)
-app.use("/admin",adminRoutes);
-
-// app.post("/submit-form", (req, res) => {
-//   res.send(req.body);
-// });
+app.use('/', userRoutes);
+app.use("/admin", adminRoutes);
 
 // Start the server
 app.listen(3001, () => {
