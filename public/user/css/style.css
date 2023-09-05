@@ -114,7 +114,8 @@ a:hover, a:focus, a.active {
   top: 0;
   bottom: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.3);
+  width: 50%;
 }
 
 .bg-full {

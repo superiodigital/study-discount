@@ -31,7 +31,8 @@
 #content .comments-block .commment-area h3 a:hover,
 .widget .latest-news-list .news-nav a:hover,
 .service-sec .service .read-more:hover {
-  color: #ffb300; }
+  color: #ffb300;
+}
 
 #back-top:hover,
 #header .cart .num,
@@ -67,11 +68,14 @@
 #header .nav-holder .btn-primary:hover,
 .feature-sec .feature-box .btn-primary,
 .offer-holder .col:hover .offer,
-.latest-coupon .coupon-box .btn-primary {
-  background: #ffb300; }
+.latest-coupon .coupon-box .btn-primary,
+.banner .btn-primary {
+  background: #ffb300;
+}
 
 .pagination a:hover,
 .team.v2 .socail-network a:hover,
 .offer-holder .col:hover .offer,
 .offer-holder .col .btn-primary .code {
-  border-color: #ffb300; }
+  border-color: #ffb300;
+}
