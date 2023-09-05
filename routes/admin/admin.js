@@ -4,6 +4,7 @@ import { deleteOfferFun, getAddOfferForm, getEditOfferForm, getOfferManager, pos
 import { deleteBannerFun, getAddBannerPage, getBannerManger, getEditBannerForm, postAddBanners, postEditBannerForm } from "../../controller/admin/bannerController.js";
 import { isAdminAuthorize } from '../../middleware/admin-authorize.js'
 import { multerMiddleware } from "../../middleware/multer.js"
+import { getDownloadLeads } from "../../controller/admin/offerLeadsController.js";
 const router = express.Router();
 // basic routes
 router.get("/", isAdminAuthorize, getAdminHome);
@@ -24,5 +25,8 @@ router.route('/edit-banner/:bannerId').get(isAdminAuthorize, getEditBannerForm).
 
 // blog routes
 router.get("/company-updates", isAdminAuthorize, getCompanyUpdatesPage);
+
+// offer lead routes
+router.get('/download-offer', getDownloadLeads)
 
 export default router

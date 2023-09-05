@@ -7,7 +7,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12 text-left">
-            <h1 class="text-uppercase" >
+            <h1 class="text-uppercase">
               {{randomBanner.description}}
             </h1>
             <div class="text-left">
@@ -57,12 +57,12 @@
           </div>
           <div class="txt-holder">
             <h3 class="heading6" style="">
-              <a href="/offers-details/{{_id}}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; word-wrap: break-word; line-height: 1.2;">{{shortDescription}}</a>
+              <a href="/offers-details/{{_id}}" id="description-link">{{shortDescription}}</a>
             </h3>
-            <ul class="list-unstyled list-show">
+            {{!-- <ul class="list-unstyled list-show">
               <li><a href="#"><i class="icon icon-smile"></i> Verified</a></li>
               <li><a href="#"><i class="icon icon-user"></i> Used</a></li>
-            </ul>
+            </ul> --}}
             <a href="/offers-details/{{_id}}" class="btn-primary md-round text-center text-uppercase">Get Offer</a>
             <time class="time text-center" datetime="{{expiresFrom}}">Expires On: {{expiresTo}}</time>
           </div>
@@ -109,8 +109,8 @@
                   class="img-responsive"></a></li>
             <li><a href="https://bitc.edu.sg/" target="_blank"><img src="/logos/bitc-logo.png" alt="LOGO"
                   class="img-responsive"></a></li>
-            <li><a href="https://bakingandpastryinstitute.com/" target="_blank"><img src="/logos/the-baking-pastry-institute.png"
-                  alt="LOGO" class="img-responsive"></a></li>
+            <li><a href="https://bakingandpastryinstitute.com/" target="_blank"><img
+                  src="/logos/the-baking-pastry-institute.png" alt="LOGO" class="img-responsive"></a></li>
             <li><a href="https://superiodigital.com/" target="_blank"><img src="/logos/superio-logo.png" alt="LOGO"
                   class="img-responsive"></a></li>
             <li><a href="https://www.acetek.edu.sg/" target="_blank"><img src="/logos/Acetek_logo_rectangle.jpeg"
@@ -148,3 +148,16 @@
   </section>
 </main>
 <!-- main of the page end -->
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var link = document.getElementById("description-link");
+    var text = link.textContent;
+    var limit = 80;
+
+    if (text.length > limit) {
+      link.textContent = text.slice(0, limit) + " ...";
+    }
+  });
+</script>

@@ -36,11 +36,27 @@
                         <textarea class="form-control" id="example-textarea" rows="5"
                             name="longDescription">{{offer.longDescription}}</textarea>
                     </div>
-
+                    <div class="" style="display: flex; justify-content: space-between; width: 100%;">
+                        <div class="mb-3" style=" width: 100%; margin-right: 1px;">
+                            <label for="example-number" class="form-label">Actual Price</label>
+                            <input class="form-control" id="example-number" type="number" name="offerPrice"
+                                placeholder="Ex-2000" value="{{offer.realPrice}}" required>
+                        </div>
+                        <div class="mb-3" style=" width: 100%; margin-left: 1px;">
+                            <label for="example-number" class="form-label">Offer Price</label>
+                            <input class="form-control" id="example-number" type="number" name="realPrice"
+                                placeholder="Ex-2000" value="{{offer.offerPrice}}" required>
+                        </div>
+                        <div class="mb-3" style=" width: 100%; margin-left: 1px;">
+                            <label for="example-number" class="form-label">Percent</label>
+                            <input class="form-control" id="example-number" type="number" name="offerPercent"
+                                placeholder="ex-30" value="{{offer.offerPercent}}">
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <label class="form-label">Current:-{{offer.expiresFrom}} to {{offer.expiresTo}}</label>
                         <input type="text" id="range-datepicker" class="form-control"
-                            placeholder="Set empty for continue with old date" name="fromTo">
+                            placeholder="Set empty for continue with old date" name="fromTo" >
                     </div>
                     <button type="submit" class="btn btn--md btn-pink waves-effect waves-light"><span><i
                                 class="fa-solid fa-floppy-disk"></i></span> Save</button>
