@@ -50,7 +50,7 @@
     <div class="row">
       {{#if offers}}
       {{#each offers}}
-      <div class="col-xs-12 col-sm-6 col-md-3">
+      <div class="col-xs-12 col-sm-6 col-md-4">
         <div class="coupon-box mar-bottom-xs">
           <div class="img-holder">
             <img src="/uploads/{{offerImage}}" alt="image description" class="img-resposnive" />
@@ -59,14 +59,14 @@
             <h3 class="heading6" style="">
               <a href="/offers-details/{{_id}}" id="description-link-{{_id}}">{{shortDescription}}</a>
             </h3>
-            <a href="/offers-details/{{_id}}" class="btn-primary md-round text-center text-uppercase">Get Offer</a>
+            <a href="/offers-details/{{_id}}" class="btn-primary md-round text-center text-uppercase mt-5">Get Offer</a>
             <time class="time text-center" datetime="{{expiresFrom}}">Expires On: {{expiresTo}}</time>
           </div>
         </div>
       </div>
       {{/each}}
       {{else}}
-      <div class="col-xs-12 col-sm-6 col-md-3">
+      <div class="col-xs-12 col-sm-6 col-md-4">
         <div class="coupon-box mar-bottom-xs">
           <div class="img-holder">
             <img src="/offer_posters/demo_size_for_offer_poster.png" alt="image description" class="img-resposnive" />
