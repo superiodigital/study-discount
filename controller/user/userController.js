@@ -10,7 +10,7 @@ export const getHomePage = async (req, res) => {
         const randomIndex = Math.floor(Math.random() * banners?.length);
 
         const randomBanner = banners[randomIndex]
-        
+
         const offers = await Offer.find().lean();
         // Format the date strings in the offers array
         offers.forEach((offer) => {
@@ -149,7 +149,7 @@ export const getOffersPage = async (req, res) => {
 export const getSingleOfferPage = async (req, res) => {
     try {
         const { offerId } = req.params
-        const offer = await Offer.findOne({ offerId }).lean()
+        const offer = await Offer.findOne({ _id: offerId }).lean()
         if (!offer) {
             return res.status(404).send({ message: 'No such offer found' })
         }
