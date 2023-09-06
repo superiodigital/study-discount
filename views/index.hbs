@@ -11,7 +11,7 @@
               {{randomBanner.description}}
             </h1>
             <div class="text-left">
-              <a href="{{randomBanner.url}}" class="btn-primary text-center md-round" style="">Get this Offer
+              <a href="{{randomBanner.url}}" class="btn-primary text-center md-round" style="">Apply for this offer 
                 <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
             </div>
           </div>
@@ -29,7 +29,7 @@
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam optio,
             </h1>
             <div class="text-left">
-              <a href="#" class="btn-primary text-center text-uppercase md-round">Get this Offer
+              <a href="#" class="btn-primary text-center text-uppercase md-round">Apply for this offer 
                 <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
             </div>
           </div>
@@ -61,8 +61,8 @@
               <a href="/offers-details/{{_id}}" title="{{shortDescription}}"
                 id="description-link-{{_id}}">{{shortDescription}}</a>
             </h3>
-            <a href="/offers-details/{{_id}}" class="btn-primary md-round text-center text-uppercase mt-5">Get this
-              Offer <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
+            <a href="/offers-details/{{_id}}" class="btn-primary md-round text-center text-uppercase mt-5">Apply for
+              this offer <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
             <time class="time text-center" datetime="{{expiresFrom}}">Expires On: {{expiresTo}}</time>
           </div>
         </div>
@@ -80,9 +80,9 @@
             </h3>
             <ul class="list-unstyled list-show">
               <li><a href="#"><i class="icon icon-smile"></i> Verified</a></li>
-              <li><a href="#"><i class="icon icon-user"></i> Used</a></li>
+              {{!-- <li><a href="#"><i class="icon icon-user"></i> Used</a></li> --}}
             </ul>
-            <a href="#" class="btn-primary md-round text-center text-uppercase">Get this Offer <span><i
+            <a href="#" class="btn-primary md-round text-center text-uppercase">Apply for this offer <span><i
                   class="fa-solid fa-arrow-right-long"></i></span></a>
             <time class="time text-center" datetime="0000-00-00">Expires On: 0000-00-00</time>
           </div>

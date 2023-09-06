@@ -3997,8 +3997,8 @@ a.active {
 -------------------------------------------------------------------*/
 #back-top {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 33px;
+  bottom: 140px;
   font-size: 18px;
   line-height: 20px;
   color: #fff;
@@ -4017,7 +4017,7 @@ a.active {
 }
 
 #back-top.active {
-  opacity: 1;
+  opacity: 0.5;
   visibility: visible;
 }
 
