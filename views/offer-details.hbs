@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12 text-center">
-            <h1>Offer details</h1>
+            <h1>{{offer.shortDescription}}</h1>
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@
             <!-- post detail of the page -->
             <div class="post-detail style2">
               <div class="img-holder">
-                <img src="/uploads/{{offer.offerImage}}" alt="image description" class="img-responsive">
+                <img src="/uploads/{{offer.offerImage}}" alt="{{offer.shortDescription}}" class="img-responsive">
               </div>
               <div class="txt-holder">
                 <header class="header">
