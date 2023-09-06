@@ -73,8 +73,16 @@ Theme URI: http://www.htmlbeans.com/html/coupon/
   width: 100%;
 }
 
-.clearfix:after, #header:after, #header .search-cart:after, #header .nav-holder:after, #header.header2 .border:after, #header.header3 .border:after, #nav:after, #content .comments-block .commment-area .header:after, .register-holder:after {
-  content: '';
+.clearfix:after,
+#header:after,
+#header .search-cart:after,
+#header .nav-holder:after,
+#header.header2 .border:after,
+#header.header3 .border:after,
+#nav:after,
+#content .comments-block .commment-area .header:after,
+.register-holder:after {
+  content: "";
   display: block;
   clear: both;
 }
@@ -96,7 +104,9 @@ body {
   margin: 0;
 }
 
-a:hover, a:focus, a.active {
+a:hover,
+a:focus,
+a.active {
   text-decoration: none;
   outline: none;
 }
@@ -691,7 +701,8 @@ a:hover, a:focus, a.active {
 /*------------------------------------------------------------------
 7. Nav Active / .nav-active
 -------------------------------------------------------------------*/
-.nav-active #header.header2 #nav, .nav-active #header.header3 #nav {
+.nav-active #header.header2 #nav,
+.nav-active #header.header3 #nav {
   opacity: 1;
   visibility: visible;
 }
@@ -734,7 +745,7 @@ a:hover, a:focus, a.active {
 }
 
 .banner:after {
-  content: '';
+  content: "";
   display: inline-block;
   vertical-align: middle;
   width: 0;
@@ -1327,7 +1338,7 @@ a:hover, a:focus, a.active {
   line-height: 40px;
   color: #fff;
   font-weight: 400;
-  font-family: 'Lily Script One', cursive;
+  font-family: "Lily Script One", cursive;
   margin: 0;
 }
 
@@ -1801,7 +1812,8 @@ a:hover, a:focus, a.active {
   margin: 0 0 21px;
 }
 
-.testimonail-slider .slide q:before, .testimonail-slider .slide q:after {
+.testimonail-slider .slide q:before,
+.testimonail-slider .slide q:after {
   display: none;
 }
 
@@ -2113,7 +2125,7 @@ a:hover, a:focus, a.active {
   margin: 0 20px 20px 0;
 }
 
-.brand-list li:nth-child(5n+5) {
+.brand-list li:nth-child(5n + 5) {
   margin: 0 0 20px;
 }
 
@@ -2268,7 +2280,7 @@ a:hover, a:focus, a.active {
   margin: 0 30px 30px 0;
 }
 
-#content .store-logo li:nth-child(4n+4) {
+#content .store-logo li:nth-child(4n + 4) {
   margin: 0 0 20px;
 }
 
@@ -2426,6 +2438,13 @@ a:hover, a:focus, a.active {
   font-size: 12px;
   line-height: 14px;
   background: #33b86c;
+  padding: 20px;
+}
+
+#offerForm .register-form-field {
+  height: 50px !important;
+  padding: 12px !important;
+  border-radius: 5px !important;
 }
 
 .widget .heading4 {
@@ -2475,7 +2494,7 @@ a:hover, a:focus, a.active {
   margin: 0 9px 10px 0;
 }
 
-.widget .popular-list li:nth-child(3n+3) {
+.widget .popular-list li:nth-child(3n + 3) {
   width: 30.32%;
   margin: 0 0 10px;
 }
@@ -2912,7 +2931,8 @@ a:hover, a:focus, a.active {
   display: block;
 }
 
-.post-detail .quote q:after, .post-detail .quote q:before {
+.post-detail .quote q:after,
+.post-detail .quote q:before {
   display: none;
 }
 
@@ -3743,7 +3763,8 @@ a:hover, a:focus, a.active {
   margin: 6px 0 0;
 }
 
-#footer .contact-list .icon.icon-phone, #footer .contact-list .icon.icon-email {
+#footer .contact-list .icon.icon-phone,
+#footer .contact-list .icon.icon-email {
   font-size: 16px;
 }
 
