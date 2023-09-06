@@ -2183,7 +2183,7 @@ a:hover, a:focus, a.active {
 39. Content / #content
 -------------------------------------------------------------------*/
 #content {
-  width: 72%;
+  width: 60%;
   float: left;
   padding: 0 41px 0 0;
   overflow: hidden;
@@ -2351,7 +2351,7 @@ a:hover, a:focus, a.active {
 40. Sidebar / #sidebar
 -------------------------------------------------------------------*/
 #sidebar {
-  width: 28%;
+  width: 40%;
   float: left;
   padding: 38px 23px 0;
   overflow: hidden;

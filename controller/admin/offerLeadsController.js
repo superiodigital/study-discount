@@ -39,3 +39,12 @@ export const getDownloadLeads = async (req, res) => {
         console.log(error);
     }
 }
+
+export const getOfferLeadTable = (req,res) => {
+    try {
+       res.render('admin/offerLead-manager.hbs',{ layout: 'admin-layout' }) 
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
