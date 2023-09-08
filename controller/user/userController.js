@@ -153,7 +153,7 @@ export const getSingleOfferPage = async (req, res) => {
         if (!offer) {
             return res.status(404).send({ message: 'No such offer found' })
         }
-        res.render('offer-details', { offer })
+        res.render('offer-details', { offer })  
     } catch (error) {
         res.status(500).send(error)
     }

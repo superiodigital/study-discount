@@ -27,7 +27,7 @@ export const getAddOfferForm = async (req, res) => {
 export const postAddOfferForm = async (req, res) => {
     try {
         // Extract form data
-        const { longDescription, shortDescription, fromTo, offerPrice, realPrice, offerPercent } = req.body;
+        const { shortDescription, fromTo, offerPrice, realPrice, offerPercent, content: longDescription } = req.body;
 
         // Access the new name of the uploaded offer image
         const newFileName = req.file.filename;
@@ -47,8 +47,8 @@ export const postAddOfferForm = async (req, res) => {
 
         // Save the offer to the database
         await newOffer.save();
-
-        res.status(201).redirect('/admin/offers')
+        res.status(201).json({ success: true });
+        // res.status(201).redirect('/admin/offers')
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
@@ -59,7 +59,6 @@ export const postAddOfferForm = async (req, res) => {
 export const deleteOfferFun = async (req, res) => {
     try {
         const { offerId } = req.params;
-        console.log(offerId);
         const offer = await Offer.findById(offerId);
 
         if (!offer) {
@@ -84,10 +83,8 @@ export const deleteOfferFun = async (req, res) => {
 
 export const postEditOfferForm = async (req, res) => {
     try {
-        console.log(req.body);
         const { offerId } = req.params
-        const { shortDescription, longDescription, fromTo, offerPrice, realPrice, offerPercent } = req.body;
-
+        const { shortDescription, content: longDescription, fromTo, offerPrice, realPrice, offerPercent } = req.body;
         const offer = await Offer.findById(offerId)
         if (!offer) {
             res.status(404).send('not fount ')
@@ -98,7 +95,6 @@ export const postEditOfferForm = async (req, res) => {
         offer.realPrice = realPrice
         offer.offerPercent = offerPercent
         if (req.file?.filename) {
-            console.log(req.file.filename);
             await fs.unlink(`public/uploads/${offer.offerImage}`);
             offer.offerImage = req.file.filename
         }
@@ -108,7 +104,7 @@ export const postEditOfferForm = async (req, res) => {
             offer.expiresTo = expiresTo
         }
         offer.save()
-        res.redirect('/admin/offers')
+        res.status(201).json({success: true})
     } catch (error) {
         console.log(error);
         res.status(500).json({ status: false, error: 'Server error' });

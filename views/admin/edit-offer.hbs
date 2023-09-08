@@ -6,8 +6,7 @@
                 <p class="sub-header">
                     Fill the fields with following the instructions
                 </p>
-                <form action="/admin/edit-offer/{{offer._id}}" method="post" enctype="multipart/form-data">
-
+                <form id="editor-form" enctype="multipart/form-data">
                     <div class="col-12 mt-3" style="border: 2px dotted #ccc; padding: 15px;">
                         <label for="fileInput" class="btn btn-primary d-block mx-auto">
                             <i class="fa-solid fa-file-arrow-up"></i>
@@ -31,11 +30,10 @@
                             name="shortDescription">{{offer.shortDescription}}</textarea>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Long Description</label>
-                        <textarea class="form-control" id="example-textarea" rows="5"
-                            name="longDescription">{{offer.longDescription}}</textarea>
+                    <div id="snow-editor" style="height: 300px;">
+
                     </div>
+
                     <div class="" style="display: flex; justify-content: space-between; width: 100%;">
                         <div class="mb-3" style=" width: 100%; margin-right: 1px;">
                             <label for="example-number" class="form-label">Actual Price</label>
@@ -56,7 +54,7 @@
                     <div class="mb-3">
                         <label class="form-label">Current:-{{offer.expiresFrom}} to {{offer.expiresTo}}</label>
                         <input type="text" id="range-datepicker" class="form-control"
-                            placeholder="Set empty for continue with old date" name="fromTo" >
+                            placeholder="Set empty for continue with old date" name="fromTo">
                     </div>
                     <button type="submit" class="btn btn--md btn-pink waves-effect waves-light"><span><i
                                 class="fa-solid fa-floppy-disk"></i></span> Save</button>
@@ -94,4 +92,63 @@
             }
         }
     }
+</script>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+
+
+    document.getElementById('editor-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Get the HTML content from the Quill editor
+        const content = document.querySelector('.ql-editor').innerHTML;
+
+        // Create a FormData object to serialize the form data
+        const formData = new FormData(this);
+
+        // Append the content from Quill to the FormData
+        formData.append('content', content);
+        var id = '{{offer._id}}'
+        console.log(id)
+        // Send an HTTP POST request using AJAX (fetch)
+        fetch('/admin/edit-offer/'+ id, {
+            method: 'POST',
+            body: formData,
+        })
+            .then((response) => {
+                console.log(response)
+                if (response.ok) {
+                    location.href = '/admin/offers'
+                } else {
+                    throw new Error('Failed to save text content');
+                }
+            })
+            .then((data) => {
+                console.log(data.message);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    });
+</script>
+
+<script>
+    // Get the encoded HTML content from your offer object
+    const encodedHTML = "{{offer.longDescription}}";
+
+    // Create a temporary element
+    const tempElement = document.createElement('div');
+
+    // Set its innerHTML to the encoded HTML
+    tempElement.innerHTML = encodedHTML;
+
+    // Get the decoded text using innerText
+    const decodedHTML = tempElement.innerText;
+
+    // Get the target <div> where you want to display the decoded HTML
+    const contentDiv = document.getElementById('snow-editor');
+
+    // Set the decoded HTML as the innerHTML of the target <div>
+    contentDiv.innerHTML = decodedHTML;
 </script>

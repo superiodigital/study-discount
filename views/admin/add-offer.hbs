@@ -6,7 +6,7 @@
                 <p class="sub-header">
                     Fill the fields with following the instructions
                 </p>
-                <form action="/admin/add-offers" method="POST" enctype="multipart/form-data">
+                <form id="editor-form" enctype="multipart/form-data">
 
                     <div class="col-12 mt-3" style="border: 2px dotted #ccc; padding: 15px;">
                         <label for="fileInput" class="btn btn-primary d-block mx-auto">
@@ -30,10 +30,8 @@
                             required></textarea>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Long Description</label>
-                        <textarea class="form-control" id="example-textarea" rows="5" name="longDescription"
-                            required></textarea>
+                    <div id="snow-editor" style="height: 300px;">
+
                     </div>
 
                     <div class="" style="display: flex; justify-content: space-between; width: 100%;">
@@ -96,4 +94,42 @@
             }
         }
     }
+</script>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+
+
+    document.getElementById('editor-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Get the HTML content from the Quill editor
+        const content = document.querySelector('.ql-editor').innerHTML;
+
+        // Create a FormData object to serialize the form data
+        const formData = new FormData(this);
+
+        // Append the content from Quill to the FormData
+        formData.append('content', content);
+
+        // Send an HTTP POST request using AJAX (fetch)
+        fetch('/admin/add-offers', {
+            method: 'POST',
+            body: formData,
+        })
+            .then((response) => {
+                console.log(response)
+                if (response.ok) {
+                    location.href = '/admin/offers'
+                } else {
+                    throw new Error('Failed to save text content');
+                }
+            })
+            .then((data) => {
+                console.log(data.message);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    });
 </script>

@@ -22,12 +22,20 @@ router.route("/add-banners").get(getAddBannerPage).post(multerMiddleware.single(
 router.delete('/delete-banner/:bannerId', deleteBannerFun)
 router.route('/edit-banner/:bannerId').get(isAdminAuthorize, getEditBannerForm).post(multerMiddleware.single('file'), postEditBannerForm)
 
-
 // blog routes
 router.get("/company-updates", isAdminAuthorize, getCompanyUpdatesPage);
 
 // offer lead routes
 router.get('/download-offer', getDownloadLeads)
 router.get('/offerLeads-table', getOfferLeadTable)
+
+
+router.get('/test', (req, res) => {
+    res.render('test', { layout: 'admin-layout' })
+})
+
+router.post('/save', multerMiddleware.single('file'), (req, res) => {
+    console.log(req.body)
+})
 
 export default router
