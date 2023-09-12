@@ -16,7 +16,7 @@ const offerLeadsSchema = new mongoose.Schema({
     offerId: {
         type: String,
         required: true,
-        ref: "Offer"
+        ref: "offer"
     },
 });
 
