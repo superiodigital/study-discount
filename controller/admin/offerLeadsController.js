@@ -27,7 +27,6 @@ export const getDownloadLeads = async (req, res) => {
         const month = String(now.getMonth() + 1).padStart(2, '0');
         const year = now.getFullYear();
         const filename = `OfferLeadData_${day}-${month}-${year}.xlsx`;
-
         // Set content type and headers for the download
         res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
