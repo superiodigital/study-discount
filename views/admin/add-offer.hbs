@@ -7,7 +7,31 @@
                     Fill the fields with following the instructions
                 </p>
                 <form id="editor-form" enctype="multipart/form-data">
-
+                    <div class="row mb-3">
+                        <div class="">
+                            <label for="message" class="form-label">Name</label>
+                            <input type="text" required parsley-type="name" name="name" class="form-control"
+                                placeholder="Name" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="">
+                            <label for="message" class="form-label">Enter a slug</label>
+                            <input type="text"  parsley-type="slug" name="slug" class="form-control"
+                                placeholder="Slug" required />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="example-select" class="form-label">Select Category</label>
+                        <select class="form-select" id="example-select" name="category">
+                            <option value="">Select category</option>
+                            {{#each categories}}
+                            <option value="{{_id}}">{{name}}</option>
+                            {{else}}
+                            <option>No Categories available.</option>
+                            {{/each}}
+                        </select>
+                    </div>
                     <div class="col-12 mt-3" style="border: 2px dotted #ccc; padding: 15px;">
                         <label for="fileInput" class="btn btn-primary d-block mx-auto">
                             <i class="fa-solid fa-file-arrow-up"></i>

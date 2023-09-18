@@ -1,3 +1,4 @@
+import Category from "../../models/schema/categorySchema.js";
 import Offer from "../../models/schema/offersSchema.js"
 import fs from 'fs/promises';
 
@@ -18,7 +19,8 @@ export const getOfferManager = async (req, res) => {
 
 export const getAddOfferForm = async (req, res) => {
     try {
-        res.render('admin/add-offer', { layout: 'admin-layout' })
+        const categories = await Category.find().lean().select('name')
+        res.render('admin/add-offer', { layout: 'admin-layout', categories })
     } catch (error) {
         res.status(500).send(error)
     }
@@ -27,18 +29,26 @@ export const getAddOfferForm = async (req, res) => {
 export const postAddOfferForm = async (req, res) => {
     try {
         // Extract form data
-        const { shortDescription, fromTo, offerPrice, realPrice, offerPercent, content: longDescription } = req.body;
+        const { name, slug,category, shortDescription, fromTo, offerPrice, realPrice, offerPercent, content: longDescription } = req.body;
 
         // Access the new name of the uploaded offer image
         const newFileName = req.file.filename;
 
         // Split the fromTo date range into expiresFrom and expiresTo
         const [expiresFrom, expiresTo] = fromTo.split(' to ');
-
+        const slugExist = await Offer.findOne({ slug: slug });
+        let slugConfirm = slug;
+        if (slugExist) {
+            // Handle duplicate slug here, maybe by appending a unique identifier
+            slugConfirm = `${slug}?=${Date.now()}`;
+        }
         // Create a new Offer document
         const newOffer = new Offer({
+            name,
+            slug: slugConfirm,
             longDescription,
             shortDescription,
+            category,
             expiresFrom, // Add expiresFrom field
             expiresTo,   // Add expiresTo field
             offerPrice, realPrice, offerPercent,
@@ -122,3 +132,4 @@ export const getEditOfferForm = async (req, res) => {
         res.status(500).json({ status: false, error: 'Server error' });
     }
 }
+

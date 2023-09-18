@@ -1,6 +1,17 @@
 import mongoose from 'mongoose';
 
 const offerSchema = new mongoose.Schema({
+  name: {
+    type: String,
+  },
+  slug: {
+    type: String,
+    unique: true,
+  },
+  category:{
+    type: String,
+    ref:'Category',
+  },
   longDescription: {
     type: String,
   },

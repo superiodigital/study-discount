@@ -2,7 +2,7 @@
 <main id="main">
   <!-- banner of the page -->
   {{#if randomBanner}}
-  <section class="banner bg-full overlay" style="background-image: url(/uploads/{{randomBanner.filePath}});">
+  <section class="banner bg-full overlay-home" style="background-image: url(/uploads/{{randomBanner.filePath}});">
     <div class="holder">
       <div class="container">
         <div class="row">
@@ -11,7 +11,7 @@
               {{randomBanner.description}}
             </h1>
             <div class="text-left">
-              <a href="{{randomBanner.url}}" class="btn-primary text-center md-round" style="">Apply for this offer 
+              <a href="{{randomBanner.url}}" class="btn-primary text-center md-round" style="">Apply for this offer
                 <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
             </div>
           </div>
@@ -20,7 +20,7 @@
     </div>
   </section>
   {{else}}
-  <section class="banner bg-full overlay">
+  <section class="banner bg-full overlay-home">
     <div class="holder">
       <div class="container">
         <div class="row">
@@ -29,7 +29,7 @@
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam optio,
             </h1>
             <div class="text-left">
-              <a href="#" class="btn-primary text-center text-uppercase md-round">Apply for this offer 
+              <a href="#" class="btn-primary text-center text-uppercase md-round">Apply for this offer
                 <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
             </div>
           </div>

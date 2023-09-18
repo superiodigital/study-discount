@@ -81,7 +81,6 @@ export const postEditBannerForm = async (req, res) => {
         banner.description = description
         banner.url = url
         if (req.file?.filename) {
-            console.log(req.file.filename);
             await fs.unlink(`public/uploads/${banner.filePath}`);
             banner.filePath = req.file.filename
         }
@@ -92,3 +91,4 @@ export const postEditBannerForm = async (req, res) => {
         res.status(500).json({ status: false, error: 'Server error' });
     }
 }
+

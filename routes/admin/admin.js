@@ -5,6 +5,7 @@ import { deleteBannerFun, getAddBannerPage, getBannerManger, getEditBannerForm, 
 import { isAdminAuthorize } from '../../middleware/admin-authorize.js'
 import { multerMiddleware } from "../../middleware/multer.js"
 import { getDownloadLeads, getOfferLeadTable } from "../../controller/admin/offerLeadsController.js";
+import { deleteCategoriesFun, getAddCategories, getCategoryManage, getEditCategoryForm, postAddCategories, postEditCategoryForm } from "../../controller/admin/categoryController.js";
 const router = express.Router();
 // basic routes
 router.get("/", isAdminAuthorize, getAdminHome);
@@ -22,20 +23,26 @@ router.route("/add-banners").get(getAddBannerPage).post(multerMiddleware.single(
 router.delete('/delete-banner/:bannerId', deleteBannerFun)
 router.route('/edit-banner/:bannerId').get(isAdminAuthorize, getEditBannerForm).post(multerMiddleware.single('file'), postEditBannerForm)
 
+//category routes
+router.get('/categories', getCategoryManage)
+router.route("/add-categories").get(isAdminAuthorize, getAddCategories).post(multerMiddleware.single('file'), postAddCategories);
+router.delete('/delete-category/:categoryId', deleteCategoriesFun)
+router.route('/edit-category/:categoryId').get(isAdminAuthorize, getEditCategoryForm).post(multerMiddleware.single('file'), postEditCategoryForm)
+
 // blog routes
 router.get("/company-updates", isAdminAuthorize, getCompanyUpdatesPage);
 
 // offer lead routes
 router.get('/download-offer', getDownloadLeads)
-router.get('/offerLeads-table', getOfferLeadTable)
+router.get('/offerLeads-table', isAdminAuthorize, getOfferLeadTable)
 
 
-router.get('/test', (req, res) => {
-    res.render('test', { layout: 'admin-layout' })
-})
+// router.get('/test', (req, res) => {
+//     res.render('test', { layout: 'admin-layout' })
+// })
 
-router.post('/save', multerMiddleware.single('file'), (req, res) => {
-    console.log(req.body)
-})
+// router.post('/save', multerMiddleware.single('file'), (req, res) => {
+//     console.log(req.body)
+// })
 
 export default router

@@ -1,4 +1,5 @@
 import Banner from '../../models/schema/bannerSchema.js'
+import Category from '../../models/schema/categorySchema.js'
 import Offer from '../../models/schema/offersSchema.js'
 import User from '../../models/schema/userSchema.js'
 import bcrypt from 'bcrypt'
@@ -11,7 +12,7 @@ export const getHomePage = async (req, res) => {
 
         const randomBanner = banners[randomIndex]
 
-        const offers = await Offer.find().lean();
+        const offers = await Offer.find().lean()
         // Format the date strings in the offers array
         offers.forEach((offer) => {
             offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
@@ -153,7 +154,20 @@ export const getSingleOfferPage = async (req, res) => {
         if (!offer) {
             return res.status(404).send({ message: 'No such offer found' })
         }
-        res.render('offer-details', { offer })  
+        const relatedOffers = await Offer.find({
+            $and: [
+                { category: offer.category },
+                { _id: { $ne: offer._id } }
+            ]
+        }).lean();
+
+        relatedOffers.forEach((offer) => {
+            offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
+            offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
+        });
+
+        res.render('offer-details', { offer, relatedOffers });
+
     } catch (error) {
         res.status(500).send(error)
     }

@@ -19,13 +19,25 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Action</th>
+                                <th>Offer Name</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {{#each offerLeads}}
                             <tr>
-                                <td>Click download</td>
+                                <td>{{incrementedIndex @index}}</td>
+                                <td>
+                                    {{name}}
+                                </td>
+                                <td>{{email}}</td>
+                                <td>{{phone}}</td>
+                                <td>{{offerId.name}}</td>
                             </tr>
+                            {{else}}
+                            <tr>
+                                <td colspan="6">No Leads available.</td>
+                            </tr>
+                            {{/each}}
                         </tbody>
                     </table>
 

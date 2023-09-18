@@ -115,6 +115,22 @@ a.active {
   position: relative;
   z-index: 1;
 }
+.overlay-home {
+  position: relative;
+  z-index: 1;
+}
+
+.overlay-home:before {
+  position: absolute;
+  content: "";
+  z-index: -1;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.3);
+  width: 50%;
+}
 
 .overlay:before {
   position: absolute;
@@ -125,7 +141,7 @@ a.active {
   bottom: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.3);
-  width: 50%;
+  width: 100%;
 }
 
 .bg-full {
