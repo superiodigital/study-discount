@@ -12,7 +12,7 @@ export const getHomePage = async (req, res) => {
 
         const randomBanner = banners[randomIndex]
 
-        const offers = await Offer.find().lean()
+        const offers = (await Offer.find().lean().sort()).reverse()
         // Format the date strings in the offers array
         offers.forEach((offer) => {
             offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
@@ -135,7 +135,7 @@ export const getContactPage = async (req, res) => {
 
 export const getOffersPage = async (req, res) => {
     try {
-        const offers = await Offer.find().lean();
+        const offers = (await Offer.find().lean().sort()).reverse()
         // Format the date strings in the offers array
         offers.forEach((offer) => {
             offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
