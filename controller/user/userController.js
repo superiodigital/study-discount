@@ -182,27 +182,24 @@ export const getOfferSubmit = async (req, res) => {
 }
 
 export const searchOffers = async (req, res) => {
-    console.log('lllo');
     const selectedCategory = req.body.category; // Assuming you send the selected category as a POST parameter
     const keyword = req.body.keyword; // Assuming you send the keyword as a POST parameter
-
     try {
         let results;
 
         // If a category is selected, search by category
         if (selectedCategory) {
-            results = await Offer.find({ category: selectedCategory });
+            results = await Offer.find({ category: selectedCategory }).lean()
         } else {
             // If no category is selected, search by keyword across the "offers" collection
             results = await Offer.find({
                 $or: [
-                    { name: { $regex: keyword, $options: 'i' } }, // Case-insensitive keyword search on 'name' field
-                    { description: { $regex: keyword, $options: 'i' } }, // Add more fields to search if needed
+                    { shortDescription: { $regex: keyword, $options: 'i' } }, // Case-insensitive keyword search on 'name' field
+                    { longDescription: { $regex: keyword, $options: 'i' } }, // Add more fields to search if needed
                 ],
-            });
+            }).lean()
         }
-        console.log(results);
-        res.json(results);
+        res.render('offers', { offerPage: true, offers: results })
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
@@ -224,7 +221,6 @@ export const getSuggestions = async (req, res) => {
             name: offer.name,
             shortDescription: offer.shortDescription
         }));
-        console.log(suggestionData);
         res.json(suggestionData);
     } catch (error) {
         console.error('Error fetching suggestions:', error);

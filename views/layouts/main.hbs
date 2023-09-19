@@ -121,7 +121,7 @@
               <a href="/"><img src="/logos/study-discount.png" alt="logo" class="img-responsive"></a>
             </div>
             <div class="search-cart hidden-xs">
-              <form class="search-form" id="search-form">
+              <form action="/search" method="post" class="search-form" id="search-form">
                 <fieldset>
                   {{!-- <select id="category-select">
                     <option value="">Select Category</option>
@@ -129,8 +129,8 @@
                     <option value="{{_id}}">{{name}}</option>
                     {{/each}}
                   </select> --}}
-                  <input type="search" class="form-control" id="keyword-input" placeholder="Enter Keyword . . .">
-									<button type="submit" class="sub-btn"><i class="icon-search"></i></button>
+                  <input type="search" name="keyword" class="form-control" id="keyword-input" placeholder="Enter Keyword . . .">
+                  <button type="submit" class="sub-btn"><i class="icon-search"></i></button>
                   <!-- Suggestion modal -->
                   <div id="suggestion-modal">
                     <div id="suggestion-list"></div>
