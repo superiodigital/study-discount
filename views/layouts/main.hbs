@@ -294,7 +294,7 @@
             suggestions.forEach((suggestion) => {
               const suggestionItem = document.createElement("div");
               suggestionItem.className = "suggestion-item";
-              suggestionItem.innerHTML = `<a class="suggestion-elem" href="/offers-details/${suggestion.id}">${suggestion.shortDescription}</a>`;
+              suggestionItem.innerHTML = `<a class="suggestion-elem" href="/offers-details/${suggestion.slug}">${suggestion.shortDescription}</a>`;
               suggestionList.appendChild(suggestionItem);
             });
             // Display the suggestion modal

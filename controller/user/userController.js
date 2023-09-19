@@ -149,8 +149,8 @@ export const getOffersPage = async (req, res) => {
 
 export const getSingleOfferPage = async (req, res) => {
     try {
-        const { offerId } = req.params
-        const offer = await Offer.findOne({ _id: offerId }).lean()
+        const { offerSlug } = req.params
+        const offer = await Offer.findOne({ slug: offerSlug }).lean()
         if (!offer) {
             return res.status(404).send({ message: 'No such offer found' })
         }
@@ -223,7 +223,8 @@ export const getSuggestions = async (req, res) => {
         const suggestionData = suggestions.map((offer) => ({
             id: offer._id, // Assuming your offers have unique IDs
             name: offer.name,
-            shortDescription: offer.shortDescription
+            shortDescription: offer.shortDescription,
+            slug: offer.slug
         }));
         res.json(suggestionData);
     } catch (error) {

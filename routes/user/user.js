@@ -32,7 +32,7 @@ router.get("/contact", getContactPage);
 router.get("/offers", getOffersPage);
 // router.get("/blog-updates", getBlogUpdatesPage);
 // router.get("/blog-details", getBlogDetailsPage);
-router.get("/offers-details/:offerId", getSingleOfferPage);
+router.get("/offers-details/:offerSlug", getSingleOfferPage);
 router.get("/offer-submission", getOfferSubmit);
 router.post("/offers-registration", postRegisterOffer);
 
