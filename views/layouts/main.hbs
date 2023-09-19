@@ -123,14 +123,14 @@
             <div class="search-cart hidden-xs">
               <form class="search-form" id="search-form">
                 <fieldset>
-                  <select id="category-select">
+                  {{!-- <select id="category-select">
                     <option value="">Select Category</option>
                     {{#each commonData.categories}}
                     <option value="{{_id}}">{{name}}</option>
                     {{/each}}
-                  </select>
+                  </select> --}}
                   <input type="search" class="form-control" id="keyword-input" placeholder="Enter Keyword . . .">
-									{{!-- <button type="submit" class="sub-btn"><i class="icon-search"></i></button> --}}
+									<button type="submit" class="sub-btn"><i class="icon-search"></i></button>
                   <!-- Suggestion modal -->
                   <div id="suggestion-modal">
                     <div id="suggestion-list"></div>
@@ -294,7 +294,7 @@
             suggestions.forEach((suggestion) => {
               const suggestionItem = document.createElement("div");
               suggestionItem.className = "suggestion-item";
-              suggestionItem.innerHTML = `<a class="suggestion-elem" href="/offers-details/${suggestion.id}">${suggestion.name}</a>`;
+              suggestionItem.innerHTML = `<a class="suggestion-elem" href="/offers-details/${suggestion.id}">${suggestion.shortDescription}</a>`;
               suggestionList.appendChild(suggestionItem);
             });
             // Display the suggestion modal

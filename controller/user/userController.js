@@ -215,15 +215,16 @@ export const getSuggestions = async (req, res) => {
     try {
         // Fetch suggestions based on the keyword (you can customize this query)
         const suggestions = await Offer.find({
-            name: { $regex: keyword, $options: 'i' }, // Case-insensitive keyword search on the 'name' field
+            shortDescription: { $regex: keyword, $options: 'i' }, // Case-insensitive keyword search on the 'name' field
         }).limit(5); // Limit the number of suggestions
 
         // Extract the relevant data for suggestions
         const suggestionData = suggestions.map((offer) => ({
             id: offer._id, // Assuming your offers have unique IDs
             name: offer.name,
+            shortDescription: offer.shortDescription
         }));
-
+        console.log(suggestionData);
         res.json(suggestionData);
     } catch (error) {
         console.error('Error fetching suggestions:', error);
