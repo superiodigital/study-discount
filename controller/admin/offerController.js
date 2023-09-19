@@ -29,7 +29,7 @@ export const getAddOfferForm = async (req, res) => {
 export const postAddOfferForm = async (req, res) => {
     try {
         // Extract form data
-        const { name, slug,category, shortDescription, fromTo, offerPrice, realPrice, offerPercent, content: longDescription } = req.body;
+        const { name, slug, category, shortDescription, fromTo, offerPrice, realPrice, offerPercent, content: longDescription } = req.body;
 
         // Access the new name of the uploaded offer image
         const newFileName = req.file.filename;
@@ -94,16 +94,21 @@ export const deleteOfferFun = async (req, res) => {
 export const postEditOfferForm = async (req, res) => {
     try {
         const { offerId } = req.params
-        const { shortDescription, content: longDescription, fromTo, offerPrice, realPrice, offerPercent } = req.body;
+        const { shortDescription, content: longDescription, fromTo, offerPrice, realPrice, offerPercent,name,slug,category } = req.body;
         const offer = await Offer.findById(offerId)
         if (!offer) {
             res.status(404).send('not fount ')
         }
+        offer.name = name
+        offer.slug = slug
         offer.shortDescription = shortDescription
         offer.longDescription = longDescription
         offer.offerPrice = offerPrice
         offer.realPrice = realPrice
         offer.offerPercent = offerPercent
+        if (category !== '') {
+        offer.category = category 
+        }
         if (req.file?.filename) {
             await fs.unlink(`public/uploads/${offer.offerImage}`);
             offer.offerImage = req.file.filename
@@ -127,7 +132,8 @@ export const getEditOfferForm = async (req, res) => {
         const offer = await Offer.findById(offerId).lean()
         offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
         offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
-        res.render('admin/edit-offer', { layout: 'admin-layout', offer })
+        const categories = await Category.find().lean().select('name')
+        res.render('admin/edit-offer', { layout: 'admin-layout', offer, categories })
     } catch (error) {
         res.status(500).json({ status: false, error: 'Server error' });
     }
