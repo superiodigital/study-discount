@@ -104,21 +104,10 @@
       <div class="row">
         <div class="col-xs-12">
           <ul class="list-unstyled store-logo">
-            <li><a href="https://avisworldwide.com/" target="_blank"><img src="/logos/Avis-Final-Logo.png" alt="LOGO"
+            {{#each commonData.categories}}
+            <li><a href="{{url}}" target="_blank"><img src="/uploads/{{logo}}" alt="LOGO"
                   class="img-responsive"></a></li>
-            <li><a href="https://bitc.edu.sg/" target="_blank"><img src="/logos/bitc-logo.png" alt="LOGO"
-                  class="img-responsive"></a></li>
-            <li><a href="https://bakingandpastryinstitute.com/" target="_blank"><img
-                  src="/logos/the-baking-pastry-institute.png" alt="LOGO" class="img-responsive"></a></li>
-            <li><a href="https://superiodigital.com/" target="_blank"><img src="/logos/superio-logo.png" alt="LOGO"
-                  class="img-responsive"></a></li>
-            <li><a href="https://www.acetek.edu.sg/" target="_blank"><img src="/logos/Acetek_logo_rectangle.jpeg"
-                  alt="LOGO" class="img-responsive"></a></li>
-            {{!-- <li><a href="#"><img src="/user/images/logo06.png" alt="LOGO" class="img-responsive"></a></li>
-            <li><a href="#"><img src="/user/images/logo07.png" alt="LOGO" class="img-responsive"></a></li>
-            <li><a href="#"><img src="/user/images/logo08.png" alt="LOGO" class="img-responsive"></a></li>
-            <li><a href="#"><img src="/user/images/logo09.png" alt="LOGO" class="img-responsive"></a></li>
-            <li><a href="#"><img src="/user/images/logo10.png" alt="LOGO" class="img-responsive"></a></li> --}}
+            {{/each}}
           </ul>
           {{!-- <div class="text-center">
             <a href="#" class="btn-primary text-center text-uppercase md-round">Visit all stores</a>

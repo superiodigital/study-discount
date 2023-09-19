@@ -180,3 +180,53 @@ export const getOfferSubmit = async (req, res) => {
         res.status(500).send(error)
     }
 }
+
+export const searchOffers = async (req, res) => {
+    console.log('lllo');
+    const selectedCategory = req.body.category; // Assuming you send the selected category as a POST parameter
+    const keyword = req.body.keyword; // Assuming you send the keyword as a POST parameter
+
+    try {
+        let results;
+
+        // If a category is selected, search by category
+        if (selectedCategory) {
+            results = await Offer.find({ category: selectedCategory });
+        } else {
+            // If no category is selected, search by keyword across the "offers" collection
+            results = await Offer.find({
+                $or: [
+                    { name: { $regex: keyword, $options: 'i' } }, // Case-insensitive keyword search on 'name' field
+                    { description: { $regex: keyword, $options: 'i' } }, // Add more fields to search if needed
+                ],
+            });
+        }
+        console.log(results);
+        res.json(results);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+export const getSuggestions = async (req, res) => {
+    const keyword = req.query.keyword;
+
+    try {
+        // Fetch suggestions based on the keyword (you can customize this query)
+        const suggestions = await Offer.find({
+            name: { $regex: keyword, $options: 'i' }, // Case-insensitive keyword search on the 'name' field
+        }).limit(5); // Limit the number of suggestions
+
+        // Extract the relevant data for suggestions
+        const suggestionData = suggestions.map((offer) => ({
+            id: offer._id, // Assuming your offers have unique IDs
+            name: offer.name,
+        }));
+
+        res.json(suggestionData);
+    } catch (error) {
+        console.error('Error fetching suggestions:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}

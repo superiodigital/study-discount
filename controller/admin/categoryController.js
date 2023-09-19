@@ -24,11 +24,12 @@ export const postAddCategories = async (req, res) => {
     try {
         // Access the new name of the uploaded offer image
         const newFileName = req.file.filename;
-        const { name, description } = req.body;
+        const { name, description, url } = req.body;
         const newCategory = new Category({
             logo: newFileName,
             name,
-            description
+            description,
+            url
         })
         await newCategory.save()
         res.status(201).redirect('/admin/categories')
@@ -78,7 +79,7 @@ export const getEditCategoryForm = async (req, res) => {
 export const postEditCategoryForm = async (req, res) => {
     try {
         const { categoryId } = req.params
-        const { description, name } = req.body;
+        const { description, name, url } = req.body;
 
         const category = await Category.findById(categoryId)
         if (!category) {
@@ -86,6 +87,7 @@ export const postEditCategoryForm = async (req, res) => {
         }
         category.description = description
         category.name = name
+        category.url = url
         if (req.file?.filename) {
             await fs.unlink(`public/uploads/${category.logo}`);
             category.logo = req.file.filename

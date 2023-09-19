@@ -13,6 +13,10 @@ const categorySchema = new mongoose.Schema({
     type: String, // Assuming the logo is a file path or URL to the image
     required: true,
   },
+  url: {
+    type: String,
+    required: true
+  },
   createdAt: {
     type: Date,
     default: Date.now,

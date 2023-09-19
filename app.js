@@ -7,6 +7,7 @@ import userRoutes from "./routes/user/user.js";
 import adminRoutes from "./routes/admin/admin.js";
 import { connectDb } from "./config/database.js";
 import { config } from "dotenv";
+import addCommonDataToLocals from "./middleware/commonData.js";
 
 const app = express();
 
@@ -46,8 +47,7 @@ app.use(express.static("public"));
 // Parse JSON request bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use('/', userRoutes);
+app.use('/', addCommonDataToLocals, userRoutes);
 app.use("/admin", adminRoutes);
 
 // Start the server

@@ -12,8 +12,10 @@ import {
   getOffersPage,
   getRegisterPage,
   getSingleOfferPage,
+  getSuggestions,
   postUserLogin,
   postUserRegister,
+  searchOffers,
 } from "../../controller/user/userController.js";
 import { isAuthorize, isAuth } from "../../middleware/session.js";
 import { postRegisterOffer } from "../../controller/user/offerController.js";
@@ -33,6 +35,9 @@ router.get("/offers", getOffersPage);
 router.get("/offers-details/:offerId", getSingleOfferPage);
 router.get("/offer-submission", getOfferSubmit);
 router.post("/offers-registration", postRegisterOffer);
+
+router.post('/search',searchOffers);
+router.get('/getSuggestions',getSuggestions)
 
 // Export the router
 export default router;

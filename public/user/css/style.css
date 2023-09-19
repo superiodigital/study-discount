@@ -322,7 +322,7 @@ a.active {
 }
 
 #header .search-form .jcf-select {
-  min-width: 185px;
+  min-width: auto;
   height: 43px;
   margin: 0;
   border: none;
@@ -360,7 +360,7 @@ a.active {
   color: #777777;
   font-weight: 400;
   float: left;
-  width: 56%;
+  width: auto;
   height: 43px;
   background: none;
   border: none;

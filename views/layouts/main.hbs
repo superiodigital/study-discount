@@ -57,9 +57,38 @@
   <!-- Pixel Code for https://kidunotifier.com/ -->
   <script async src="https://kidunotifier.com/pixel/ko91rdm48bdtpuh0v532jw25ao76ru4r"></script>
   <!-- END Pixel Code -->
-  <script id="ACXConnectScript" type="text/javascript" src="https://kidumailer.com/websites/64f8674ec04ec/connect.js"></script>
+  <script id="ACXConnectScript" type="text/javascript"
+    src="https://kidumailer.com/websites/64f8674ec04ec/connect.js"></script>
 
+  <style>
+    /* Style for the suggestion modal */
+    #suggestion-modal {
+      margin-top: 45px;
+      display: none;
+      background-color: #ffb300;
+      border: 1px solid #ccc;
+      max-height: 150px;
+      overflow-y: auto;
+      width: 560px;
+      position: fixed;
+      z-index: 20;
+    }
 
+    .suggestion-item {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .suggestion-item:hover {
+      background-color: #f2f2f2;
+    }
+
+    .suggestion-elem {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
 </head>
 
 <body>
@@ -92,23 +121,32 @@
               <a href="/"><img src="/logos/study-discount.png" alt="logo" class="img-responsive"></a>
             </div>
             <div class="search-cart hidden-xs">
-              <form action="#" class="search-form">
+              <form class="search-form" id="search-form">
                 <fieldset>
-                  <select>
-                    <option value="0">Select Category</option>
-                    {{!-- <option value="1">Select Category</option>
-                    <option value="2">Select Category</option> --}}
+                  <select id="category-select">
+                    <option value="">Select Category</option>
+                    {{#each commonData.categories}}
+                    <option value="{{_id}}">{{name}}</option>
+                    {{/each}}
                   </select>
-                  <input type="search" class="form-control" placeholder="Enter Keyword . . .">
-                  <button type="submit" class="sub-btn"><i class="icon-search"></i></button>
+                  <input type="search" class="form-control" id="keyword-input" placeholder="Enter Keyword . . .">
+									{{!-- <button type="submit" class="sub-btn"><i class="icon-search"></i></button> --}}
+                  <!-- Suggestion modal -->
+                  <div id="suggestion-modal">
+                    <div id="suggestion-list"></div>
+                  </div>
                 </fieldset>
               </form>
+              <div id="search-results">
+                <!-- Display search results here -->
+              </div>
               <a href="#" class="cart"><i class="fa-solid fa-percent"></i><span class="num round">0</span></a>
             </div>
             <a href="#" class="nav-opener text-center pull-right hidden visible-xs"><i class="fa fa-bars"></i></a>
           </div>
         </div>
       </div>
+
       <!-- nav holder of the page -->
       <div class="nav-holder">
         <div class="container">
@@ -127,6 +165,7 @@
                     <a href="/">Home</a>
                   </li>
                   {{/if}}
+
                   {{#if aboutPage}}
                   <li class="active"><a href="/about">About</a></li>
                   {{else}}
@@ -184,7 +223,7 @@
                 <li>
                   <span class="icon icon-phone"></span>
                   <span class="tel"><a href="tel:+917907402599">+91 790 740 25 99</a>
-                 
+
                   </span>
                 </li>
                 <li>
@@ -210,8 +249,8 @@
         <div class="container">
           <div class="row">
             <div class="col-xs-12 col-sm-5">
-              <p>© 2023 All rights reserved. Product by <a
-                  style="color: orange;" href="https://superiodigital.com/" target="_blank"> Superio Digital Solutions</a></p>
+              <p>© 2023 All rights reserved. Product by <a style="color: orange;" href="https://superiodigital.com/"
+                  target="_blank"> Superio Digital Solutions</a></p>
             </div>
             <div class="col-xs-12 col-sm-7">
               <ul class="list-unstyled footer-nav">
@@ -227,6 +266,69 @@
     </footer>
     <!-- footer of the page end -->
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const categorySelect = document.getElementById("category-select");
+      const keywordInput = document.getElementById("keyword-input");
+      const searchResults = document.getElementById("search-results");
+      const suggestionModal = document.getElementById("suggestion-modal");
+      const suggestionList = document.getElementById("suggestion-list");
+
+      // Function to fetch and display suggestions as the user types
+      function fetchAndDisplaySuggestions(keyword) {
+        // Define the URL for your server's endpoint that provides suggestions
+        const url = `/getSuggestions?keyword=${encodeURIComponent(keyword)}`; // Replace with your actual endpoint URL
+
+        // Make a GET request to fetch suggestions
+        fetch(url)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`Network response was not ok: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((suggestions) => {
+            // Render suggestions in the modal
+            suggestionList.innerHTML = "";
+            suggestions.forEach((suggestion) => {
+              const suggestionItem = document.createElement("div");
+              suggestionItem.className = "suggestion-item";
+              suggestionItem.innerHTML = `<a class="suggestion-elem" href="/offers-details/${suggestion.id}">${suggestion.name}</a>`;
+              suggestionList.appendChild(suggestionItem);
+            });
+            // Display the suggestion modal
+            suggestionModal.style.display = "block";
+          })
+          .catch((error) => {
+            console.error("Error fetching suggestions:", error);
+          });
+      }
+
+      // Event listener for keyword input
+      keywordInput.addEventListener("input", function () {
+        const keyword = keywordInput.value.trim();
+
+        if (keyword.length > 0) {
+          fetchAndDisplaySuggestions(keyword);
+        } else {
+          suggestionModal.style.display = "none";
+        }
+      });
+
+      // Function to render search results as HTML
+      function renderResults(results) {
+        let html = "<ul>";
+        results.forEach((result) => {
+          html += `<li>${result.name}: ${result.description}</li>`;
+        });
+        html += "</ul>";
+        return html;
+      }
+    });
+  </script>
+
+
   {{!--
   <script src="/user/scripts/main.js"></script> --}}
   <!-- include jQuery -->
