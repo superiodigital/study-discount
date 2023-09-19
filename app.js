@@ -50,6 +50,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', addCommonDataToLocals, userRoutes);
 app.use("/admin", adminRoutes);
 
+// Define a 404 route
+app.use((req, res, next) => {
+  res.status(404).render('not-found-404', { notFound: true });
+});
+
 // Start the server
 app.listen(3001, () => {
   console.log("Server started on port 3001");

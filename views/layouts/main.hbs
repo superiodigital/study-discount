@@ -92,6 +92,9 @@
 </head>
 
 <body>
+  {{#if notFound}}
+  {{{body}}}
+  {{else}}
   <div id="wrapper">
     <!-- header of the page -->
     <header id="header">
@@ -129,7 +132,8 @@
                     <option value="{{_id}}">{{name}}</option>
                     {{/each}}
                   </select> --}}
-                  <input type="search" name="keyword" class="form-control" id="keyword-input" placeholder="Enter Keyword . . .">
+                  <input type="search" name="keyword" class="form-control" id="keyword-input"
+                    placeholder="Enter Keyword . . .">
                   <button type="submit" class="sub-btn"><i class="icon-search"></i></button>
                   <!-- Suggestion modal -->
                   <div id="suggestion-modal">
@@ -353,6 +357,8 @@
     })();
   </script>
   <!--End of Tawk.to Script-->
+  {{/if}}
+
 
 </body>
 
