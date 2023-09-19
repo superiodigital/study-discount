@@ -199,6 +199,10 @@ export const searchOffers = async (req, res) => {
                 ],
             }).lean()
         }
+        results.forEach((offer) => {
+            offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
+            offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
+        });
         res.render('offers', { offerPage: true, offers: results })
     } catch (error) {
         console.error(error);
