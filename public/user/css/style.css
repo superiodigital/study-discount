@@ -1427,14 +1427,14 @@ a.active {
 23. Offer Holder / .offer-holder
 -------------------------------------------------------------------*/
 .offer-holder {
-  overflow: hidden;
+  /* overflow: hidden; */
   width: 110%;
 }
 
 .offer-holder .col {
   width: 351px;
   float: left;
-  height: 361px !important;
+  height: auto !important;
   padding: 29px 25px;
   border: 1px solid #ececec;
   margin-right: 30px;
@@ -1471,6 +1471,7 @@ a.active {
   font-size: 16px;
   line-height: 18px;
   color: #333333;
+  background-color: #fff4a4;
   padding: 9px 25px 7px;
   float: right;
   text-align: center;
