@@ -43,7 +43,7 @@
   <section class="latest-coupon container pad-top-lg pad-bottom-md">
     <div class="row">
       <header class="col-xs-12 text-center header">
-        <h2 class="heading">Latest Offers</h2>
+        <h2 class="heading">Featured Offers!</h2>
         <p>These are the new offers. Click to learn more and register.</p>
       </header>
     </div>
@@ -71,7 +71,7 @@
       {{/each}}
       {{else}}
       <div class="col-xs-12 col-sm-6 col-md-4">
-        <h3 style="Font">No offer fount</h3>
+        <h3 style="Font">No offer found</h3>
       </div>
       {{/if}}
     </div>
@@ -81,7 +81,7 @@
   <section class="offer-sec container pad-top-lg pad-bottom-md" style="margin-bottom: 50px;">
     <div class="row">
       <header class="col-xs-12 text-center header">
-        <h2 class="heading">Today’s Best Offers with Category</h2>
+        <h2 class="heading">View more offers!</h2>
         <ul class="list-unstyled filter-list">
           {{#each filteredCategory}}
           <li class=""><a href="#" data-filter=".{{_id}}">{{name}}</a></li>
@@ -97,19 +97,21 @@
           <!-- col of the page -->
           <div class="col mar-bottom-xs {{category}}">
             <div class="header">
-              <div class="" style="position: relative;">
+              <div class="off-img-holder" style="position: relative;">
                 <a href="/offers-details/{{slug}}">
-                  <img src="/uploads/{{offerImage}}" alt="logo" class="img-responsive">
+                  <img src="/uploads/{{offerImage}}" alt="{{name}}" title="{{shortDescription}}" class="img-responsive">
                   <span class="offer" style="position: absolute; top: 0; right: 0;">{{offerPercent}}% Off</span>
                 </a>
               </div>
             </div>
-            <strong class="heading6">{{shortDescription}}</strong>
-            <span class="sub-title">Registered : {{registrations}}</span>
-            <div class="text-center">
-              <a href="/offers-details/{{slug}}" class="btn-primary text-center text-uppercase md-round">View offer<span
-                  class="code">Go <i class="fa-solid fa-arrow-right"></i></span></a>
-              <time class="time" datetime="2017-02-03 20:00">Expires On : {{expiresTo}}</time>
+            <div style="padding: 12px 15px;">
+              <strong class="heading6">{{shortDescription}}</strong>
+              <span class="sub-title">Registered : {{registrations}}</span>
+              <div class="text-center">
+                <a href="/offers-details/{{slug}}" class="btn-primary text-center text-uppercase md-round">View
+                  offer<span class="code">Go <i class="fa-solid fa-arrow-right"></i></span></a>
+                <time class="time" datetime="2017-02-03 20:00">Expires On : {{expiresTo}}</time>
+              </div>
             </div>
           </div>
           {{/each}}
@@ -132,7 +134,7 @@
         <div class="col-xs-12">
           <ul class="list-unstyled store-logo">
             {{#each commonData.categories}}
-            <li><a href="{{url}}" target="_blank"><img src="/uploads/{{logo}}" alt="LOGO" class="img-responsive"></a>
+            <li><a href="{{url}}" target="_blank"><img src="/uploads/{{logo}}" alt="{{name}}" title="{{name}}" class="img-responsive"></a>
             </li>
             {{/each}}
           </ul>
