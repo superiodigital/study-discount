@@ -8,9 +8,9 @@ const offerSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  category:{
+  category: {
     type: String,
-    ref:'Category',
+    ref: 'Category',
   },
   longDescription: {
     type: String,
@@ -29,6 +29,10 @@ const offerSchema = new mongoose.Schema({
   },
   expiresFrom: {
     type: Date,
+  },
+  viewedCount: {
+    type: Number,
+    default: 0
   },
   expiresTo: {
     type: Date,

@@ -19,6 +19,9 @@ export const getHomePage = async (req, res) => {
             offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
             const countOfRegistrations = await OfferLead.countDocuments({ offerId: offer._id })
             offer.registrations = countOfRegistrations
+            if (offer.offerPercent === 0) {
+                delete offer.offerPercent
+            }
         });
 
         const offersCategory = await Offer.find().populate('category').select('category').lean()
@@ -173,6 +176,13 @@ export const getOffersPage = async (req, res) => {
 export const getSingleOfferPage = async (req, res) => {
     try {
         const { offerSlug } = req.params
+        const changeOfferViewCount = await Offer.findOne({ slug: offerSlug })
+        if (!changeOfferViewCount) {
+            return res.status(404).send({ message: 'No such offer found' })
+        }
+        changeOfferViewCount.viewedCount += 1
+        await changeOfferViewCount.save()
+        // finding offer
         const offer = await Offer.findOne({ slug: offerSlug }).lean()
         if (!offer) {
             return res.status(404).send({ message: 'No such offer found' })
@@ -183,15 +193,15 @@ export const getSingleOfferPage = async (req, res) => {
                 { _id: { $ne: offer._id } }
             ]
         }).lean();
-
         relatedOffers.forEach((offer) => {
             offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
             offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
         });
-
-        res.render('offer-details', { offer, relatedOffers });
+        const registeredCount = await OfferLead.countDocuments({ offerId: offer._id })
+        res.render('offer-details', { offer, relatedOffers, registeredCount });
 
     } catch (error) {
+        console.log(error);
         res.status(500).send(error)
     }
 }

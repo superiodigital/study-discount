@@ -33,8 +33,9 @@
                   <div class="align-left">
                     <h3 class="heading3">{{offer.shortDescription}}</h3>
                     <ul class="list-unstyled list-show">
-                      <li><a href="#"><i class="icon icon-smile"></i> Verified</a></li>
-                      {{!-- <li><a href="#"><i class="icon icon-user"></i> 35 Used</a></li> --}}
+                      <li title="Verified"><i class="fa-solid fa-circle-check"></i> Verified</li>
+                      <li><i class="fa-solid fa-eye"></i> {{offer.viewedCount}}</li>
+                      <li><i class="icon icon-user"></i>{{registeredCount}}</li>
                     </ul>
                   </div>
                 </header>
