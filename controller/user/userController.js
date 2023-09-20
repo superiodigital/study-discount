@@ -1,5 +1,6 @@
 import Banner from '../../models/schema/bannerSchema.js'
 import Category from '../../models/schema/categorySchema.js'
+import OfferLead from '../../models/schema/offerLeads.js'
 import Offer from '../../models/schema/offersSchema.js'
 import User from '../../models/schema/userSchema.js'
 import bcrypt from 'bcrypt'
@@ -9,14 +10,15 @@ export const getHomePage = async (req, res) => {
     try {
         const banners = await Banner.find().lean()
         const randomIndex = Math.floor(Math.random() * banners?.length);
-
         const randomBanner = banners[randomIndex]
 
         const offers = (await Offer.find().lean().sort()).reverse()
         // Format the date strings in the offers array
-        offers.forEach((offer) => {
+        offers.forEach(async (offer) => {
             offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
             offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
+            const countOfRegistrations = await OfferLead.countDocuments({ offerId: offer._id })
+            offer.registrations = countOfRegistrations
         });
         res.render('index', { randomBanner, offers, homePage: true })
     } catch (error) {
@@ -196,6 +198,7 @@ export const searchOffers = async (req, res) => {
                 $or: [
                     { shortDescription: { $regex: keyword, $options: 'i' } }, // Case-insensitive keyword search on 'name' field
                     { longDescription: { $regex: keyword, $options: 'i' } }, // Add more fields to search if needed
+                    { name: { $regex: keyword, $options: 'i' } }, // Add more fields to search if needed
                 ],
             }).lean()
         }
@@ -216,7 +219,11 @@ export const getSuggestions = async (req, res) => {
     try {
         // Fetch suggestions based on the keyword (you can customize this query)
         const suggestions = await Offer.find({
-            shortDescription: { $regex: keyword, $options: 'i' }, // Case-insensitive keyword search on the 'name' field
+            $or: [
+                { shortDescription: { $regex: keyword, $options: 'i' } }, // Case-insensitive keyword search on 'name' field
+                { longDescription: { $regex: keyword, $options: 'i' } }, // Add more fields to search if needed
+                { name: { $regex: keyword, $options: 'i' } }, // Add more fields to search if needed
+            ],
         }).limit(5); // Limit the number of suggestions
 
         // Extract the relevant data for suggestions
