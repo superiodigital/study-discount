@@ -76,14 +76,14 @@
       {{/if}}
     </div>
   </section>
-
+  {{#if offers}}
   <!-- offer sec of the page -->
   <section class="offer-sec container pad-top-lg pad-bottom-md">
     <div class="row">
       <header class="col-xs-12 text-center header">
         <h2 class="heading">Today’s Best Offers with Category</h2>
         <ul class="list-unstyled filter-list">
-          {{#each commonData.categories}}
+          {{#each filteredCategory}}
           <li class=""><a href="#" data-filter=".{{_id}}">{{name}}</a></li>
           {{/each}}
         </ul>
@@ -97,15 +97,16 @@
           <!-- col of the page -->
           <div class="col mar-bottom-xs {{category}}">
             <div class="header">
-              <div class="c-logo"><a href="/offers-details/{{slug}}"><img src="/uploads/{{offerImage}}" alt="logo" class="img-responsive"></a>
+              <div class="c-logo"><a href="/offers-details/{{slug}}"><img src="/uploads/{{offerImage}}" alt="logo"
+                    class="img-responsive"></a>
               </div>
               <span class="offer">{{offerPercent}}% Off</span>
             </div>
             <strong class="heading6">{{shortDescription}}</strong>
             <span class="sub-title">Registered : {{registrations}}</span>
             <div class="text-center">
-              <a href="/offers-details/{{slug}}" class="btn-primary text-center text-uppercase md-round">View offer<span class="code">Go <i
-                    class="fa-solid fa-arrow-right"></i></span></a>
+              <a href="/offers-details/{{slug}}" class="btn-primary text-center text-uppercase md-round">View offer<span
+                  class="code">Go <i class="fa-solid fa-arrow-right"></i></span></a>
               <time class="time" datetime="2017-02-03 20:00">Expires On : {{expiresTo}}</time>
             </div>
           </div>
@@ -114,6 +115,7 @@
       </div>
     </div>
   </section>
+  {{/if}}
 
   <!-- store sec of the page -->
   <section class="store-sec bg-grey pad-top-lg pad-bottom-lg">
