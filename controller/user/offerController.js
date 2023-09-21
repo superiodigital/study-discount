@@ -4,9 +4,11 @@ import Offer from '../../models/schema/offersSchema.js'
 
 export const postRegisterOffer = async (req, res) => {
     try {
-        const { name, email, phone, offerId } = req.body
+        const { name, email, phone, offerId, isTermsAccepted } = req.body
+        const accepted = isTermsAccepted === 'on' ? true : false
         const newOffer = new OfferLead({
-            name, email, phone, offerId
+            name, email, phone, offerId,
+            isPolicyAccept: accepted
         })
         await newOffer.save()
         res.status(200).json({ status: true })

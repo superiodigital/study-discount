@@ -13,6 +13,7 @@ import {
   getRegisterPage,
   getSingleOfferPage,
   getSuggestions,
+  getTermsAndConditions,
   postUserLogin,
   postUserRegister,
   searchOffers,
@@ -38,6 +39,7 @@ router.post("/offers-registration", postRegisterOffer);
 
 router.post('/search',searchOffers);
 router.get('/getSuggestions',getSuggestions)
+router.get('/terms-and-conditions',getTermsAndConditions)
 
 // Export the router
 export default router;

@@ -153,6 +153,7 @@ export const getAboutPage = async (req, res) => {
 
 export const getContactPage = async (req, res) => {
     try {
+        console.log('ggg');
         res.render('contact', { contactPage: true })
     } catch (error) {
         res.status(500).send(error)
@@ -267,6 +268,14 @@ export const getSuggestions = async (req, res) => {
         res.json(suggestionData);
     } catch (error) {
         console.error('Error fetching suggestions:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+export const getTermsAndConditions = (req, res) => {
+    try {
+        res.render('terms-and-conditions', { notFound: true })
+    } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
 }

@@ -18,7 +18,7 @@ export const getDownloadLeads = async (req, res) => {
 
         // Iterate over Mongoose documents and add them to the worksheet
         leads.forEach((lead) => {
-            worksheet.addRow({ name: lead.name, email: lead.email, phone: lead.phone, offer: lead.offerId?.shortDescription });
+            worksheet.addRow({ name: lead.name, email: lead.email, phone: lead.phone, offer: lead.offerId?.name });
         });
 
         // Generate a unique filename in "dd-mm-yyyy" format

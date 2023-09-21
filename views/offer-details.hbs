@@ -74,7 +74,10 @@
                 </div>
                 {{!-- offerId --}}
                 <input type="text" value="{{offer._id}}" name="offerId" readonly hidden />
-
+                <div class="tacbox">
+                  <input class="tacinput" id="checkbox" type="checkbox" name="isTermsAccepted" checked/>
+                  <label for="checkbox"> I agree to these <a href="/terms-and-conditions" style="color: rgb(0, 21, 255);">Terms and Conditions</a>.</label>
+                </div>
                 <div class="col d-flex" style="margin-top: 15px;">
                   <button class="btn-primary text-center text-uppercase" style="width: 100%;" type="button"
                     id="submitDetails">Apply Now!</button>
