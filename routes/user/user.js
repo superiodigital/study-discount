@@ -38,7 +38,7 @@ router.get("/offers-details/:offerSlug", getSingleOfferPage);
 router.get("/offer-submission", getOfferSubmit);
 router.post("/offers-registration", postRegisterOffer);
 
-// router.get('/faq', getFaqPage);
+router.get('/faq', getFaqPage);
 
 router.post('/search',searchOffers);
 router.get('/getSuggestions',getSuggestions)

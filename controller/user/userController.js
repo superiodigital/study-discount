@@ -3,6 +3,7 @@ import Category from '../../models/schema/categorySchema.js'
 import OfferLead from '../../models/schema/offerLeads.js'
 import Offer from '../../models/schema/offersSchema.js'
 import User from '../../models/schema/userSchema.js'
+import FAQ from "../../models/schema/faqSchema.js";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -280,9 +281,10 @@ export const getTermsAndConditions = (req, res) => {
     }
 }
 
-export const getFaqPage = (req, res) => {
+export const getFaqPage = async (req, res) => {
     try {
-        res.render('FAQs')
+        const faqs = await FAQ.find({}).lean()
+        res.render('FAQs', { FAQ: true ,faqs})
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }

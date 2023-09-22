@@ -1,56 +1,184 @@
-<div class="list-group w-100">
-    <a href="#shortExampleAnswer1collapse" data-mdb-toggle="collapse" aria-expanded="false"
-        aria-controls="shortExampleAnswer1collapse" class="list-group-item list-group-item-action">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Question 1</h5>
+<div class="containerDiv">
+    <h1>Frequently Asked Questions</h1>
+    <div class="accordion">
+        {{#each faqs}}
+        <div class="accordion-item">
+            <button id="accordion-button-{{incrementedIndex @index}}" aria-expanded="false"><span
+                    class="accordion-title">{{question}}</span><span class="icon" aria-hidden="true"></span></button>
+            <div class="accordion-content">
+                <p>{{answer}}</p>
+            </div>
         </div>
-        <p class="mb-1">
-            Short & concise version of the answer.
-        </p>
-        <small><u>Learn more</u></small>
-        <!-- Collapsed content -->
-        <div class="collapse mt-3" id="shortExampleAnswer1collapse">
-            Detailed and comprehensive answer goes here. pariatur cliche reprehenderit, enim eiusmod
-            high
-            life accusamus terry richardson ad
-            squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-            sapiente ea proident.
+        {{else}}
+        <div>No FAQs</div>
+        {{/each}}
+        {{!-- <div class="accordion-item">
+            <button id="accordion-button-2" aria-expanded="false"><span class="accordion-title">Why is the sky
+                    blue?</span><span class="icon" aria-hidden="true"></span></button>
+            <div class="accordion-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra
+                    suspendisse potenti.</p>
+            </div>
         </div>
-    </a>
-    <a href="#shortExampleAnswer2collapse" data-mdb-toggle="collapse" aria-expanded="false"
-        aria-controls="shortExampleAnswer1collapse" class="list-group-item list-group-item-action">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Question 2</h5>
+        <div class="accordion-item">
+            <button id="accordion-button-3" aria-expanded="false"><span class="accordion-title">Will we ever discover
+                    aliens?</span><span class="icon" aria-hidden="true"></span></button>
+            <div class="accordion-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra
+                    suspendisse potenti.</p>
+            </div>
         </div>
-        <p class="mb-1">
-            Short & concise version of the answer.
-        </p>
-        <small class="text-muted"><u>Learn more</u></small>
-        <!-- Collapsed content -->
-        <div class="collapse mt-3" id="shortExampleAnswer2collapse">
-            Detailed and comprehensive answer goes here. pariatur cliche reprehenderit, enim eiusmod
-            high
-            life accusamus terry richardson ad
-            squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-            sapiente ea proident.
+        <div class="accordion-item">
+            <button id="accordion-button-4" aria-expanded="false"><span class="accordion-title">How much does the Earth
+                    weigh?</span><span class="icon" aria-hidden="true"></span></button>
+            <div class="accordion-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra
+                    suspendisse potenti.</p>
+            </div>
         </div>
-    </a>
-    <a href="#shortExampleAnswer3collapse" data-mdb-toggle="collapse" aria-expanded="false"
-        aria-controls="shortExampleAnswer1collapse" class="list-group-item list-group-item-action">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Question 3</h5>
-        </div>
-        <p class="mb-1">
-            Short & concise version of the answer.
-        </p>
-        <small class="text-muted"><u>Learn more</u></small>
-        <!-- Collapsed content -->
-        <div class="collapse mt-3" id="shortExampleAnswer3collapse">
-            Detailed and comprehensive answer goes here. pariatur cliche reprehenderit, enim eiusmod
-            high
-            life accusamus terry richardson ad
-            squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-            sapiente ea proident.
-        </div>
-    </a>
+        <div class="accordion-item">
+            <button id="accordion-button-5" aria-expanded="false"><span class="accordion-title">How do airplanes stay
+                    up?</span><span class="icon" aria-hidden="true"></span></button>
+            <div class="accordion-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra
+                    suspendisse potenti.</p>
+            </div>
+        </div> --}}
+    </div>
 </div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Hind:300,400&display=swap');
+
+    /* Define variables as custom properties */
+    :root {
+        --bg: #fff;
+        --text: #7288a2;
+        --gray: #4d5974;
+        --lightgray: #e5e5e5;
+        --blue: #03b5d2;
+    }
+
+    .containerDiv {
+        margin: 100px 100px 100px 100px;
+    }
+
+    /* Accordion styles */
+    .accordion .accordion-item {
+        border-bottom: 1px solid var(--lightgray);
+    }
+
+    .accordion button {
+        position: relative;
+        display: block;
+        text-align: left;
+        width: 100%;
+        padding: 1em 0;
+        color: var(--text);
+        font-size: 2.15rem;
+        font-weight: 400;
+        border: none;
+        background: none;
+        outline: none;
+    }
+
+    .accordion button:hover,
+    .accordion button:focus {
+        cursor: pointer;
+        color: var(--blue);
+    }
+
+    .accordion button:hover::after,
+    .accordion button:focus::after {
+        cursor: pointer;
+        color: var(--blue);
+        border: 1px solid var(--blue);
+    }
+
+    .accordion .accordion-title {
+        padding: 1em 1.5em 1em 0;
+    }
+
+    .accordion .icon {
+        display: inline-block;
+        position: absolute;
+        top: 18px;
+        right: 0;
+        width: 22px;
+        height: 22px;
+        border: 1px solid;
+        border-radius: 22px;
+    }
+
+    .accordion .icon::before {
+        display: block;
+        position: absolute;
+        content: '';
+        top: 9px;
+        left: 5px;
+        width: 10px;
+        height: 2px;
+        background: currentColor;
+    }
+
+    .accordion .icon::after {
+        display: block;
+        position: absolute;
+        content: '';
+        top: 5px;
+        left: 9px;
+        width: 2px;
+        height: 10px;
+        background: currentColor;
+    }
+
+    .accordion button[aria-expanded='true'] {
+        color: var(--blue);
+    }
+
+    .accordion button[aria-expanded='true'] .icon::after {
+        width: 0;
+    }
+
+    .accordion .accordion-content {
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: opacity 200ms linear, max-height 200ms linear;
+        will-change: opacity, max-height;
+    }
+
+    .accordion .accordion-content p {
+        font-size: 2rem;
+        font-weight: 300;
+    }
+
+    .accordion button[aria-expanded='true']+.accordion-content {
+        opacity: 1;
+        max-height: 9em;
+        transition: all 200ms linear;
+        will-change: opacity, max-height;
+    }
+</style>
+
+<script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+</script>
