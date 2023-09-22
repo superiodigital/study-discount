@@ -4,7 +4,7 @@ import OfferLead from '../../models/schema/offerLeads.js';
 
 export const getDownloadLeads = async (req, res) => {
     try {
-        const leads = await OfferLead.find({ isBlocked: false }).populate('offerId')
+        const leads = await OfferLead.find({ isBlocked: true }).populate('offerId')
         const workbook = new Workbook();
         const worksheet = workbook.addWorksheet('OfferLead Data');
 
