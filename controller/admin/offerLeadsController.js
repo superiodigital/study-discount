@@ -60,10 +60,32 @@ export const putOfferLeadDisable = async (req, res) => {
     }
 }
 
+export const putOfferLeadEnable = async (req, res) => {
+    try {
+        const { leadId } = req.params
+        const offerLead = await OfferLead.findById(leadId)
+        offerLead.isBlocked = true
+        await offerLead.save()
+        res.status(200).json({ status: true, message: 'Moved to Lead list' });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const getLeadsLogs = async (req, res) => {
     try {
         const offerLeads = await OfferLead.find({ isBlocked: false }).populate('offerId').lean()
         res.render('admin/leads-bin', { layout: 'admin-layout', offerLeads })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const deleteLeadsLogs = async (req, res) => {
+    try {
+        const { leadId } = req.params
+        const offerLeads = await OfferLead.deleteOne({ isBlocked: false, _id: leadId })
+        res.status(200).json({ status: true, message: 'deleted' });
     } catch (error) {
         console.log(error);
     }
