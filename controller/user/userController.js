@@ -275,7 +275,7 @@ export const getSuggestions = async (req, res) => {
 
 export const getTermsAndConditions = (req, res) => {
     try {
-        res.render('terms-and-conditions', { notFound: true })
+        res.render('terms-and-conditions')
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
