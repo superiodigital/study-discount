@@ -1,6 +1,6 @@
 import Admin from '../../models/schema/adminSchema.js'
 import jwt from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt' 
 import User from '../../models/schema/userSchema.js'
 
 export const getAdminHome = async (req, res) => {
