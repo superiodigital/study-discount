@@ -45,6 +45,26 @@ export const getOfferLeadTable = async (req, res) => {
         res.render('admin/offerLead-manager.hbs', { layout: 'admin-layout', offerLeads })
     } catch (error) {
         console.log(error);
+    }
+}
 
+export const putOfferLeadDisable = async (req, res) => {
+    try {
+        const { leadId } = req.params
+        const offerLead = await OfferLead.findById(leadId)
+        offerLead.isBlocked = false
+        await offerLead.save()
+        res.status(200).json({ status: true, message: 'Moved to bin successfully' });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getLeadsLogs = async (req, res) => {
+    try {
+        const offerLeads = await OfferLead.find({ isBlocked: false }).populate('offerId').lean()
+        res.render('admin/leads-bin', { layout: 'admin-layout', offerLeads })
+    } catch (error) {
+        console.log(error);
     }
 }

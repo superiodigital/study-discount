@@ -64,8 +64,8 @@
         if (confirm("Are you sure you want to Remove this item?")) {
             // User clicked OK, perform the Remove action here
             $.ajax({
-                url: '/admin/move-to-bin/' + leadId, // Replace with your backend endpoint URL
-                method: 'PUT', // or 'POST', 'PUT', etc., depending on your backend
+                url: '/admin/delete-lead/' + leadId, // Replace with your backend endpoint URL
+                method: 'DELETE', // or 'POST', 'PUT', etc., depending on your backend
                 success: function (response) {
                     console.log(response)
                     if (response.status) {

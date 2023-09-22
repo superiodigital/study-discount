@@ -4,7 +4,7 @@ import { deleteOfferFun, getAddOfferForm, getEditOfferForm, getOfferManager, pos
 import { deleteBannerFun, getAddBannerPage, getBannerManger, getEditBannerForm, postAddBanners, postEditBannerForm } from "../../controller/admin/bannerController.js";
 import { isAdminAuthorize } from '../../middleware/admin-authorize.js'
 import { multerMiddleware } from "../../middleware/multer.js"
-import { getDownloadLeads, getOfferLeadTable } from "../../controller/admin/offerLeadsController.js";
+import { getDownloadLeads, getLeadsLogs, getOfferLeadTable, putOfferLeadDisable } from "../../controller/admin/offerLeadsController.js";
 import { deleteCategoriesFun, getAddCategories, getCategoryManage, getEditCategoryForm, postAddCategories, postEditCategoryForm } from "../../controller/admin/categoryController.js";
 import { deleteFaqManager, getAddFaqManager, getEditFaqManager, getFaqManager, postAddFaqManager, postEditFaqManager } from "../../controller/admin/faqController.js";
 const router = express.Router();
@@ -42,6 +42,8 @@ router.get("/company-updates", isAdminAuthorize, getCompanyUpdatesPage);
 // offer lead routes
 router.get('/download-offer', isAdminAuthorize, getDownloadLeads)
 router.get('/offerLeads-table', isAdminAuthorize, getOfferLeadTable)
+router.put('/move-to-bin/:leadId',isAdminAuthorize,putOfferLeadDisable)
+router.get('/leads-logs',isAdminAuthorize,getLeadsLogs)
 
 
 // router.get('/test', (req, res) => {

@@ -13,8 +13,12 @@ const offerLeadsSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    isPolicyAccept:{
-        type : Boolean,
+    isPolicyAccept: {
+        type: Boolean,
+    },
+    isBlocked: {
+        type: Boolean,
+        default: true,
     },
     offerId: {
         type: String,
