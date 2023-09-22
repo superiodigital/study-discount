@@ -1,17 +1,19 @@
 import Admin from '../../models/schema/adminSchema.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
+import User from '../../models/schema/userSchema.js'
 
 export const getAdminHome = async (req, res) => {
     try {
-        res.render('admin/index', { layout: 'admin-layout' })
+        const users = await (await User.find({}).lean().sort()).reverse()
+        res.render('admin/index', { layout: 'admin-layout', users })
     } catch (error) {
         res.status(500).send(error)
     }
 }
 export const getAdminLogin = async (req, res) => {
     try {
-        res.render('admin/admin-login', { layout: 'admin-layout' , isLogin:true })
+        res.render('admin/admin-login', { layout: 'admin-layout', isLogin: true })
     } catch (error) {
         res.status(500).send(error)
     }

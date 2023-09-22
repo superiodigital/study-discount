@@ -279,3 +279,11 @@ export const getTermsAndConditions = (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+export const getFaqPage = (req, res) => {
+    try {
+        res.render('FAQs')
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}

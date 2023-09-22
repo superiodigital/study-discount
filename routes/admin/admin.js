@@ -6,6 +6,7 @@ import { isAdminAuthorize } from '../../middleware/admin-authorize.js'
 import { multerMiddleware } from "../../middleware/multer.js"
 import { getDownloadLeads, getOfferLeadTable } from "../../controller/admin/offerLeadsController.js";
 import { deleteCategoriesFun, getAddCategories, getCategoryManage, getEditCategoryForm, postAddCategories, postEditCategoryForm } from "../../controller/admin/categoryController.js";
+import { deleteFaqManager, getAddFaqManager, getEditFaqManager, getFaqManager, postAddFaqManager, postEditFaqManager } from "../../controller/admin/faqController.js";
 const router = express.Router();
 // basic routes
 router.get("/", isAdminAuthorize, getAdminHome);
@@ -26,14 +27,20 @@ router.route('/edit-banner/:bannerId').get(isAdminAuthorize, getEditBannerForm).
 //category routes
 router.get('/categories', getCategoryManage)
 router.route("/add-categories").get(isAdminAuthorize, getAddCategories).post(multerMiddleware.single('file'), postAddCategories);
-router.delete('/delete-category/:categoryId', deleteCategoriesFun)
+router.delete('/delete-category/:categoryId', isAdminAuthorize, deleteCategoriesFun)
 router.route('/edit-category/:categoryId').get(isAdminAuthorize, getEditCategoryForm).post(multerMiddleware.single('file'), postEditCategoryForm)
+
+// FAQ routes
+router.get('/faq-manager', isAdminAuthorize, getFaqManager)
+router.route('/add-faq').get(isAdminAuthorize, getAddFaqManager).post(isAdminAuthorize, postAddFaqManager)
+router.delete('/delete-faq/:faqId', isAdminAuthorize, deleteFaqManager)
+router.route('/edit-faq/:faqId').get(isAdminAuthorize, getEditFaqManager).post(isAdminAuthorize, postEditFaqManager)
 
 // blog routes
 router.get("/company-updates", isAdminAuthorize, getCompanyUpdatesPage);
 
 // offer lead routes
-router.get('/download-offer', getDownloadLeads)
+router.get('/download-offer', isAdminAuthorize, getDownloadLeads)
 router.get('/offerLeads-table', isAdminAuthorize, getOfferLeadTable)
 
 
