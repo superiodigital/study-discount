@@ -41,7 +41,7 @@ export const getDownloadLeads = async (req, res) => {
 
 export const getOfferLeadTable = async (req, res) => {
     try {
-        const offerLeads = await OfferLead.find().populate('offerId').lean()
+        const offerLeads = await OfferLead.find({ isBlocked: true }).populate('offerId').lean()
         res.render('admin/offerLead-manager.hbs', { layout: 'admin-layout', offerLeads })
     } catch (error) {
         console.log(error);
