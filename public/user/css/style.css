@@ -4470,3 +4470,16 @@ text {
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
 }
+
+/* Default styles for the button */
+.button-responsiveness {
+  width: 100%;
+  /* Add any other styles you want for mobile here */
+}
+
+/* Media query for screens with a minimum width of 768px (adjust as needed) */
+@media screen and (min-width: 768px) {
+  .button-responsiveness {
+    display: none; /* Hide the button on screens wider than 768px */
+  }
+}
