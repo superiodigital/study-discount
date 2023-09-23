@@ -4441,3 +4441,32 @@ a.more-link {
   width: 100%;
   padding-left: 70px;
 }
+
+text {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  pointer-events: none;
+}
+
+#chart {
+  width: 500px;
+  height: 500px;
+  top: 0;
+  left: 0;
+}
+
+#question {
+  width: 400px;
+  top: 0;
+  left: 520px;
+}
+
+#question h1 {
+  font-size: 30px;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+}

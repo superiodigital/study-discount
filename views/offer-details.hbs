@@ -13,6 +13,10 @@
       </div>
     </div>
   </section>
+  <section>
+    <a href="#offerFormForRegistration"  class="btn-primary text-center text-uppercase" style="width: 100%;">Apply
+      Now!</a>
+  </section>
   <!-- twocolumns of the page -->
   <div class="twocolumns pad-top-lg pad-bottom-lg">
     <div class="container">
@@ -54,7 +58,7 @@
           </article>
           <!-- sidebar of the page -->
           <aside id="sidebar">
-            <section class="widget popular-widget">
+            <section class="widget popular-widget" id="offerFormForRegistration">
               <h3 class="heading4">Apply for this offer</h3>
               <form id="offerForm">
                 <div class="col" style="margin-top: 15px;">
@@ -75,8 +79,9 @@
                 {{!-- offerId --}}
                 <input type="text" value="{{offer._id}}" name="offerId" readonly hidden />
                 <div class="tacbox">
-                  <input class="tacinput" id="checkbox" type="checkbox" name="isTermsAccepted" checked/>
-                  <label for="checkbox"> I agree to these <a href="/terms-and-conditions" style="color: rgb(0, 21, 255);">Terms and Conditions</a>.</label>
+                  <input class="tacinput" id="checkbox" type="checkbox" name="isTermsAccepted" checked />
+                  <label for="checkbox"> I agree to these <a href="/terms-and-conditions"
+                      style="color: rgb(0, 21, 255);text-decoration: underline;">Terms and Conditions</a>.</label>
                 </div>
                 <div class="col d-flex" style="margin-top: 15px;">
                   <button class="btn-primary text-center text-uppercase" style="width: 100%;" type="button"
@@ -85,6 +90,8 @@
               </form>
 
             </section>
+            <!-- Spinner of the page -->
+            
           </aside>
         </div>
       </div>
@@ -120,6 +127,9 @@
   </section>
   {{/if}}
 </main>
+
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="/user/js/wheel.js"></script>
 
 <script>
   // Get the encoded HTML content from your offer object
