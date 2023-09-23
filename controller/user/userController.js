@@ -154,7 +154,6 @@ export const getAboutPage = async (req, res) => {
 
 export const getContactPage = async (req, res) => {
     try {
-        console.log('ggg');
         res.render('contact', { contactPage: true })
     } catch (error) {
         res.status(500).send(error)

@@ -1354,7 +1354,7 @@ a.active {
   line-height: 40px;
   color: #fff;
   font-weight: 400;
-  font-family: "Lily Script One", cursive;
+  /* font-family: "Lily Script One", cursive; */
   margin: 0;
   text-align: center;
 }
@@ -4403,4 +4403,41 @@ a.more-link {
   height: 2em;
   width: 2em;
   vertical-align: middle;
+}
+
+.tc-main-container {
+  margin: 100px 100px 100px 100px;
+}
+
+.tc-sub-container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+}
+
+.tc-points {
+  display: flex;
+  column-gap: 10px;
+}
+
+.tc-main-points {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.tc-header {
+  background-color: black;
+  margin-top: 0;
+  padding: 0;
+  height: 80px;
+}
+
+.tc-footer {
+  background-color: black;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-left: 70px;
 }
