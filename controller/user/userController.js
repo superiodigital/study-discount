@@ -179,14 +179,14 @@ export const getSingleOfferPage = async (req, res) => {
         const { offerSlug } = req.params
         const changeOfferViewCount = await Offer.findOne({ slug: offerSlug })
         if (!changeOfferViewCount) {
-            return res.status(404).send({ message: 'No such offer found' })
+            return res.status(404).render('not-found-404',{ notFound: true })
         }
         changeOfferViewCount.viewedCount += 1
         await changeOfferViewCount.save()
         // finding offer
         const offer = await Offer.findOne({ slug: offerSlug }).lean()
         if (!offer) {
-            return res.status(404).send({ message: 'No such offer found' })
+            return res.status(404).render('not-found-404',{ notFound: true })
         }
         const relatedOffers = await Offer.find({
             $and: [
