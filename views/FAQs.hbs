@@ -1,8 +1,11 @@
 <div class="containerDiv">
     <h1>Frequently Asked Questions</h1>
-    <a href="/faq-study-discount" class="btn-primary text-center text-uppercase" style="margin-right: 2px">Study Discount</a>
-    <a href="/faq-study-abroad" class="btn-primary text-center text-uppercase" style="/faq-study-abroad">Study
-        Abroad</a>
+    <div style="display: flex;justify-content: center;">
+        <a href="/faq-study-discount" class="btn-primary text-center text-uppercase" style="margin-right: 2px">Study
+            Discount</a>
+        <a href="/faq-study-abroad" class="btn-primary text-center text-uppercase" style="/faq-study-abroad">Study
+            Abroad</a>
+    </div>
     <div class="accordion">
         {{#each faqs}}
         <div class="accordion-item">
@@ -13,7 +16,7 @@
             </div>
         </div>
         {{else}}
-        <div>No FAQs</div>
+        <div style="margin-top: 5px;">No FAQs</div>
         {{/each}}
     </div>
 </div>
