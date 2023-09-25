@@ -1501,7 +1501,7 @@ a.active {
 }
 
 .offer-holder .col .offer {
-  font-size: 16px;
+  font-size: 20px;
   line-height: 18px;
   color: #333333;
   background-color: #fff4a4;
@@ -1509,6 +1509,7 @@ a.active {
   float: right;
   text-align: center;
   margin: 18px 0 0;
+  font-weight: 800;
   border: 1px solid #c6c6c6;
   -webkit-transition: all 0.25s linear;
   -o-transition: all 0.25s linear;
