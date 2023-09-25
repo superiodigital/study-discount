@@ -8,6 +8,13 @@
                 </p>
                 <form action="/admin/add-faq" method="post">
                     <div class="mb-3">
+                        <label for="example-select" class="form-label">Select Category</label>
+                        <select class="form-select" id="example-select" name="category" required>
+                            <option value="study-discount">Study Discount</option>
+                            <option value="study-abroad">Study Abroad</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="message" class="form-label">Question</label>
                         <textarea class="form-control" id="example-textarea" rows="2" name="question"
                             required></textarea>
@@ -15,8 +22,7 @@
 
                     <div class="mb-3">
                         <label for="message" class="form-label">Answer</label>
-                        <textarea class="form-control" id="example-textarea" rows="3" name="answer"
-                            required></textarea>
+                        <textarea class="form-control" id="example-textarea" rows="3" name="answer" required></textarea>
                     </div>
 
                     <button type="submit" class="btn btn--md btn-pink waves-effect waves-light"><span><i

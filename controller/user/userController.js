@@ -280,11 +280,21 @@ export const getTermsAndConditions = (req, res) => {
     }
 }
 
-export const getFaqPage = async (req, res) => {
+export const getFaqStudyAbroadPage = async (req, res) => {
     try {
-        const faqs = await FAQ.find({}).lean()
-        res.render('FAQs', { FAQ: true ,faqs})
+        const faqs = await FAQ.find({ category: 'study-abroad' }).lean()
+        res.render('FAQs', { FAQ: true, faqs })
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+export const getFaqStudyDIscountPage = async (req, res) => {
+    try {
+        const faqs = await FAQ.find({ category: 'study-discount' }).lean()
+        res.render('FAQs', { FAQ: true, faqs })
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+

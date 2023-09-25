@@ -20,10 +20,11 @@ export const getAddFaqManager = async (req, res) => {
 
 export const postAddFaqManager = async (req, res) => {
     try {
-        const { question, answer } = req.body
+        const { question, answer, category } = req.body
         const faq = new FAQ({
             question: question,
-            answer: answer
+            answer: answer,
+            category: category
         })
         await faq.save()
         res.redirect('/admin/faq-manager')
@@ -58,6 +59,9 @@ export const postEditFaqManager = async (req, res) => {
         const faq = await FAQ.findById(faqId)
         faq.question = req.body.question
         faq.answer = req.body.answer
+        if (req.body.category !== '') {
+            faq.category = req.body.category
+        }
         await faq.save()
         res.redirect('/admin/faq-manager')
     } catch (error) {

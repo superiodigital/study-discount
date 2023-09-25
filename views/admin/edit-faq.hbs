@@ -8,6 +8,14 @@
                 </p>
                 <form action="/admin/edit-faq/{{faq._id}}" method="post">
                     <div class="mb-3">
+                        <label for="example-select" class="form-label">Select Category</label>
+                        <select class="form-select" id="example-select" name="category" required>
+                            <option value="">Continue with old category</option> 
+                            <option value="study-discount">Study Discount</option>
+                            <option value="study-abroad">Study Abroad</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="message" class="form-label">Question</label>
                         <textarea class="form-control" id="example-textarea" rows="2" name="question"
                             required>{{faq.question}}</textarea>

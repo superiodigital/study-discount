@@ -13,7 +13,6 @@ const faqSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        ref: 'category'
     },
     createdAt: {
         type: Date,

@@ -54,7 +54,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/fav-icon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/logos/fav-icon-96x96.png">
   <link rel="icon" type="image/x-icon" href="/logos/fav-icon.png">
-  
+
 
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -200,6 +200,16 @@
                   <li><a href="/offers">Offers</a></li>
                   {{/if}}
 
+                  {{#if FAQ}}
+                  <li class="active">
+                    <a href="/faq-study-discount">FAQs</a>
+                  </li>
+                  {{else}}
+                  <li>
+                    <a href="/faq-study-discount">FAQs</a>
+                  </li>
+                  {{/if}}
+
                   {{#if contactPage}}
                   <li class="active">
                     <a href="/contact">Contact</a>
@@ -207,16 +217,6 @@
                   {{else}}
                   <li>
                     <a href="/contact">Contact</a>
-                  </li>
-                  {{/if}}
-
-                  {{#if FAQ}}
-                  <li class="active">
-                    <a href="/faq">FAQs</a>
-                  </li>
-                  {{else}}
-                  <li>
-                    <a href="/faq">FAQs</a>
                   </li>
                   {{/if}}
 
@@ -270,6 +270,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/offers">Offers</a></li>
+                <li><a href="/faq">FAQs</a></li>
                 <li><a href="/contact">Contact</a></li>
               </ul>
             </div>
@@ -286,9 +287,11 @@
             </div>
             <div class="col-xs-12 col-sm-7">
               <ul class="list-unstyled footer-nav">
-                <li><a href="/">Home</a></li>
+                {{!-- <li><a href="/">Home</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/offers">Offers</a></li>
+                <li><a href="/contact">Contact</a></li> --}}
+                <li><a href="/terms-and-conditions">Terms and Conditions</a></li>
                 <li><a href="/contact">Contact</a></li>
               </ul>
             </div>

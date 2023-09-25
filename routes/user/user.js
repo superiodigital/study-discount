@@ -6,7 +6,8 @@ import {
   // getBlogDetailsPage,
   // getBlogUpdatesPage,
   getContactPage,
-  getFaqPage,
+  getFaqStudyAbroadPage,
+  getFaqStudyDIscountPage,
   getHomePage,
   getLoginPage,
   getOfferSubmit,
@@ -38,11 +39,12 @@ router.get("/offers-details/:offerSlug", getSingleOfferPage);
 router.get("/offer-submission", getOfferSubmit);
 router.post("/offers-registration", postRegisterOffer);
 
-router.get('/faq', getFaqPage);
+router.get('/faq-study-discount', getFaqStudyDIscountPage);
+router.get('/faq-study-abroad', getFaqStudyAbroadPage);
 
-router.post('/search',searchOffers);
-router.get('/getSuggestions',getSuggestions)
-router.get('/terms-and-conditions',getTermsAndConditions)
+router.post('/search', searchOffers);
+router.get('/getSuggestions', getSuggestions)
+router.get('/terms-and-conditions', getTermsAndConditions)
 
 // Export the router
 export default router;
