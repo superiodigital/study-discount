@@ -1,0 +1,28 @@
+<div class="row" style="margin-top: 10px;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title">Enter Head&amp;Description here</h4>
+                <p class="sub-header">
+                    Fill the fields with following the instructions
+                </p>
+                <form action="/admin/add-terms-and-condition" method="post">
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Heading</label>
+                        <textarea class="form-control" id="example-textarea" rows="2" name="heading"
+                            required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Description</label>
+                        <textarea class="form-control" id="example-textarea" rows="3" name="description"
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn--md btn-pink waves-effect waves-light"><span><i
+                                class="fa-solid fa-floppy-disk"></i></span> Save</button>
+                </form>
+                <!-- Preview -->
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div><!-- end col -->
+</div>

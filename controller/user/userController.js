@@ -6,6 +6,7 @@ import User from '../../models/schema/userSchema.js'
 import FAQ from "../../models/schema/faqSchema.js";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import TermsAndConditions from '../../models/schema/termsAndConditions.js'
 
 export const getHomePage = async (req, res) => {
     try {
@@ -179,14 +180,14 @@ export const getSingleOfferPage = async (req, res) => {
         const { offerSlug } = req.params
         const changeOfferViewCount = await Offer.findOne({ slug: offerSlug })
         if (!changeOfferViewCount) {
-            return res.status(404).render('not-found-404',{ notFound: true })
+            return res.status(404).render('not-found-404', { notFound: true })
         }
         changeOfferViewCount.viewedCount += 1
         await changeOfferViewCount.save()
         // finding offer
         const offer = await Offer.findOne({ slug: offerSlug }).lean()
         if (!offer) {
-            return res.status(404).render('not-found-404',{ notFound: true })
+            return res.status(404).render('not-found-404', { notFound: true })
         }
         const relatedOffers = await Offer.find({
             $and: [
@@ -272,9 +273,10 @@ export const getSuggestions = async (req, res) => {
     }
 }
 
-export const getTermsAndConditions = (req, res) => {
+export const getTermsAndConditions = async (req, res) => {
     try {
-        res.render('terms-and-conditions')
+        const termAndConditions = await TermsAndConditions.find({}).lean()
+        res.render('terms-and-conditions', { termAndConditions })
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }

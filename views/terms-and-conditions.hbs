@@ -1,7 +1,7 @@
-<div class="tc-main-container">
+{{!-- <div class="tc-main-container">
     <div class="tc-sub-container">
         <div>
-            <h1 class="">Study Discount privacy policy</h1>
+            <h1 class="">Study Discount Terms And Conditions</h1>
         </div>
         <div class="tc-main-points">
             <div class="tc-points">
@@ -62,4 +62,153 @@
             </div>
         </div>
     </div>
+</div> --}}
+
+<div class="containerDiv">
+    <h1>Study Discount Terms And Conditions</h1>
+    <div class="accordion">
+        {{#each termAndConditions}}
+        <div class="accordion-item">
+            <button id="accordion-button-{{incrementedIndex @index}}" aria-expanded="false"><span
+                    class="accordion-title">{{heading}}</span><span class="icon" aria-hidden="true"></span></button>
+            <div class="accordion-content">
+                <p>{{description}}</p>
+            </div>
+        </div>
+        {{else}}
+        <div style="margin-top: 5px;">Will update soon...</div>
+        {{/each}}
+    </div>
 </div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Hind:300,400&display=swap');
+
+    /* Define variables as custom properties */
+    :root {
+        --bg: #fff;
+        --text: #7288a2;
+        --gray: #4d5974;
+        --lightgray: #e5e5e5;
+        --yellow: #ffb300;
+    }
+
+    .containerDiv {
+        margin: 100px 100px 100px 100px;
+    }
+
+    /* Accordion styles */
+    .accordion .accordion-item {
+        border-bottom: 1px solid var(--lightgray);
+    }
+
+    .accordion button {
+        position: relative;
+        display: block;
+        text-align: left;
+        width: 100%;
+        padding: 1em 0;
+        color: var(--text);
+        font-size: 2.15rem;
+        font-weight: 400;
+        border: none;
+        background: none;
+        outline: none;
+    }
+
+    .accordion button:hover,
+    .accordion button:focus {
+        cursor: pointer;
+        color: var(--yellow);
+    }
+
+    .accordion button:hover::after,
+    .accordion button:focus::after {
+        cursor: pointer;
+        color: var(--yellow);
+        border: 1px solid var(--yellow);
+    }
+
+    .accordion .accordion-title {
+        padding: 1em 1.5em 1em 0;
+    }
+
+    .accordion .icon {
+        display: inline-block;
+        position: absolute;
+        top: 18px;
+        right: 0;
+        width: 22px;
+        height: 22px;
+        border: 1px solid;
+        border-radius: 22px;
+    }
+
+    .accordion .icon::before {
+        display: block;
+        position: absolute;
+        content: '';
+        top: 9px;
+        left: 5px;
+        width: 10px;
+        height: 2px;
+        background: currentColor;
+    }
+
+    .accordion .icon::after {
+        display: block;
+        position: absolute;
+        content: '';
+        top: 5px;
+        left: 9px;
+        width: 2px;
+        height: 10px;
+        background: currentColor;
+    }
+
+    .accordion button[aria-expanded='true'] {
+        color: var(--yellow);
+    }
+
+    .accordion button[aria-expanded='true'] .icon::after {
+        width: 0;
+    }
+
+    .accordion .accordion-content {
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: opacity 200ms linear, max-height 200ms linear;
+        will-change: opacity, max-height;
+    }
+
+    .accordion .accordion-content p {
+        font-size: 2rem;
+        font-weight: 300;
+    }
+
+    .accordion button[aria-expanded='true']+.accordion-content {
+        opacity: 1;
+        max-height: 25em;
+        transition: all 200ms linear;
+        will-change: opacity, max-height;
+    }
+</style>
+
+<script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+</script>

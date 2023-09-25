@@ -7,6 +7,7 @@ import { multerMiddleware } from "../../middleware/multer.js"
 import { deleteLeadsLogs, getDownloadLeads, getLeadsLogs, getOfferLeadTable, putOfferLeadDisable, putOfferLeadEnable } from "../../controller/admin/offerLeadsController.js";
 import { deleteCategoriesFun, getAddCategories, getCategoryManage, getEditCategoryForm, postAddCategories, postEditCategoryForm } from "../../controller/admin/categoryController.js";
 import { deleteFaqManager, getAddFaqManager, getEditFaqManager, getFaqManager, postAddFaqManager, postEditFaqManager } from "../../controller/admin/faqController.js";
+import { deleteTermsAndConditionsManager, getAddTermsAndConditionsManager, getEditTermsAndConditionsManager, getTermsAndConditionsManager, postAddTermsAndConditionsManager, postEditTermsAndConditionsManager } from "../../controller/admin/termsAndConditionController.js";
 const router = express.Router();
 // basic routes
 router.get("/", isAdminAuthorize, getAdminHome);
@@ -35,6 +36,13 @@ router.get('/faq-manager', isAdminAuthorize, getFaqManager)
 router.route('/add-faq').get(isAdminAuthorize, getAddFaqManager).post(isAdminAuthorize, postAddFaqManager)
 router.delete('/delete-faq/:faqId', isAdminAuthorize, deleteFaqManager)
 router.route('/edit-faq/:faqId').get(isAdminAuthorize, getEditFaqManager).post(isAdminAuthorize, postEditFaqManager)
+
+// terms-conditions routes
+router.get('/terms-and-condition', isAdminAuthorize, getTermsAndConditionsManager)
+router.route('/add-terms-and-condition').get(isAdminAuthorize, getAddTermsAndConditionsManager).post(isAdminAuthorize, postAddTermsAndConditionsManager)
+router.delete('/delete-terms-and-condition/:termsAndConditionsId', isAdminAuthorize, deleteTermsAndConditionsManager)
+router.route('/edit-terms-and-condition/:termsAndConditionsId').get(isAdminAuthorize, getEditTermsAndConditionsManager).post(isAdminAuthorize, postEditTermsAndConditionsManager)
+
 
 // blog routes
 router.get("/company-updates", isAdminAuthorize, getCompanyUpdatesPage);
