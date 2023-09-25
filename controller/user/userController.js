@@ -283,7 +283,7 @@ export const getTermsAndConditions = (req, res) => {
 export const getFaqStudyAbroadPage = async (req, res) => {
     try {
         const faqs = await FAQ.find({ category: 'study-abroad' }).lean()
-        res.render('FAQs', { FAQ: true, faqs })
+        res.render('FAQs', { FAQ: true, faqs, studyAbroad: true })
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
@@ -292,7 +292,7 @@ export const getFaqStudyAbroadPage = async (req, res) => {
 export const getFaqStudyDIscountPage = async (req, res) => {
     try {
         const faqs = await FAQ.find({ category: 'study-discount' }).lean()
-        res.render('FAQs', { FAQ: true, faqs })
+        res.render('FAQs', { FAQ: true, faqs, studyDiscount: true })
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }

@@ -1,10 +1,24 @@
 <div class="containerDiv">
     <h1>Frequently Asked Questions</h1>
     <div style="display: flex;justify-content: center;">
-        <a href="/faq-study-discount" class="btn-primary text-center text-uppercase" style="margin-right: 2px">Study
+        {{#if studyDiscount}}
+        <a href="/faq-study-discount" class="btn text-center text-uppercase"
+            style="margin-left: 2px;background-color: ffb300;">Study
             Discount</a>
-        <a href="/faq-study-abroad" class="btn-primary text-center text-uppercase" style="/faq-study-abroad">Study
+        {{else}}
+        <a href="/faq-study-discount" class="btn text-center text-uppercase" style="margin-left: 2px; background-color: black; color: white;">Study
+            Discount</a>
+        {{/if}}
+
+        {{#if studyAbroad}}
+        <a href="/faq-study-abroad" class="btn text-center text-uppercase"
+            style="margin-left: 2px;background-color: ffb300;">Study
             Abroad</a>
+        {{else}}
+        <a href="/faq-study-abroad" class="btn text-center text-uppercase" style="margin-left: 2px; background-color: black; color: white;">Study
+            Abroad</a>
+        {{/if}}
+
     </div>
     <div class="accordion">
         {{#each faqs}}
