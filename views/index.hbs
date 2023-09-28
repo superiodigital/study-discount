@@ -2,23 +2,25 @@
 <main id="main">
   <!-- banner of the page -->
   {{#if randomBanner}}
-  <section class="banner bg-full" style="background-image: url(/uploads/{{randomBanner.filePath}});">
-    <div class="holder">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-6 text-left">
-            {{!-- <h1 class="" style="text-align: left;">
-              {{randomBanner.description}}
-            </h1>
-            <div class="text-left">
-              <a href="{{randomBanner.url}}" class="btn-primary text-center md-round" style="">Apply for this offer
-                <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
-            </div> --}}
+  <a href="{{randomBanner.url}}">
+    <section class="banner bg-full" style="background-image: url(/uploads/{{randomBanner.filePath}});">
+      <div class="holder">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-6 text-left">
+              {{!-- <h1 class="" style="text-align: left;">
+                {{randomBanner.description}}
+              </h1>
+              <div class="text-left">
+                <a href="{{randomBanner.url}}" class="btn-primary text-center md-round" style="">Apply for this offer
+                  <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
+              </div> --}}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </a>
   {{else}}
   <section class="banner bg-full overlay-home">
     <div class="holder">
