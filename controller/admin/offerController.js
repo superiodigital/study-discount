@@ -40,7 +40,7 @@ export const postAddOfferForm = async (req, res) => {
         let slugConfirm = slug;
         if (slugExist) {
             // Handle duplicate slug here, maybe by appending a unique identifier
-            slugConfirm = `${slug}?=${Date.now()}`;
+            slugConfirm = `${slug}=${Date.now()}`;
         }
         // Create a new Offer document
         const newOffer = new Offer({

@@ -57,9 +57,9 @@ router.delete('/delete-lead/:leadId', isAdminAuthorize, deleteLeadsLogs)
 
 
 
-// router.get('/test', (req, res) => {
-//     res.render('test', { layout: 'admin-layout' })
-// })
+router.get('/test', (req, res) => {
+    res.render('test', { layout: 'admin-layout' })
+})
 
 // router.post('/save', multerMiddleware.single('file'), (req, res) => {
 //     console.log(req.body)

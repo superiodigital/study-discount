@@ -48,6 +48,8 @@
   <!-- include the site stylesheet -->
   <link rel="stylesheet" href="/user/css/responsive.css" />
   <!-- include the site stylesheet -->
+  <link rel="stylesheet" href="/user/css/custom.css" />
+  <!-- include the site stylesheet -->
   <style class="color_css"></style>
 
   <link rel="icon" type="image/png" sizes="16x16" href="/fav-icon-16x16.png">
@@ -116,23 +118,26 @@
     <!-- header of the page -->
     <header id="header">
       <!-- header top of the page -->
-      {{!-- {{#if homePage}} --}}
       <div class="header-top">
         <div class="container">
           <div class="row">
             <div class="col-xs-12">
               {{! <span class="txt">Welcome to Coupmy Save More With Our Deals</span> }}
               <ul class="align-left list-unstyled">
+                {{#if commonData.userLoggedIn}}
+                <li><a href="#"><i class="fa fa-user"></i>
+                    Profile</a></li>
+                {{else}}
                 <li><a href="/login"><i class="fa fa-unlock-alt"></i>
                     Login</a></li>
                 <li><a href="/register"><i class="fa fa-user"></i>
                     Register</a></li>
+                {{/if}}
               </ul>
             </div>
           </div>
         </div>
       </div>
-      {{!-- {{/if}}? --}}
       <!-- header holder of the page -->
       <div class="header-holder container">
         <div class="row">
