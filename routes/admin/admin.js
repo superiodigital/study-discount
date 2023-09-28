@@ -8,6 +8,7 @@ import { deleteLeadsLogs, getDownloadLeads, getLeadsLogs, getOfferLeadTable, put
 import { deleteCategoriesFun, getAddCategories, getCategoryManage, getEditCategoryForm, postAddCategories, postEditCategoryForm } from "../../controller/admin/categoryController.js";
 import { deleteFaqManager, getAddFaqManager, getEditFaqManager, getFaqManager, postAddFaqManager, postEditFaqManager } from "../../controller/admin/faqController.js";
 import { deleteTermsAndConditionsManager, getAddTermsAndConditionsManager, getEditTermsAndConditionsManager, getTermsAndConditionsManager, postAddTermsAndConditionsManager, postEditTermsAndConditionsManager } from "../../controller/admin/termsAndConditionController.js";
+import { deleteScratchCardGift, getAddScratchGift, getEditScratchGift, getScratchCardManager, postAddScratchGift, postEditScratchGift } from "../../controller/admin/scratchController.js.js";
 const router = express.Router();
 // basic routes
 router.get("/", isAdminAuthorize, getAdminHome);
@@ -43,6 +44,11 @@ router.route('/add-terms-and-condition').get(isAdminAuthorize, getAddTermsAndCon
 router.delete('/delete-terms-and-condition/:termsAndConditionsId', isAdminAuthorize, deleteTermsAndConditionsManager)
 router.route('/edit-terms-and-condition/:termsAndConditionsId').get(isAdminAuthorize, getEditTermsAndConditionsManager).post(isAdminAuthorize, postEditTermsAndConditionsManager)
 
+// offer win elements routes
+router.get('/scratch-card-manager', getScratchCardManager)
+router.route('/add-scratch-gift').get(getAddScratchGift).post(multerMiddleware.single('file'), postAddScratchGift)
+router.route('/edit-scratch-card-gift/:scratchGiftsId').get(getEditScratchGift).post(multerMiddleware.single('file'), postEditScratchGift)
+router.delete('/delete-scratch-card-gift/:scratchGiftsId', deleteScratchCardGift)
 
 // blog routes
 router.get("/company-updates", isAdminAuthorize, getCompanyUpdatesPage);

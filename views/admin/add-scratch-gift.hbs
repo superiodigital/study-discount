@@ -1,0 +1,69 @@
+<div class="row" style="margin-top: 10px;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title">Upload scratch gift here</h4>
+                <p class="sub-header">
+                    Fill the fields with following the instructions
+                </p>
+                <form action="/admin/add-scratch-gift" method="POST" enctype="multipart/form-data">
+
+                    <div class="col-12 mt-3" style="border: 2px dotted #ccc; padding: 15px;">
+                        <label for="fileInput" class="btn btn-primary d-block mx-auto">
+                            <i class="fa-solid fa-file-arrow-up"></i>
+                            <span>Choose File</span>
+                            <input type="file" id="fileInput" style="display:none;" name="file" accept="image/*"
+                                onchange="displayImage()" />
+                        </label>
+                        <p class="text-muted text-center mt-2 mb-0">Max File size</p>
+                        <h3 class="text-center">Drop files here or click to upload.</h3>
+                        <span class="text-muted font-13">(width: 000 px, height: 000 px)</span>
+                    </div>
+
+                    <div id="imagePreview" class="text-center mt-3">
+                        <!-- The selected image will be displayed here -->
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Win Message</label>
+                        <textarea class="form-control" id="example-textarea" rows="3" name="message"
+                            placeholder="Max 70 characters"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-md btn-pink waves-effect waves-light"><span><i
+                                class="fa-solid fa-floppy-disk"></i></span> Save</button>
+                </form>
+                <!-- Preview -->
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div><!-- end col -->
+</div>
+
+<script>
+    function displayImage() {
+        const fileInput = document.getElementById('fileInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const file = fileInput.files[0];
+
+        if (file) {
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.style.maxWidth = '100%';
+                    img.style.maxHeight = '300px'; // Adjust the maximum height as needed
+                    imagePreview.innerHTML = '';
+                    imagePreview.appendChild(img);
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please select an image file.');
+                fileInput.value = ''; // Reset the file input
+                imagePreview.innerHTML = ''; // Clear the image preview
+            }
+        }
+    }
+</script>
