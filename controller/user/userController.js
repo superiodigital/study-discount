@@ -67,6 +67,7 @@ export const getContactPage = async (req, res) => {
 export const getOffersPage = async (req, res) => {
     try {
         const offers = (await Offer.find().lean().sort()).reverse()
+        const featuredOffers = (await Offer.find().lean().limit(3).sort()).reverse()
         // Format the date strings in the offers array
         offers.forEach((offer) => {
             offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
@@ -91,7 +92,7 @@ export const getOffersPage = async (req, res) => {
             if (nameA > nameB) return 1;
             return 0;
         });
-        res.render('offers', { offerPage: true, offers, filteredCategory })
+        res.render('offers', { offerPage: true, offers, filteredCategory,featuredOffers })
     } catch (error) {
         res.status(500).send(error)
     }
