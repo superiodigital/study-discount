@@ -19,6 +19,7 @@ import {
 import { isAuthorize, isAuth } from "../../middleware/session.js";
 import { postRegisterOffer } from "../../controller/user/offerController.js";
 import { getLoginPage, getRegisterPage, postUserLogin, postUserRegister } from "../../controller/user/authController.js";
+import { postContactSubmit } from "../../controller/user/contactController.js";
 
 // Create a router instance
 const router = express.Router();
@@ -30,7 +31,9 @@ router.route("/login").get(isAuth, getLoginPage).post(postUserLogin); // route t
 router.route("/register").get(isAuth, getRegisterPage).post(postUserRegister); // route to register
 
 router.get("/about", getAboutPage); // route to about page
-router.get("/contact", getContactPage);
+
+router.route("/contact").get(getContactPage).post(postContactSubmit); // route to contact page
+
 router.get("/offers", getOffersPage);
 // router.get("/blog-updates", getBlogUpdatesPage);
 // router.get("/blog-details", getBlogDetailsPage);
@@ -44,6 +47,8 @@ router.get('/faq-study-abroad', getFaqStudyAbroadPage);
 router.post('/search', searchOffers);
 router.get('/getSuggestions', getSuggestions)
 router.get('/terms-and-conditions', getTermsAndConditions)
+
+
 
 // Export the router
 export default router;

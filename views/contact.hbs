@@ -55,27 +55,27 @@
           </li>
         </ul>
         <!-- contact form of the page -->
-        <form action="#" class="contact-form">
+        <form class="contact-form">
           <fieldset>
             <div class="form-group">
               <div class="col">
                 <label for="name">Name <span class="clr">*</span></label>
-                <input type="text" id="name" class="form-control" />
+                <input type="text" id="name" class="form-control" name="name" />
               </div>
               <div class="col">
                 <label for="email">Email Address
                   <span class="clr">*</span></label>
-                <input type="email" id="email" class="form-control" />
+                <input type="email" id="email" class="form-control" name="email" />
               </div>
             </div>
             <div class="form-group">
               <div class="col">
                 <label for="tel">Phone <span class="clr">*</span></label>
-                <input type="tel" id="tel" class="form-control" />
+                <input type="tel" id="tel" class="form-control" name="phone" />
               </div>
               <div class="col">
-                <label for="sub">Subject</label>
-                <input type="text" id="sub" class="form-control" />
+                <label for="sub">Place</label>
+                <input type="text" id="sub" class="form-control" name="place" />
               </div>
             </div>
             <div class="form-group">
@@ -97,3 +97,46 @@
   </div>
 </main>
 <!-- main of the page end -->
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.contact-form').submit(function (e) {
+      e.preventDefault();
+
+      // Reset previous error messages
+      $('#response').html('');
+
+      // Form data
+      const formData = {
+        name: $('#name').val(),
+        email: $('#email').val(),
+        phone: $('#tel').val(),
+        place: $('#sub').val(),
+        message: $('#msg').val()
+      };
+
+      // Simple form validation (you can add more advanced validation)
+      if (!formData.name || !formData.email || !formData.phone || !formData.message) {
+        alert('All fields are required.')
+        return;
+      }
+
+      // Send the data to the server using AJAX
+      $.ajax({
+        type: 'POST',
+        url: '/contact', // Replace with your server's endpoint
+        data: formData,
+        success: function (response) {
+          alert('Message sent successfully!')
+          // Clear the form after successful submission
+          $('.contact-form')[0].reset();
+        },
+        error: function (error) {
+          alert('An error occurred. Please try again later.')
+        }
+      });
+    });
+  });
+</script>
