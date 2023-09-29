@@ -1,39 +1,57 @@
-<div class="containerDiv">
-    <h1>Frequently Asked Questions</h1>
-    <div style="display: flex;justify-content: center;">
-        {{#if studyDiscount}}
-        <a href="/faq-study-discount" class="btn text-center text-uppercase"
-            style="margin-left: 2px;background-color: ffb300;">Study
-            Discount</a>
-        {{else}}
-        <a href="/faq-study-discount" class="btn text-center text-uppercase" style="margin-left: 2px; background-color: black; color: white;">Study
-            Discount</a>
-        {{/if}}
-
-        {{#if studyAbroad}}
-        <a href="/faq-study-abroad" class="btn text-center text-uppercase"
-            style="margin-left: 2px;background-color: ffb300;">Study
-            Abroad</a>
-        {{else}}
-        <a href="/faq-study-abroad" class="btn text-center text-uppercase" style="margin-left: 2px; background-color: black; color: white;">Study
-            Abroad</a>
-        {{/if}}
-
-    </div>
-    <div class="accordion">
-        {{#each faqs}}
-        <div class="accordion-item">
-            <button id="accordion-button-{{incrementedIndex @index}}" aria-expanded="false"><span
-                    class="accordion-title">{{question}}</span><span class="icon" aria-hidden="true"></span></button>
-            <div class="accordion-content">
-                <p>{{answer}}</p>
+<main id="main">
+    <section class="banner banner3 bg-full overlay"
+        style="background-image: url(/main-images/study-discount-about-us.png);">
+        <div class="holder">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <h2 class="" style="color: #ffb300;">Study Discount</h2>
+                        <h1>Frequently Asked Questions</h1>
+                    </div>
+                </div>
             </div>
         </div>
-        {{else}}
-        <div style="margin-top: 5px;">No FAQs</div>
-        {{/each}}
+    </section>
+    <div class="containerDiv">
+        {{!-- <h1>Frequently Asked Questions</h1> --}}
+        <div style="display: flex;justify-content: center;">
+            {{#if studyDiscount}}
+            <a href="/faq-study-discount" class="btn text-center text-uppercase"
+                style="margin-left: 2px;background-color: ffb300;">Study
+                Discount</a>
+            {{else}}
+            <a href="/faq-study-discount" class="btn text-center text-uppercase"
+                style="margin-left: 2px; background-color: black; color: white;">Study
+                Discount</a>
+            {{/if}}
+
+            {{#if studyAbroad}}
+            <a href="/faq-study-abroad" class="btn text-center text-uppercase"
+                style="margin-left: 2px;background-color: ffb300;">Study
+                Abroad</a>
+            {{else}}
+            <a href="/faq-study-abroad" class="btn text-center text-uppercase"
+                style="margin-left: 2px; background-color: black; color: white;">Study
+                Abroad</a>
+            {{/if}}
+
+        </div>
+        <div class="accordion">
+            {{#each faqs}}
+            <div class="accordion-item">
+                <button id="accordion-button-{{incrementedIndex @index}}" aria-expanded="false"><span
+                        class="accordion-title">{{question}}</span><span class="icon"
+                        aria-hidden="true"></span></button>
+                <div class="accordion-content">
+                    <p>{{answer}}</p>
+                </div>
+            </div>
+            {{else}}
+            <div style="margin-top: 5px;">No FAQs</div>
+            {{/each}}
+        </div>
     </div>
-</div>
+</main>
 
 <style>
     @import url('https://fonts.googleapis.com/css?family=Hind:300,400&display=swap');

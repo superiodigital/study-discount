@@ -10,8 +10,8 @@
 .container-div-scratch {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .scratch-card {
@@ -95,6 +95,69 @@
     #f3ff00,
     #faff19,
     #fff700
+  );
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+      135deg,
+      transparent 40%,
+      rgb(255 255 255 / 0.8) 50%,
+      transparent 60%
+    );
+    background-position: bottom right;
+    background-size: 300% 300%;
+    background-repeat: no-repeat;
+
+    @at-root .scratch-card-cover.shine::before {
+      animation: shine 8s infinite;
+    }
+  }
+
+  @keyframes shine {
+    50% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: -50% -50%;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    filter: url("#noise");
+  }
+}
+
+.scratch-card-cover-shelton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #cfced6;
+  background-image: linear-gradient(
+    to right,
+    #f7f7f7,
+    #f7f7f7,
+    #f7f7f7,
+    #f7f7f7,
+    #f7f7f7
   );
   overflow: hidden;
 

@@ -1,19 +1,34 @@
-<div class="containerDiv">
-    <h1>Terms And Conditions</h1>
-    <div class="accordion">
-        {{#each termAndConditions}}
-        <div class="accordion-item">
-            <button id="accordion-button-{{incrementedIndex @index}}" aria-expanded="false"><span
-                    class="accordion-title">{{heading}}</span><span class="icon" aria-hidden="true"></span></button>
-            <div class="accordion-content">
-                <p>{{description}}</p>
+<main id="main">
+    <section class="banner banner3 bg-full overlay"
+        style="background-image: url(/main-images/study-discount-about-us.png);">
+        <div class="holder">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <h2 class="" style="color: #ffb300;">Study Discount</h2>
+                        <h1>Terms And Conditions</h1>
+                    </div>
+                </div>
             </div>
         </div>
-        {{else}}
-        <div style="margin-top: 5px;">Will update soon...</div>
-        {{/each}}
+    </section>
+    <div class="containerDiv">
+        {{!-- <h1>Terms And Conditions</h1> --}}
+        <div class="accordion">
+            {{#each termAndConditions}}
+            <div class="accordion-item">
+                <button id="accordion-button-{{incrementedIndex @index}}" aria-expanded="false"><span
+                        class="accordion-title">{{heading}}</span><span class="icon" aria-hidden="true"></span></button>
+                <div class="accordion-content">
+                    <p>{{description}}</p>
+                </div>
+            </div>
+            {{else}}
+            <div style="margin-top: 5px;">Will update soon...</div>
+            {{/each}}
+        </div>
     </div>
-</div>
+</main>
 
 <style>
     @import url('https://fonts.googleapis.com/css?family=Hind:300,400&display=swap');
