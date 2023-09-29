@@ -73,6 +73,11 @@ export const getOffersPage = async (req, res) => {
             offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
             offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
         });
+        // Format the date strings in the offers array
+        featuredOffers.forEach((offer) => {
+            offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
+            offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
+        });
         const offersCategory = await Offer.find().populate('category').select('category').lean()
 
         let filteredCategory = []
@@ -92,7 +97,7 @@ export const getOffersPage = async (req, res) => {
             if (nameA > nameB) return 1;
             return 0;
         });
-        res.render('offers', { offerPage: true, offers, filteredCategory,featuredOffers })
+        res.render('offers', { offerPage: true, offers, filteredCategory, featuredOffers })
     } catch (error) {
         res.status(500).send(error)
     }
