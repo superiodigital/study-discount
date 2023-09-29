@@ -150,6 +150,26 @@ a.active {
   background-repeat: no-repeat;
 }
 
+@media (max-width: 768px) {
+  .bg-full {
+    /* Adjust background properties for smaller screens */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 185px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .bg-full {
+    /* Adjust background properties for smaller screens */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height:  360px;
+  }
+}
+
 .bg-parallax {
   background-size: cover;
   background-attachment: fixed;
