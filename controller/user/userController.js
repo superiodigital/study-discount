@@ -66,13 +66,32 @@ export const getContactPage = async (req, res) => {
 
 export const getOffersPage = async (req, res) => {
     try {
-        const offers = (await Offer.find().lean().sort()).reverse()
+        const offers = (await Offer.find().lean().limit(3).sort()).reverse()
         // Format the date strings in the offers array
         offers.forEach((offer) => {
             offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
             offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
         });
-        res.render('offers', { offerPage: true, offers })
+        const offersCategory = await Offer.find().populate('category').select('category').lean()
+
+        let filteredCategory = []
+        let categoryForFilter = offersCategory.map((cat, i) => {
+            const index = filteredCategory.findIndex((c) => c._id === cat.category._id)
+            if (index === -1) {
+                filteredCategory.push(cat.category)
+                return
+            }
+        })
+
+        // Sort the array by the 'name' property in ascending order
+        filteredCategory.sort((a, b) => {
+            const nameA = a.name.toUpperCase(); // Convert names to uppercase for case-insensitive sorting
+            const nameB = b.name.toUpperCase();
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+            return 0;
+        });
+        res.render('offers', { offerPage: true, offers, filteredCategory })
     } catch (error) {
         res.status(500).send(error)
     }
