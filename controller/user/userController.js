@@ -14,10 +14,8 @@ export const getHomePage = async (req, res) => {
 
         const featuredOffers = (await Offer.find().lean().sort()).reverse()
         featuredOffers.forEach((offer, i) => {
-            if (i < 3) {
                 offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
                 offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
-            }
         });
 
         // Format the date strings in the offers array
