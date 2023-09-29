@@ -69,9 +69,14 @@ export const getOffersPage = async (req, res) => {
         const offers = (await Offer.find().lean().sort()).reverse()
         const featuredOffers = (await Offer.find().lean().limit(3).sort()).reverse()
         // Format the date strings in the offers array
-        offers.forEach((offer) => {
+        offers.forEach(async (offer) => {
             offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
             offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
+            const countOfRegistrations = await OfferLead.countDocuments({ offerId: offer._id })
+            offer.registrations = countOfRegistrations
+            if (offer.offerPercent === 0) {
+                delete offer.offerPercent
+            }
         });
         // Format the date strings in the offers array
         featuredOffers.forEach((offer) => {
