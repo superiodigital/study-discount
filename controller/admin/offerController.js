@@ -29,7 +29,7 @@ export const getAddOfferForm = async (req, res) => {
 export const postAddOfferForm = async (req, res) => {
     try {
         // Extract form data
-        const { name, slug, category, shortDescription, fromTo, offerPrice, realPrice, offerPercent, content: longDescription } = req.body;
+        const { name, slug, category, shortDescription, fromTo, offerPrice, realPrice, offerPercent, content: longDescription, type } = req.body;
 
         // Access the new name of the uploaded offer image
         const newFileName = req.file.filename;
@@ -50,6 +50,7 @@ export const postAddOfferForm = async (req, res) => {
             shortDescription,
             category,
             expiresFrom, // Add expiresFrom field
+            type,
             expiresTo,   // Add expiresTo field
             offerPrice, realPrice, offerPercent,
             offerImage: newFileName, // Assuming your Offer model has an 'offerImage' field for the image name
@@ -94,7 +95,7 @@ export const deleteOfferFun = async (req, res) => {
 export const postEditOfferForm = async (req, res) => {
     try {
         const { offerId } = req.params
-        const { shortDescription, content: longDescription, fromTo, offerPrice, realPrice, offerPercent,name,slug,category } = req.body;
+        const { shortDescription, content: longDescription, fromTo, offerPrice, realPrice, offerPercent, name, slug, category, type } = req.body;
         const offer = await Offer.findById(offerId)
         if (!offer) {
             res.status(404).send('not fount ')
@@ -106,8 +107,9 @@ export const postEditOfferForm = async (req, res) => {
         offer.offerPrice = offerPrice
         offer.realPrice = realPrice
         offer.offerPercent = offerPercent
+        offer.type = type
         if (category !== '') {
-        offer.category = category 
+            offer.category = category
         }
         if (req.file?.filename) {
             await fs.unlink(`public/uploads/${offer.offerImage}`);

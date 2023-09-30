@@ -12,7 +12,7 @@ export const getHomePage = async (req, res) => {
 
         const offers = (await Offer.find().lean().sort()).reverse()
 
-        const featuredOffers = (await Offer.find().lean().sort()).reverse().slice(0, 3);
+        const featuredOffers = (await Offer.find({type:'featured'}).lean().sort()).reverse()
         featuredOffers.forEach((offer, i) => {
             offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
             offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
@@ -74,7 +74,7 @@ export const getContactPage = async (req, res) => {
 export const getOffersPage = async (req, res) => {
     try {
         const offers = (await Offer.find().lean().sort()).reverse()
-        const featuredOffers = (await Offer.find().lean().sort()).reverse().slice(0, 3);
+        const featuredOffers = (await Offer.find({type:'featured'}).lean().sort()).reverse()
         // Format the date strings in the offers array
         offers.forEach(async (offer) => {
             offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
