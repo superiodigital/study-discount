@@ -144,6 +144,12 @@ a.active {
   width: 100%;
 }
 
+.banner-bg-full {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .bg-full {
   background-size: cover;
   background-position: center;
@@ -151,7 +157,7 @@ a.active {
 }
 
 @media (max-width: 768px) {
-  .bg-full {
+  .banner-bg-full {
     /* Adjust background properties for smaller screens */
     background-size: contain;
     background-position: center;
@@ -161,12 +167,12 @@ a.active {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .bg-full {
+  .banner-bg-full {
     /* Adjust background properties for smaller screens */
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    height:  360px;
+    height: 360px;
   }
 }
 
