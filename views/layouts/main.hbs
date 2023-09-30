@@ -167,12 +167,20 @@
               <div id="search-results">
                 <!-- Display search results here -->
               </div>
-              <a href="#" class="cart"><i class="fa-solid fa-percent"></i><span class="num round">0</span></a>
+              <a id="open-popup" class="cart"><i class="fa-solid fa-percent"></i><span class="num round">0</span></a>
             </div>
             <a href="#" class="nav-opener text-center pull-right hidden visible-xs"><i class="fa fa-bars"></i></a>
           </div>
         </div>
       </div>
+
+      {{!-- <div id="popup" class="popup">
+        <div class="popup-content">
+          <span id="close-popup" class="close-popup">&times;</span>
+          <h2>Popup Content</h2>
+          <p>This is a simple popup created with HTML and CSS.</p>
+        </div>
+      </div> --}}
 
       <!-- nav holder of the page -->
       <div class="nav-holder">
@@ -352,6 +360,45 @@
     </footer>
     <!-- footer of the page end -->
   </div>
+
+  <style>
+    .popup {
+      display: none;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1;
+    }
+
+    .popup-content {
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 20px;
+      position: relative;
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 24px;
+    }
+  </style>
+  <script>
+    document.getElementById("open-popup").addEventListener("click", function () {
+      document.getElementById("popup").style.display = "block";
+    });
+
+    document.getElementById("close-popup").addEventListener("click", function () {
+      document.getElementById("popup").style.display = "none";
+    });
+
+  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
