@@ -57,6 +57,9 @@
           <div class="img-holder">
             <a href="/offers-details/{{slug}}" title="{{shortDescription}}"><img src="/uploads/{{offerImage}}"
                 alt="{{shortDescription}}" class="img-resposnive" />
+              {{#if offerPercent}}
+              <span class="offerSpanStyle" style="position: absolute; top: 0; right: 16px;">{{offerPercent}}% Off</span>
+              {{/if}}
             </a>
           </div>
           <div class="txt-holder">
@@ -224,3 +227,21 @@
     });
   });
 </script>
+
+<style>
+  .offerSpanStyle {
+    font-size: 20px;
+    line-height: 18px;
+    color: #333333;
+    background-color: #fff4a4;
+    padding: 9px 25px 7px;
+    float: right;
+    text-align: center;
+    margin: 18px 0 0;
+    font-weight: 800;
+    border: 1px solid #c6c6c6;
+    -webkit-transition: all 0.25s linear;
+    -o-transition: all 0.25s linear;
+    transition: all 0.25s linear;
+  }
+</style>

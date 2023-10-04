@@ -20,6 +20,7 @@ import { isAuthorize, isAuth } from "../../middleware/session.js";
 import { postRegisterOffer } from "../../controller/user/offerController.js";
 import { getLoginPage, getRegisterPage, postUserLogin, postUserRegister } from "../../controller/user/authController.js";
 import { postContactSubmit } from "../../controller/user/contactController.js";
+import { postAddScratchToUserList } from "../../controller/user/scratchUserController.js";
 
 // Create a router instance
 const router = express.Router();
@@ -43,6 +44,8 @@ router.post("/offers-registration", postRegisterOffer);
 
 router.get('/faq-study-discount', getFaqStudyDIscountPage);
 router.get('/faq-study-abroad', getFaqStudyAbroadPage);
+
+router.post('/scratch-gift',postAddScratchToUserList)
 
 router.post('/search', searchOffers);
 router.get('/getSuggestions', getSuggestions)

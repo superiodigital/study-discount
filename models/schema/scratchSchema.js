@@ -9,6 +9,10 @@ const scratchCardSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    offerIdArray: {
+        type: Array,
+        default: []
+    }
 });
 
 const ScratchCard = mongoose.model('ScratchCard', scratchCardSchema);

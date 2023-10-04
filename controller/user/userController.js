@@ -3,6 +3,7 @@ import OfferLead from '../../models/schema/offerLeads.js'
 import Offer from '../../models/schema/offersSchema.js'
 import FAQ from "../../models/schema/faqSchema.js";
 import TermsAndConditions from '../../models/schema/termsAndConditions.js'
+import { handleExistScratchGIft } from './scratchUserController.js';
 
 export const getHomePage = async (req, res) => {
     try {
@@ -10,9 +11,9 @@ export const getHomePage = async (req, res) => {
         const randomIndex = Math.floor(Math.random() * banners?.length);
         const randomBanner = banners[randomIndex]
 
-        const offers = (await Offer.find().lean().sort()).reverse()
+        const offers = (await Offer.find().lean().sort({ offerPercent: -1 }))
 
-        const featuredOffers = (await Offer.find({type:'featured'}).lean().sort()).reverse()
+        const featuredOffers = (await Offer.find({ type: 'featured' }).lean().sort({ offerPercent: -1 }))
         featuredOffers.forEach((offer, i) => {
             offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
             offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
@@ -73,8 +74,8 @@ export const getContactPage = async (req, res) => {
 
 export const getOffersPage = async (req, res) => {
     try {
-        const offers = (await Offer.find().lean().sort()).reverse()
-        const featuredOffers = (await Offer.find({type:'featured'}).lean().sort()).reverse()
+        const offers = (await Offer.find().lean().sort({ offerPercent: -1 }))
+        const featuredOffers = (await Offer.find({ type: 'featured' }).lean().sort({ offerPercent: -1 }))
         // Format the date strings in the offers array
         offers.forEach(async (offer) => {
             offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
@@ -140,7 +141,13 @@ export const getSingleOfferPage = async (req, res) => {
             offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
         });
         const registeredCount = await OfferLead.countDocuments({ offerId: offer._id })
-        res.render('offer-details', { offer, relatedOffers, registeredCount });
+        const userToken = req.session.userToken;
+        if (userToken) {
+            const response = await handleExistScratchGIft(userToken, { offerId: offer._id })
+            res.render('offer-details', { offer, relatedOffers, registeredCount, gift: response.gift, giftExist: response.giftExist });
+        } else {
+            res.render('offer-details', { offer, relatedOffers, registeredCount });
+        }
     } catch (error) {
         console.log(error);
         res.status(500).send(error)

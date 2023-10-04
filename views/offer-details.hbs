@@ -59,7 +59,36 @@
           </article>
           <!-- sidebar of the page -->
           <aside id="sidebar">
-            {{!-- {{#if commonData.userLoggedIn}}
+            {{!-- {{#if gift}}
+            {{#if giftExist}}
+            <div class="container-div-scratch">
+              <div>
+                <div class="scratch-card">
+                  <div class="scratch-card-cover-container">
+                    <canvas class="scratch-card-canvas" width="320" height="320"></canvas>
+                    <!-- only needed for Safari and iOS browsers -->
+                    <img class="scratch-card-canvas-render hidden" alt="">
+                  </div>
+                  <img class="scratch-card-image" src="/uploads/{{gift.image}}" alt="{{gift.winMessage}}">
+                </div>
+                <p class="scratch-card-text">🎁{{gift.winMessage}}</p>
+              </div>
+
+              <svg width="0" height="0">
+                <filter id="remove-black" color-interpolation-filters="sRGB">
+                  <feColorMatrix type="matrix" values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              -1 -1 -1 0 1" result="black-pixels" />
+                  <feComposite in="SourceGraphic" in2="black-pixels" operator="out" />
+                </filter>
+                <filter id="noise">
+                  <feTurbulence baseFrequency="0.5"></feTurbulence>
+                </filter>
+              </svg>
+            </div>
+            {{else}}
+            {{#if commonData.userLoggedIn}}
             <div class="container-div-scratch">
               <div>
                 <div class="scratch-card">
@@ -95,8 +124,7 @@
                       </svg>
                     </div>
                   </div>
-                  <img class="scratch-card-image" src="https://pngimg.com/uploads/heart/heart_PNG51158.png"
-                    alt="Apple 50$ gift card">
+                  <img class="scratch-card-image" src="/uploads/{{gift.image}}" alt="{{gift.winMessage}}">
                 </div>
                 <p class="scratch-card-text">🎁 Scratch for a surprise!</p>
               </div>
@@ -153,6 +181,8 @@
                 </div>
               </div>
             </div>
+            {{/if}}
+            {{/if}}
             {{/if}} --}}
             <section class="widget popular-widget" id="offerFormForRegistration">
               <h3 class="heading4">Apply for this offer</h3>
@@ -221,7 +251,8 @@
               <a href="/offers-details/{{slug}}" title="{{shortDescription}}"
                 id="description-link-{{_id}}">{{shortDescription}}</a>
             </h3>
-            <a href="/offers-details/{{slug}}" class="btn-primary md-round text-center text-uppercase mt-5">Get Offer</a>
+            <a href="/offers-details/{{slug}}" class="btn-primary md-round text-center text-uppercase mt-5">Get
+              Offer</a>
             <time class="time text-center" datetime="{{expiresFrom}}">Expires On: {{expiresTo}}</time>
           </div>
         </div>
@@ -235,7 +266,8 @@
 <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.0.3"></script>
 <script src="/user/js/wheel.js"></script>
-<script src="/user/js/scratch.js"></script>
+{{!--
+<script src="/user/js/scratch.js"></script> --}}
 
 <script>
   // Get the encoded HTML content from your offer object
@@ -333,4 +365,173 @@
       return phoneRegex.test(phone);
     }
   });
+</script>
+
+<script>
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+  const scratchCardCover = document.querySelector('.scratch-card-cover');
+  const scratchCardCanvasRender = document.querySelector('.scratch-card-canvas-render');
+  const scratchCardCoverContainer = document.querySelector('.scratch-card-cover-container');
+  const scratchCardText = document.querySelector('.scratch-card-text');
+  const scratchCardImage = document.querySelector('.scratch-card-image');
+
+  const canvas = document.querySelector('canvas');
+  const context = canvas.getContext('2d');
+  let isPointerDown = false;
+  let positionX;
+  let positionY;
+  let clearDetectionTimeout = null;
+
+  const devicePixelRatio = window.devicePixelRatio || 1;
+
+  const canvasWidth = canvas.offsetWidth * devicePixelRatio;
+  const canvasHeight = canvas.offsetHeight * devicePixelRatio;
+
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
+
+  context.scale(devicePixelRatio, devicePixelRatio);
+
+  if (isSafari) {
+    canvas.classList.add('hidden');
+  }
+
+  canvas.addEventListener('pointerdown', (e) => {
+    scratchCardCover.classList.remove('shine');
+    ({ x: positionX, y: positionY } = getPosition(e));
+    clearTimeout(clearDetectionTimeout);
+
+    canvas.addEventListener('pointermove', plot);
+
+    window.addEventListener('pointerup', (e) => {
+      canvas.removeEventListener('pointermove', plot);
+      clearDetectionTimeout = setTimeout(() => {
+        checkBlackFillPercentage();
+      }, 500);
+    }, { once: true });
+  });
+
+  const checkBlackFillPercentage = () => {
+    const imageData = context.getImageData(0, 0, canvasWidth, canvasHeight);
+    const pixelData = imageData.data;
+
+    let blackPixelCount = 0;
+
+    for (let i = 0; i < pixelData.length; i += 4) {
+      const red = pixelData[i];
+      const green = pixelData[i + 1];
+      const blue = pixelData[i + 2];
+      const alpha = pixelData[i + 3];
+
+      if (red === 0 && green === 0 && blue === 0 && alpha === 255) {
+        blackPixelCount++;
+      }
+    }
+
+    const blackFillPercentage = blackPixelCount * 100 / (canvasWidth * canvasHeight);
+
+    if (blackFillPercentage >= 45) {
+      scratchCardCoverContainer.classList.add('clear');
+      confetti({
+        particleCount: 100,
+        spread: 90,
+        origin: {
+          y: (scratchCardText.getBoundingClientRect().bottom + 60) / window.innerHeight,
+        },
+      });
+      // Backend request code using fetch
+      fetch('/scratch-gift', {
+        method: 'POST', // Use the appropriate HTTP method (GET, POST, etc.)
+        headers: {
+          'Content-Type': 'application/json', // Set the content type as needed
+        },
+        // You can pass any data you need to the backend in the body
+        body: JSON.stringify({ blackFillPercentage, userId: '{{commonData.userLoggedIn}}', giftId: '{{gift._id}}', offerId: '{{offer._id}}' }), // Adjust data as needed
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json(); // If the response is JSON, parse it
+          } else {
+            throw new Error('Failed to fetch data from the backend');
+          }
+        })
+        .then((data) => {
+          // Handle the response from the backend as needed
+          console.log(data); // You can replace this with your handling logic
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+
+      scratchCardText.textContent = '🎉 You got a $50 Apple gift card!';
+      scratchCardImage.classList.add('animate');
+      scratchCardCoverContainer.addEventListener('transitionend', () => {
+        scratchCardCoverContainer.classList.add('hidden');
+      }, { once: true });
+    }
+  }
+
+  const getPosition = ({ clientX, clientY }) => {
+    const { left, top } = canvas.getBoundingClientRect();
+    return {
+      x: clientX - left,
+      y: clientY - top,
+    };
+  }
+
+  const plotLine = (context, x1, y1, x2, y2) => {
+    var diffX = Math.abs(x2 - x1);
+    var diffY = Math.abs(y2 - y1);
+    var dist = Math.sqrt(diffX * diffX + diffY * diffY);
+    var step = dist / 50;
+    var i = 0;
+    var t;
+    var x;
+    var y;
+
+    while (i < dist) {
+      t = Math.min(1, i / dist);
+
+      x = x1 + (x2 - x1) * t;
+      y = y1 + (y2 - y1) * t;
+
+      context.beginPath();
+      context.arc(x, y, 16, 0, Math.PI * 2);
+      context.fill();
+
+      i += step;
+    }
+  }
+
+  const setImageFromCanvas = () => {
+    canvas.toBlob((blob) => {
+      const url = URL.createObjectURL(blob);
+      previousUrl = scratchCardCanvasRender.src;
+      scratchCardCanvasRender.src = url;
+      if (!previousUrl) {
+        scratchCardCanvasRender.classList.remove('hidden');
+      } else {
+        URL.revokeObjectURL(previousUrl);
+      }
+      previousUrl = url;
+    });
+  }
+
+  let setImageTimeout = null;
+
+  const plot = (e) => {
+    const { x, y } = getPosition(e);
+    plotLine(context, positionX, positionY, x, y);
+    positionX = x;
+    positionY = y;
+    if (isSafari) {
+      clearTimeout(setImageTimeout);
+
+      setImageTimeout = setTimeout(() => {
+        setImageFromCanvas();
+      }, 5);
+    }
+  };
 </script>

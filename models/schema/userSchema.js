@@ -16,6 +16,16 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: String,
   },
+  scratchCardArray: [{
+    giftId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'ScratchCard' // Replace 'Gift' with the actual name of your Gift model
+    },
+    offerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'offer' // Replace 'Offer' with the actual name of your Offer model
+    },
+  }]
 });
 
 const User = mongoose.model("User", userSchema);

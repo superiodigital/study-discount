@@ -1,9 +1,11 @@
 import ScratchCard from "../../models/schema/scratchSchema.js";
 import fs from 'fs/promises';
+import Offer from "../../models/schema/offersSchema.js";
 
 export const getAddScratchGift = async (req, res) => {
     try {
-        res.render('admin/add-scratch-gift', { layout: 'admin-layout' })
+        const offerNames = await Offer.find({}).select('name').lean()
+        res.render('admin/add-scratch-gift', { layout: 'admin-layout' ,offerNames})
     } catch (error) {
         res.status(500).send(error)
     }
@@ -47,15 +49,22 @@ export const deleteScratchCardGift = async (req, res) => {
 export const postAddScratchGift = async (req, res) => {
     try {
         const { message } = req.body;
-        const imageUrl = req.file.filename; // The uploaded image filename
-        console.log(req.body);
-        const newScratchGifts = new ScratchCard({ winMessage: message, image: imageUrl });
+        const imageUrl = req.file.filename; // Assuming you have middleware set up for file uploads
+        const offerIdArray = req.body.offerIdArray; // Assuming offerIdArray is part of the request body
+
+        const newScratchGifts = new ScratchCard({
+            winMessage: message,
+            image: imageUrl,
+            offerIdArray: Array.isArray(offerIdArray) ? offerIdArray : [offerIdArray]
+        });
         await newScratchGifts.save();
-        res.status(201).redirect('/admin/scratch-card-manager')
+
+        res.status(201).redirect('/admin/scratch-card-manager');
     } catch (error) {
-        console.error(error); 
+        console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
+
 }
 
 export const getEditScratchGift = async (req, res) => {
@@ -89,4 +98,3 @@ export const postEditScratchGift = async (req, res) => {
         res.status(500).json({ status: false, error: 'Server error' });
     }
 }
-

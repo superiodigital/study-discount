@@ -31,9 +31,9 @@ canvas.addEventListener('pointerdown', (e) => {
   scratchCardCover.classList.remove('shine');
   ({ x: positionX, y: positionY } = getPosition(e));
   clearTimeout(clearDetectionTimeout);
-  
+
   canvas.addEventListener('pointermove', plot);
-  
+
   window.addEventListener('pointerup', (e) => {
     canvas.removeEventListener('pointermove', plot);
     clearDetectionTimeout = setTimeout(() => {
@@ -60,16 +60,42 @@ const checkBlackFillPercentage = () => {
   }
 
   const blackFillPercentage = blackPixelCount * 100 / (canvasWidth * canvasHeight);
- 
+
   if (blackFillPercentage >= 45) {
     scratchCardCoverContainer.classList.add('clear');
     confetti({
       particleCount: 100,
       spread: 90,
       origin: {
-         y: (scratchCardText.getBoundingClientRect().bottom + 60) / window.innerHeight,
+        y: (scratchCardText.getBoundingClientRect().bottom + 60) / window.innerHeight,
       },
     });
+    // add backend req code here
+    // Backend request code using fetch
+  fetch('/scratch-gift', {
+    method: 'POST', // Use the appropriate HTTP method (GET, POST, etc.)
+    headers: {
+      'Content-Type': 'application/json', // Set the content type as needed
+    },
+    // You can pass any data you need to the backend in the body
+    body: JSON.stringify({ blackFillPercentage }), // Adjust data as needed
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json(); // If the response is JSON, parse it
+      } else {
+        throw new Error('Failed to fetch data from the backend');
+      }
+    })
+    .then((data) => {
+      // Handle the response from the backend as needed
+      console.log(data); // You can replace this with your handling logic
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+    
     scratchCardText.textContent = '🎉 You got a $50 Apple gift card!';
     scratchCardImage.classList.add('animate');
     scratchCardCoverContainer.addEventListener('transitionend', () => {
