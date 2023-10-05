@@ -44,7 +44,7 @@ export const handleExistScratchGIft = async (userToken, details) => {
             const giftObj = user.scratchCardArray[findIndex];
             const gift = await ScratchCard.findById(giftObj.giftId).lean()
             if (!gift) {
-                return { giftNotFound: true };
+                return { giftNotFound: true }; 
             }
             // Return the gift object or any other data you need
             return { gift: gift, giftExist: true };

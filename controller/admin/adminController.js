@@ -39,7 +39,7 @@ export const postAdminLogin = async (req, res) => {
                         expiresIn: "1h",
                     }
                 );
-
+0
                 // Store the token in the session cookie
                 req.session.adminToken = token;
 
@@ -64,5 +64,14 @@ export const postAdminLogin = async (req, res) => {
         console.log(error);
         res.status(500).json({ success: false, message: "Internal Server Error" });
     }
+}
 
+export const deleteUser = async (req, res) => {
+    try {
+        const deletedUser = await User.deleteOne({ _id: req.params.userId })
+        res.redirect('/admin')
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
 }

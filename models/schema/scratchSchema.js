@@ -5,6 +5,9 @@ const scratchCardSchema = new mongoose.Schema({
         type: String, // Assuming you will store the image URL or file path as a string
         required: true,
     },
+    // name: {
+    //     type: String, // Assuming you will store the name
+    // },
     winMessage: {
         type: String,
         required: true,

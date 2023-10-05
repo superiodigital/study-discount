@@ -2,25 +2,56 @@
 <main id="main">
   <!-- banner of the page -->
   {{#if randomBanner}}
-  <a href="{{randomBanner.url}}">
+  {{!-- <a href="{{randomBanner.url}}">
     <section class="banner banner-bg-full" style="background-image: url(/uploads/{{randomBanner.filePath}});">
       <div class="holder">
         <div class="container">
           <div class="row">
             <div class="col-xs-6 text-left">
-              {{!-- <h1 class="" style="text-align: left;">
+              <h1 class="" style="text-align: left;">
                 {{randomBanner.description}}
               </h1>
               <div class="text-left">
                 <a href="{{randomBanner.url}}" class="btn-primary text-center md-round" style="">Apply for this offer
                   <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
-              </div> --}}
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  </a>
+  </a> --}}
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      {{#each banners}}
+      <li data-target="#carousel-example-generic" data-slide-to="{{@index}}" class="{{#if first}} active{{/if}}"></li>
+      {{/each}}
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      {{#each banners}}
+      <div class="item{{#if first}} active{{/if}}">
+        <img class="img-responsive" style="width:100% !important;" src="/uploads/{{filePath}}" alt="{{description}}">
+        {{!-- <div class="carousel-caption">
+          {{description}}
+        </div> --}}
+      </div>
+      {{/each}}
+
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+        </a>
+  </div>
   {{else}}
   <section class="banner banner-bg-full overlay-home">
     <div class="holder">
@@ -58,7 +89,8 @@
             <a href="/offers-details/{{slug}}" title="{{shortDescription}}"><img src="/uploads/{{offerImage}}"
                 alt="{{shortDescription}}" class="img-resposnive" />
               {{#if offerPercent}}
-              <span class="offerSpanStyle" style="position: absolute; top: 0; right: 16px;">{{offerPercent}}% Off</span>
+              <span class="offerSpanStyle" style="position: absolute; top: 0; right: 16px;">{{offerPercent}}%
+                Off</span>
               {{/if}}
             </a>
           </div>

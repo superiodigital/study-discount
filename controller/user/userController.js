@@ -12,7 +12,7 @@ export const getHomePage = async (req, res) => {
         const randomBanner = banners[randomIndex]
 
         const offers = (await Offer.find().lean().sort({ offerPercent: -1 }))
-
+        banners[0].first = true
         const featuredOffers = (await Offer.find({ type: 'featured' }).lean().sort({ offerPercent: -1 }))
         featuredOffers.forEach((offer, i) => {
             offer.expiresFrom = new Date(offer.expiresFrom).toLocaleDateString('en-GB');
@@ -49,7 +49,7 @@ export const getHomePage = async (req, res) => {
             if (nameA > nameB) return 1;
             return 0;
         });
-        res.render('index', { randomBanner, offers, homePage: true, filteredCategory, featuredOffers })
+        res.render('index', { randomBanner, offers, homePage: true, filteredCategory, featuredOffers, banners })
     } catch (error) {
         console.log(error);
         res.status(500).send(error)
