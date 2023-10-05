@@ -11,7 +11,7 @@ export const getHomePage = async (req, res) => {
         const randomIndex = Math.floor(Math.random() * banners?.length);
         const randomBanner = banners[randomIndex]
 
-        const offers = (await Offer.find().lean().sort({ offerPercent: -1 }))
+        const offers = (await Offer.find().lean().sort()).reverse()
         banners[0].first = true
         const featuredOffers = (await Offer.find({ type: 'featured' }).lean().sort({ offerPercent: -1 }))
         featuredOffers.forEach((offer, i) => {
@@ -74,7 +74,7 @@ export const getContactPage = async (req, res) => {
 
 export const getOffersPage = async (req, res) => {
     try {
-        const offers = (await Offer.find().lean().sort({ offerPercent: -1 }))
+        const offers = (await Offer.find().lean().sort()).reverse()
         const featuredOffers = (await Offer.find({ type: 'featured' }).lean().sort({ offerPercent: -1 }))
         // Format the date strings in the offers array
         offers.forEach(async (offer) => {
