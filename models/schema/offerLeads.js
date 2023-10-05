@@ -25,6 +25,11 @@ const offerLeadsSchema = new mongoose.Schema({
         required: true,
         ref: "offer"
     },
+    gifts: {
+        type: Array,
+        ref: 'ScratchCard',
+        default: []
+    }
 });
 
 const OfferLead = mongoose.model('OfferLead', offerLeadsSchema);

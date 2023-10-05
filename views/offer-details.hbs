@@ -59,7 +59,7 @@
           </article>
           <!-- sidebar of the page -->
           <aside id="sidebar">
-            {{!-- {{#if gift}}
+            {{#if gift}}
             {{#if giftExist}}
             <div class="container-div-scratch">
               <div>
@@ -183,7 +183,7 @@
             </div>
             {{/if}}
             {{/if}}
-            {{/if}} --}}
+            {{/if}}
             <section class="widget popular-widget" id="offerFormForRegistration">
               <h3 class="heading4">Apply for this offer</h3>
               <form id="offerForm">
@@ -209,6 +209,9 @@
                   <label for="checkbox"> I agree to these <a href="/terms-and-conditions"
                       style="color: rgb(0, 21, 255);text-decoration: underline;">Terms and Conditions</a>.</label>
                 </div>
+                {{#if giftExist}}
+                <input type="text" style="display: none;" value="{{gift._id}}" name="giftId" id="giftInput">
+                {{/if}}
                 <div class="col d-flex" style="margin-top: 15px;">
                   <button class="btn-primary text-center text-uppercase" style="width: 100%;" type="button"
                     id="submitDetails">Apply Now!</button>
@@ -451,7 +454,8 @@
       })
         .then((response) => {
           if (response.ok) {
-            return response.json(); // If the response is JSON, parse it
+            response.json(); // If the response is JSON, parse it
+            location.reload()
           } else {
             throw new Error('Failed to fetch data from the backend');
           }

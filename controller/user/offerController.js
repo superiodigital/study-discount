@@ -1,6 +1,6 @@
-import { trusted } from 'mongoose';
 import OfferLead from '../../models/schema/offerLeads.js';
 import Offer from '../../models/schema/offersSchema.js'
+import ScratchCard from '../../models/schema/scratchSchema.js';
 import { signUpWhileRegister } from './authController.js';
 
 export const postRegisterOffer = async (req, res) => {
@@ -9,8 +9,11 @@ export const postRegisterOffer = async (req, res) => {
         const accepted = isTermsAccepted === 'on' ? true : false
         const newOffer = new OfferLead({
             name, email, phone, offerId,
-            isPolicyAccept: accepted
+            isPolicyAccept: accepted,
         })
+        if (req.body.giftId) {
+            newOffer.gifts.push(req.body.giftId)
+        }
         await newOffer.save()
         const userSignup = await signUpWhileRegister(req.session.userToken, { name, email, phone })
         if (userSignup.userRegistered) {

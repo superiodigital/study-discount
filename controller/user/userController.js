@@ -25,11 +25,10 @@ export const getHomePage = async (req, res) => {
             offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
             const countOfRegistrations = await OfferLead.countDocuments({ offerId: offer._id })
             offer.registrations = countOfRegistrations
-            if (offer.offerPercent === 0) {
+            if (offer.offerPercent === '0') {
                 delete offer.offerPercent
             }
         });
-
         const offersCategory = await Offer.find().populate('category').select('category').lean()
 
         let filteredCategory = []
@@ -82,7 +81,7 @@ export const getOffersPage = async (req, res) => {
             offer.expiresTo = new Date(offer.expiresTo).toLocaleDateString('en-GB');
             const countOfRegistrations = await OfferLead.countDocuments({ offerId: offer._id })
             offer.registrations = countOfRegistrations
-            if (offer.offerPercent === 0) {
+            if (offer.offerPercent === '0') {
                 delete offer.offerPercent
             }
         });
@@ -146,7 +145,7 @@ export const getSingleOfferPage = async (req, res) => {
             const response = await handleExistScratchGIft(userToken, { offerId: offer._id })
             res.render('offer-details', { offer, relatedOffers, registeredCount, gift: response.gift, giftExist: response.giftExist });
         } else {
-            res.render('offer-details', { offer, relatedOffers, registeredCount });
+            res.render('offer-details', { offer, relatedOffers, registeredCount, gift: true });
         }
     } catch (error) {
         console.log(error);
