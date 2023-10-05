@@ -33,7 +33,9 @@
     <div class="carousel-inner" role="listbox">
       {{#each banners}}
       <div class="item{{#if first}} active{{/if}}">
-        <img class="img-responsive" style="width:100% !important;" src="/uploads/{{filePath}}" alt="{{description}}">
+        <a href="{{url}}">
+          <img class="img-responsive" style="width:100% !important;" src="/uploads/{{filePath}}" alt="{{description}}">
+        </a>
         {{!-- <div class="carousel-caption">
           {{description}}
         </div> --}}
