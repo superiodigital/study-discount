@@ -158,6 +158,7 @@ export const getScratchWinnersManager = async (req, res) => {
         }));
         res.render('admin/scratch-winners-manager', { layout: 'admin-layout', winners: extractedData })
     } catch (error) {
-
+        console.log(error);
+        res.status(500).json({ status: false, error: 'Server error' });
     }
 }
