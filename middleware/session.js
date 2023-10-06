@@ -31,16 +31,22 @@ export const isAuthorize = (req, res, next) => {
 
 export const isAuth = (req, res, next) => {
   try {
+    // Get the previous URL from the Referer header
+    const previousRoute = req.get('Referer') || '/';
+    const fullUrl = previousRoute;
+    const url = new URL(fullUrl);
+    const path = `${url.pathname}${url.search}${url.hash}`;
+    if (path !== '/login' && path !== '/register') {
+      req.session.previousRoute = path;
+    }
     // Check if userToken is present in the session
     const userToken = req.session.userToken;
     if (!userToken) {
       // Redirect to login page or return an error response
       return next();
     }
-
     // Verify and decode the JWT token
     const decodedToken = jwt.verify(userToken, process.env.JWT_SECRET_TOKEN);
-
     if (!decodedToken) {
       // Token is invalid or expired, redirect to login
       return next();

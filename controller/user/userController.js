@@ -4,6 +4,7 @@ import Offer from '../../models/schema/offersSchema.js'
 import FAQ from "../../models/schema/faqSchema.js";
 import TermsAndConditions from '../../models/schema/termsAndConditions.js'
 import { handleExistScratchGIft } from './scratchUserController.js';
+import CommonSettings from '../../models/schema/commonSchema.js';
 
 export const getHomePage = async (req, res) => {
     try {
@@ -119,6 +120,7 @@ export const getSingleOfferPage = async (req, res) => {
     try {
         const { offerSlug } = req.params
         const changeOfferViewCount = await Offer.findOne({ slug: offerSlug })
+        const settings = await CommonSettings.findOne()
         if (!changeOfferViewCount) {
             return res.status(404).render('not-found-404', { notFound: true })
         }
@@ -141,11 +143,15 @@ export const getSingleOfferPage = async (req, res) => {
         });
         const registeredCount = await OfferLead.countDocuments({ offerId: offer._id })
         const userToken = req.session.userToken;
-        if (userToken) {
-            const response = await handleExistScratchGIft(userToken, { offerId: offer._id })
-            res.render('offer-details', { offer, relatedOffers, registeredCount, gift: response.gift, giftExist: response.giftExist });
+        if (settings.scratchCard) {
+            if (userToken) {
+                const response = await handleExistScratchGIft(userToken, { offerId: offer._id })
+                res.render('offer-details', { offer, relatedOffers, registeredCount, gift: response.gift, giftExist: response.giftExist });
+            } else {
+                res.render('offer-details', { offer, relatedOffers, registeredCount, gift: true });
+            }
         } else {
-            res.render('offer-details', { offer, relatedOffers, registeredCount, gift: true });
+            res.render('offer-details', { offer, relatedOffers, registeredCount, gift: false });
         }
     } catch (error) {
         console.log(error);

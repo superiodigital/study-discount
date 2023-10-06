@@ -18,7 +18,7 @@ import {
 } from "../../controller/user/userController.js";
 import { isAuthorize, isAuth } from "../../middleware/session.js";
 import { postRegisterOffer } from "../../controller/user/offerController.js";
-import { getLoginPage, getRegisterPage, postUserLogin, postUserRegister } from "../../controller/user/authController.js";
+import { getLoginPage, getLogoutUser, getRegisterPage, postUserLogin, postUserRegister } from "../../controller/user/authController.js";
 import { postContactSubmit } from "../../controller/user/contactController.js";
 import { postAddScratchToUserList } from "../../controller/user/scratchUserController.js";
 
@@ -30,6 +30,7 @@ router.get("/", getHomePage); // route to home page
 
 router.route("/login").get(isAuth, getLoginPage).post(postUserLogin); // route to login page
 router.route("/register").get(isAuth, getRegisterPage).post(postUserRegister); // route to register
+router.get("/logout", getLogoutUser)
 
 router.get("/about", getAboutPage); // route to about page
 
@@ -45,7 +46,7 @@ router.post("/offers-registration", postRegisterOffer);
 router.get('/faq-study-discount', getFaqStudyDIscountPage);
 router.get('/faq-study-abroad', getFaqStudyAbroadPage);
 
-router.post('/scratch-gift',postAddScratchToUserList)
+router.post('/scratch-gift', postAddScratchToUserList)
 
 router.post('/search', searchOffers);
 router.get('/getSuggestions', getSuggestions)

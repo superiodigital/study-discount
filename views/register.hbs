@@ -1,15 +1,13 @@
 <!-- main of the page -->
 <main id="main">
   <!-- banner of the page -->
-  <section
-    class="banner banner3 bg-full overlay"
-    style="background-image: url(/main-images/study-discount-about-us.png);"
-  >
+  <section class="banner banner3 bg-full overlay"
+    style="background-image: url(/main-images/study-discount-about-us.png);">
     <div class="holder">
       <div class="container">
         <div class="row">
           <div class="col-xs-12 text-center">
-             <h2 class="" style="color: #ffb300;">Study Discount</h2>
+            <h2 class="" style="color: #ffb300;">Study Discount</h2>
             <h1>Sign up</h1>
           </div>
         </div>
@@ -26,52 +24,27 @@
             <div class="txt-holder">
               <h3 class="heading2">Register Now</h3>
               <p>Fill the forum to confirm your registration</p>
-              <form  id="signupForm" class="register-form">
+              <form id="signupForm" class="register-form">
                 <fieldset>
                   <span id="usernameError" style="color: red; font-size: 12px;"></span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Your Name *"
-                    name="username"
-                    id="username"
-                  />
+                  <input type="text" class="form-control" placeholder="Your Name *" name="username" id="username" />
                   <span id="submissionError" style="color: red; font-size: 13px"></span>
                   <span id="emailError" style="color: red; font-size: 12px;"></span>
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Email Address *"
-                    name="email"
-                    id="email"
-                  />
-                   <span id="passwordError" style="color: red; font-size: 12px"></span>
-                  <input
-                    type="password"
-                    class="form-control"
-                    placeholder="Password *"
-                    name="password"
-                    id="password"
-                  />
+                  <input type="email" class="form-control" placeholder="Email Address *" name="email" id="email" />
+                  <span id="passwordError" style="color: red; font-size: 12px"></span>
+                  <input type="password" class="form-control" placeholder="Password *" name="password" id="password" />
                   <span id="passwordConfirmationError" style="color: red; font-size: 12px"></span>
-                  <input
-                    type="password"
-                    class="form-control"
-                    placeholder="Password Confirmation *"
-                    name="passwordConfirmation"
-                    id="passwordConfirmation"
-                  />
+                  <input type="password" class="form-control" placeholder="Password Confirmation *"
+                    name="passwordConfirmation" id="passwordConfirmation" />
                   <div class="form-check">
                     <input type="checkbox" name="remember" value="true" id="rememberMe" />
                     Accept
-                    <a href="#" class="clr">Terms and Conditions</a>
+                    <a href="/terms-and-conditions" class="clr">Terms and Conditions</a>
                   </div>
-                  <button
-                    type="submit"
-                    class="btn-primary text-center text-uppercase"
-                  >Register Now</button>
+                  <button type="submit" class="btn-primary text-center text-uppercase">Register Now</button>
                 </fieldset>
               </form>
+              <p>Already have an account? <a href="/login" style="text-decoration: underline;">Login</a></p>
               {{!-- <div class="btn-holder">
                 <a href="#" class="google-btn"><i class="fa fa-google-plus"></i>
                   Sign in with Google</a>
@@ -80,11 +53,7 @@
               </div> --}}
             </div>
             <div class="img-holder">
-              <img
-                src="/user/images/img62.jpg"
-                alt="image description"
-                class="img-responsive"
-              />
+              <img src="/user/images/img62.jpg" alt="image description" class="img-responsive" />
             </div>
           </div>
         </div>
@@ -94,90 +63,90 @@
 </main>
 <!-- main of the page end -->
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-        $("#signupForm").submit(function(event) {
-            event.preventDefault();
+  $(document).ready(function () {
+    $("#signupForm").submit(function (event) {
+      event.preventDefault();
 
-            // Get input values
-            var username = $("#username").val();
-            var email = $("#email").val();
-            var password = $("#password").val();
-            var passwordConfirmation = $("#passwordConfirmation").val();
-            var rememberMe = $("#rememberMe").prop("checked");
+      // Get input values
+      var username = $("#username").val();
+      var email = $("#email").val();
+      var password = $("#password").val();
+      var passwordConfirmation = $("#passwordConfirmation").val();
+      var rememberMe = $("#rememberMe").prop("checked");
 
-            // Perform validation
-            if (email === "") {
-                $("#usernameError").text("Username is required");
+      // Perform validation
+      if (email === "") {
+        $("#usernameError").text("Username is required");
+      } else {
+        $("#usernameError").text("");
+      }
+
+      // Perform validation
+      if (email === "") {
+        $("#emailError").text("Email is required");
+      } else {
+        $("#emailError").text("");
+      }
+
+      if (password === "") {
+        $("#passwordError").text("Password is required");
+      } else {
+        $("#passwordError").text("");
+      }
+
+      if (passwordConfirmation === "") {
+        $("#passwordConfirmationError").text("Password confirmation is required");
+      } else {
+        $("#passwordConfirmationError").text("");
+        if (password !== passwordConfirmation) {
+          $("#passwordConfirmationError").text("Not confirmed");
+        } else {
+          $("#passwordConfirmationError").text("");
+        }
+      }
+
+
+
+
+      // If both fields are filled, you can proceed with further actions
+      if (email !== "" && password !== "" && username !== "") {
+        // Perform login or other actions here
+        // For demonstration purposes, let's just show an alert
+        var message = "register successful!";
+        if (rememberMe) {
+          message += " Remember Me is checked.";
+        }
+
+        // Create an object with form data
+        var formData = {
+          username: username,
+          email: email,
+          password: password,
+          rememberMe: rememberMe
+        };
+
+        // Send form data to backend using AJAX
+        $.ajax({
+          type: "POST",
+          url: "/register",  // Replace with your backend URL
+          data: formData,
+          success: function (response) {
+            // Handle the response from the backend
+            console.log(response)
+            if (response.userRegistered) {
+              location.href = response.route
+            } else if (response.userExist) {
+              $("#submissionError").text("User Exist");
             } else {
-                $("#usernameError").text("");
+              $("#submissionError").text("internal error");
             }
-
-            // Perform validation
-            if (email === "") {
-                $("#emailError").text("Email is required");
-            } else {
-                $("#emailError").text("");
-            }
-
-            if (password === "") {
-                $("#passwordError").text("Password is required");
-            } else {
-                $("#passwordError").text("");
-            }
-
-            if (passwordConfirmation === "") {
-                $("#passwordConfirmationError").text("Password confirmation is required");
-            } else {
-                $("#passwordConfirmationError").text("");
-                  if (password !== passwordConfirmation) {
-                    $("#passwordConfirmationError").text("Not confirmed");
-                  } else {
-                    $("#passwordConfirmationError").text("");
-                  }
-            }
-            
-           
-            
-
-            // If both fields are filled, you can proceed with further actions
-            if (email !== "" && password !== "" && username !== "") {
-                // Perform login or other actions here
-                // For demonstration purposes, let's just show an alert
-                var message = "register successful!";
-                if (rememberMe) {
-                    message += " Remember Me is checked.";
-                }
-              
-                // Create an object with form data
-            var formData = {
-                username: username,
-                email: email,
-                password: password,
-                rememberMe: rememberMe
-            };
-
-            // Send form data to backend using AJAX
-            $.ajax({
-                type: "POST",
-                url: "/register",  // Replace with your backend URL
-                data: formData,
-                success: function(response) {
-                    // Handle the response from the backend
-                    console.log(response)
-                    if(response.userRegistered){
-                      location.href = '/'
-                    }else if(response.userExist){
-                      $("#submissionError").text("User Exist");
-                    }else{
-                      $("#submissionError").text("internal error");
-                    }
-                },
-            });
-
-            }
+          },
         });
+
+      }
     });
+  });
 </script>

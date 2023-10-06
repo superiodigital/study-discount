@@ -20,6 +20,7 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Offer Name</th>
+                                <th>Gift Name</th>
                                 <th>Act</th>
                             </tr>
                         </thead>
@@ -33,6 +34,7 @@
                                 <td>{{email}}</td>
                                 <td>{{phone}}</td>
                                 <td>{{offerId.name}}</td>
+                                <td>{{#if gifts}}{{gifts.name}}{{else}}No Gifts won{{/if}}</td>
                                 <td>
                                     {{!-- delete button --}}
                                     <button type="button" class="btn btn-danger waves-effect waves-light"

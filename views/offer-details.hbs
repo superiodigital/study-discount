@@ -59,7 +59,9 @@
           </article>
           <!-- sidebar of the page -->
           <aside id="sidebar">
-            {{!-- {{#if gift}}
+            {{#if gift}}
+            <h3 style="color: #202020;margin: 0 0 11px;padding: 0 0 20px;position: relative;z-index: 1;">Scratch here to
+              win prizes.</h3>
             {{#if giftExist}}
             <div class="container-div-scratch">
               <div>
@@ -71,7 +73,7 @@
                   </div>
                   <img class="scratch-card-image" src="/uploads/{{gift.image}}" alt="{{gift.winMessage}}">
                 </div>
-                <p class="scratch-card-text">🎁{{gift.winMessage}}</p>
+                <p class="scratch-card-text" style="margin-top: 10;">🎁{{gift.winMessage}}</p>
               </div>
 
               <svg width="0" height="0">
@@ -126,7 +128,7 @@
                   </div>
                   <img class="scratch-card-image" src="/uploads/{{gift.image}}" alt="{{gift.winMessage}}">
                 </div>
-                <p class="scratch-card-text">🎁 Scratch for a surprise!</p>
+                <p class="scratch-card-text " style="margin-top: 10;">🎁 Scratch for a surprise!</p>
               </div>
 
               <svg width="0" height="0">
@@ -179,11 +181,13 @@
                   <a href="/login" class="btn-primary text-center text-uppercase"
                     style="background-color: #33b86c;padding: 20;width: 93%;position: absolute;z-index: 10; top: 39%;">Login</a>
                 </div>
+                <p class="scratch-card-text " style="margin-top: 10;">Please <a href="/login"
+                    style="text-decoration: underline;">login</a> to use the scratch card
               </div>
             </div>
             {{/if}}
             {{/if}}
-            {{/if}} --}}
+            {{/if}}
             <section class="widget popular-widget" id="offerFormForRegistration">
               <h3 class="heading4">Apply for this offer</h3>
               <form id="offerForm">
@@ -434,7 +438,7 @@
 
     const blackFillPercentage = blackPixelCount * 100 / (canvasWidth * canvasHeight);
 
-    if (blackFillPercentage >= 45) {
+    if (blackFillPercentage >= 20) {
       scratchCardCoverContainer.classList.add('clear');
       confetti({
         particleCount: 100,
@@ -469,7 +473,7 @@
         });
 
 
-      scratchCardText.textContent = '🎉 You got a $50 Apple gift card!';
+      scratchCardText.textContent = '{{gift.winMessage}}';
       scratchCardImage.classList.add('animate');
       scratchCardCoverContainer.addEventListener('transitionend', () => {
         scratchCardCoverContainer.classList.add('hidden');

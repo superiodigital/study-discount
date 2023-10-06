@@ -15,13 +15,14 @@ export const postRegisterOffer = async (req, res) => {
             newOffer.gifts.push(req.body.giftId)
         }
         await newOffer.save()
-        const userSignup = await signUpWhileRegister(req.session.userToken, { name, email, phone })
-        if (userSignup.userRegistered) {
-            req.session.userToken = userSignup.token
-            res.status(200).json({ status: true })
-        } else {
-            res.status(200).json({ status: true })
-        }
+        res.status(200).json({ status: true })
+        // const userSignup = await signUpWhileRegister(req.session.userToken, { name, email, phone })
+        // if (userSignup.userRegistered) {
+        //     req.session.userToken = userSignup.token
+        //     res.status(200).json({ status: true })
+        // } else {
+        //     res.status(200).json({ status: true })
+        // }
     } catch (error) {
         console.log(error);
     }

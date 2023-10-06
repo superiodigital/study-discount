@@ -7,6 +7,13 @@ export const getDownloadLeads = async (req, res) => {
         const leads = await OfferLead.find({ isBlocked: true }).populate('offerId')
         const workbook = new Workbook();
         const worksheet = workbook.addWorksheet('OfferLead Data');
+        leads.forEach((lead) => {
+            if (lead?.gifts?.length > 0) {
+                lead.gifts = lead.gifts[0]
+            } else {
+                lead.gifts = null
+            }
+        })
 
         // Define column headers
         worksheet.columns = [
@@ -14,11 +21,12 @@ export const getDownloadLeads = async (req, res) => {
             { header: 'Email', key: 'email', width: 30 },
             { header: 'Phone', key: 'phone', width: 15 },
             { header: 'Offer', key: 'offer', width: 30 },
+            { header: 'Gift', key: 'Gift', width: 30 },
         ];
 
         // Iterate over Mongoose documents and add them to the worksheet
         leads.forEach((lead) => {
-            worksheet.addRow({ name: lead.name, email: lead.email, phone: lead.phone, offer: lead.offerId?.name });
+            worksheet.addRow({ name: lead.name, email: lead.email, phone: lead.phone, offer: lead.offerId?.name , Gift: lead?.gifts?lead?.gifts.name : 'No Gifts' });
         });
 
         // Generate a unique filename in "dd-mm-yyyy" format
@@ -41,7 +49,15 @@ export const getDownloadLeads = async (req, res) => {
 
 export const getOfferLeadTable = async (req, res) => {
     try {
-        const offerLeads = await OfferLead.find({ isBlocked: true }).populate('offerId').lean()
+        const offerLeads = await OfferLead.find({ isBlocked: true }).populate('offerId gifts').lean()
+        offerLeads.forEach((lead) => {
+            if (lead?.gifts?.length > 0) {
+                lead.gifts = lead.gifts[0]
+            } else {
+                lead.gifts = null
+            }
+        })
+        console.log(offerLeads);
         res.render('admin/offerLead-manager.hbs', { layout: 'admin-layout', offerLeads })
     } catch (error) {
         console.log(error);

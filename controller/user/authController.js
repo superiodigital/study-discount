@@ -34,6 +34,7 @@ export const postUserLogin = async (req, res) => {
                 res.status(200).json({
                     success: true,
                     message: "user logged",
+                    route: req.session.previousRoute ? req.session.previousRoute : '/'
                 });
             } else {
                 res.status(401).json({ success: false, message: "Invalid credentials" });
@@ -89,7 +90,11 @@ export const postUserRegister = async (req, res) => {
         // Save the token in the session
         req.session.userToken = token;
 
-        res.status(201).json({ userRegistered: true, message: 'Registration successful' });
+        res.status(201).json({
+            userRegistered: true,
+            message: 'Registration successful',
+            route: req.session.previousRoute ? req.session.previousRoute : '/'
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ internalError: true, message: 'Server error' });
@@ -134,6 +139,19 @@ export const signUpWhileRegister = async (userSession, userData) => {
         }
     } catch (error) {
         console.log(error);
+        return { error }
+    }
+}
+
+export const getLogoutUser = async (req, res) => {
+    try {
+        req.session.userToken = undefined;
+        const previousRoute = req.get('Referer') || '/';
+        const fullUrl = previousRoute;
+        const url = new URL(fullUrl);
+        const path = `${url.pathname}${url.search}${url.hash}`;
+        res.redirect(path ? path : '/')
+    } catch (error) {
         return { error }
     }
 }

@@ -6,7 +6,12 @@
                 <div class="card-body">
                     <h4 class="header-title">Terms and scratch gifts</h4>
                     <a href="/admin/add-scratch-gift" class="btn btn-success waves-effect waves-light">
-                        <span class="btn-label"><i class="fa-solid fa-plus"></i></span>Add New
+                        <span class="btn-label"><i class="fa-solid fa-plus"></i> Add New</span>
+                    </a>
+                    <a id="disableButton"
+                        class="{{#if settings.scratchCard}}btn-danger{{else}}btn-primary{{/if}} btn  waves-effect waves-light">
+                        <span class="btn-label">{{#if settings.scratchCard}}<i class="fa-solid fa-toggle-on"></i>
+                            Disable</span>{{else}}<i class="fa-solid fa-toggle-off"></i></i> Enable</span>{{/if}}
                     </a>
                     </p>
 
@@ -90,4 +95,28 @@
             alert("Item not deleted.");
         }
     }
+</script>
+
+<script>
+    document.getElementById('disableButton').addEventListener('click', function () {
+        // Data to send in the request, if needed
+        const requestData = {
+            // Add your data properties here
+        };
+
+        fetch('/admin/enable-and-disable-scratchcard', {
+            method: 'POST',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                } else {
+                    location.reload();
+                }
+            })
+            .catch(error => {
+                // Handle errors here
+                console.error('Fetch error:', error);
+            });
+    });
 </script>

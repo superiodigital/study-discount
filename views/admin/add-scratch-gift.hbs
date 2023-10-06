@@ -7,6 +7,12 @@
                     Fill the fields with following the instructions
                 </p>
                 <form action="/admin/add-scratch-gift" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Offer Name</label>
+                        <input type="text" parsley-type="slug" name="name" class="form-control" placeholder="Name"
+                            required />
+                    </div>
+
                     <div class="dropdown" data-control="checkbox-dropdown">
                         <label class="dropdown-label">Select</label>
 
@@ -16,12 +22,13 @@
                             </a>
                             {{#each offerNames}}
                             <label class="dropdown-option">
-                                <input type="checkbox" name="offerIdArray" value="{{_id}}" checked />
+                                <input class="" type="checkbox" name="offerIdArray" value="{{_id}}" checked />
                                 {{name}}
                             </label>
                             {{/each}}
                         </div>
                     </div>
+
                     <div class="col-12 mt-3" style="border: 2px dotted #ccc; padding: 15px;">
                         <label for="fileInput" class="btn btn-primary d-block mx-auto">
                             <i class="fa-solid fa-file-arrow-up"></i>
@@ -42,6 +49,11 @@
                         <label for="message" class="form-label">Win Message</label>
                         <textarea class="form-control" id="example-textarea" rows="3" name="message"
                             placeholder="Max 70 characters"></textarea>
+                    </div>
+                    <div class="mb-3" >
+                        <label for="message" class="form-label">Set Priority</label>
+                        <input type="number" name="priority" class="form-control"
+                            placeholder="Ex-1,2,3....99,100" required />
                     </div>
 
                     <button type="submit" class="btn btn-md btn-pink waves-effect waves-light"><span><i

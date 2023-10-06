@@ -10,7 +10,6 @@
 .container-div-scratch {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
   margin-bottom: 50px;
 }
 
@@ -19,9 +18,16 @@
   border: 4px solid #c7c6cf;
   border-radius: 8px;
   padding: 12px;
-  width: 320px;
-  height: 320px;
+  width: 405px;
+  height: 405px;
   background-color: #fff;
+}
+
+@media screen and (max-width: 480px) {
+  .scratch-card {
+    width: 320px;
+    height: 320px;
+  }
 }
 
 .scratch-card-cover-container {

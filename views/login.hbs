@@ -1,7 +1,8 @@
 <!-- main of the page -->
 <main id="main">
   <!-- banner of the page -->
-  <section class="banner banner3 bg-full overlay" style="background-image: url(/main-images/study-discount-about-us.png);">
+  <section class="banner banner3 bg-full overlay"
+    style="background-image: url(/main-images/study-discount-about-us.png);">
     <div class="holder">
       <div class="container">
         <div class="row">
@@ -37,6 +38,7 @@
                   <button type="submit" class="btn-primary text-center text-uppercase">Login Now</button>
                 </fieldset>
               </form>
+              <p>Don't have any account? <a href="/register" style="text-decoration: underline;">Sign Up</a></p>
               {{!-- <div class="btn-holder">
                 <a href="#" class="google-btn"><i class="fa fa-google-plus"></i>
                   Sign in with Google</a>
@@ -105,7 +107,7 @@
             // Handle the response from the backend
             console.log(response)
             if (response.message == "user logged") {
-              location.href = '/'
+              location.href = response.route
             } else if (response.message == "Invalid credentials") {
               $("#submissionError").text("invalid credentials");
             } else {
