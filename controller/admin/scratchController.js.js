@@ -41,7 +41,18 @@ export const getAddScratchGift = async (req, res) => {
 export const getScratchCardManager = async (req, res) => {
     try {
         const settings = await CommonSettings.findOne().lean()
-        const scratchGifts = await ScratchCard.find({}).lean()
+        const scratchGifts = await ScratchCard.find({}).populate('offerIdArray').lean()
+        scratchGifts.forEach((gift) => {
+            gift.offerNames = []
+            gift.offerIdArray.forEach((item) => {
+                gift.offerNames.push(item.name)
+            })
+            // if (Array.isArray(gift.offer)) {
+            //     gift.offer.push(offerIdArray.name)
+            // } else {
+            //     gift.offer = [gift.offerIdArray.name]
+            // }
+        })
         res.render('admin/scratch-card-manager', { layout: 'admin-layout', scratchGifts, settings })
     } catch (error) {
         console.log(error);
@@ -94,14 +105,17 @@ export const postAddScratchGift = async (req, res) => {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
-
 }
 
 export const getEditScratchGift = async (req, res) => {
     try {
         const { scratchGiftsId: giftId } = req.params
-        const gift = await ScratchCard.findById(giftId).lean();
+        const gift = await ScratchCard.findById(giftId).populate('offerIdArray').lean();
         const offerNames = await Offer.find({}).select('name').lean()
+        gift.offers = []
+        gift.offerIdArray.forEach((item) => {
+            gift.offers.push(item.name)
+        })
         res.render('admin/edit-scratch-gift', { layout: 'admin-layout', gift, offerNames })
     } catch (error) {
         res.status(500).send(error)
@@ -111,8 +125,7 @@ export const getEditScratchGift = async (req, res) => {
 export const postEditScratchGift = async (req, res) => {
     try {
         const { scratchGiftsId } = req.params
-        const { message, name, priority } = req.body;
-
+        const { message, name, priority, offerIdArray } = req.body;
         const scratchGifts = await ScratchCard.findById(scratchGiftsId)
         if (!scratchGifts) {
             res.status(404).send('not fount ')
@@ -120,6 +133,7 @@ export const postEditScratchGift = async (req, res) => {
         scratchGifts.name = name
         scratchGifts.priority = Number(priority)
         scratchGifts.winMessage = message
+        scratchGifts.offerIdArray = offerIdArray
         if (req.file?.filename) {
             await fs.unlink(`public/uploads/${scratchGifts.image}`);
             scratchGifts.image = req.file.filename
@@ -144,6 +158,6 @@ export const getScratchWinnersManager = async (req, res) => {
         }));
         res.render('admin/scratch-winners-manager', { layout: 'admin-layout', winners: extractedData })
     } catch (error) {
-      
+
     }
 }

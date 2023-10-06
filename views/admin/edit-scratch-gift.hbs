@@ -12,10 +12,12 @@
                         <input type="text" value="{{gift.name}}" name="name" class="form-control" placeholder="Name"
                             required />
                     </div>
-
+                    <div class="mb-3">
+                        <h4 for="">Selected offers</h4>
+                        {{#each gift.offers}}<span>{{this}}</span>, {{/each}}
+                    </div>
                     <div class="dropdown" data-control="checkbox-dropdown">
                         <label class="dropdown-label">Select</label>
-
                         <div class="dropdown-list">
                             <a href="#" data-toggle="check-all" class="dropdown-option">
                                 Check All

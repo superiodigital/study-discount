@@ -14,7 +14,8 @@ const scratchCardSchema = new mongoose.Schema({
     },
     offerIdArray: {
         type: Array,
-        default: []
+        default: [],
+        ref: 'offer'
     },
     name: String,
     priority: Number,

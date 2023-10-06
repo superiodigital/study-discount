@@ -23,6 +23,8 @@
                                 <th>No</th>
                                 <th>img</th>
                                 <th>message</th>
+                                <th>Priority</th>
+                                <th>Offers</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -37,6 +39,14 @@
                                     <p
                                         style="max-width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; word-wrap: break-word; line-height: 1.2;">
                                         {{winMessage}}</p>
+                                </td>
+                                <td>
+                                    {{priority}}
+                                </td>
+                                <td>
+                                    {{#each offerNames}}
+                                    <p>{{this}}</p>
+                                    {{/each}}
                                 </td>
                                 <td>
                                     {{!-- edit button --}}
