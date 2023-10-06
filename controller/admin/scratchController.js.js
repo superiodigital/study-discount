@@ -151,10 +151,10 @@ export const getScratchWinnersManager = async (req, res) => {
         const scratchWinners = await ScratchWinner.find({}).populate('userId offerId giftId')
         // Extract username, offerName, and giftName
         const extractedData = scratchWinners.map(item => ({
-            _id: item._id,
-            userName: item.userId.username,
-            offerName: item.offerId.name,
-            giftName: item.giftName,
+            _id: item?._id,
+            userName: item?.userId?.username,
+            offerName: item?.offerId?.name,
+            giftName: item?.giftName,
         }));
         res.render('admin/scratch-winners-manager', { layout: 'admin-layout', winners: extractedData })
     } catch (error) {

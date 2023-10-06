@@ -57,7 +57,6 @@ export const getOfferLeadTable = async (req, res) => {
                 lead.gifts = null
             }
         })
-        console.log(offerLeads);
         res.render('admin/offerLead-manager.hbs', { layout: 'admin-layout', offerLeads })
     } catch (error) {
         console.log(error);
