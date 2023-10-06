@@ -144,6 +144,6 @@ export const getScratchWinnersManager = async (req, res) => {
         }));
         res.render('admin/scratch-winners-manager', { layout: 'admin-layout', winners: extractedData })
     } catch (error) {
-
+      
     }
 }

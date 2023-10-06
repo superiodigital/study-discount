@@ -80,17 +80,23 @@ export const postUserRegister = async (req, res) => {
 
         // Generate a JWT token after successful registration
         const token = jwt.sign(
-            { adminId: newUser._id },
+            { userId: newUser._id },
             process.env.JWT_SECRET_TOKEN,
             {
                 expiresIn: "30d",
             }
         );
 
-        // Save the token in the session
+        // Store the token in the session cookie
         req.session.userToken = token;
 
-        res.status(201).json({
+        // Save the token in a regular cookie
+        res.cookie("token", token, {
+            httpOnly: true, // The cookie cannot be accessed by JavaScript
+            secure: process.env.NODE_ENV === "production", // Use secure cookies in production (HTTPS)
+            maxAge: 2592000000, // Session expiration time (1 month)
+        });
+        res.status(200).json({
             userRegistered: true,
             message: 'Registration successful',
             route: req.session.previousRoute ? req.session.previousRoute : '/'
@@ -125,7 +131,7 @@ export const signUpWhileRegister = async (userSession, userData) => {
 
             // Generate a JWT token after successful registration
             const token = jwt.sign(
-                { adminId: newUser._id },
+                { userId: newUser._id },
                 process.env.JWT_SECRET_TOKEN,
                 {
                     expiresIn: "30d",
