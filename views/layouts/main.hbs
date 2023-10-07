@@ -169,7 +169,7 @@
               </div>
               <a id="open-popup" class="cart"><i class="fa-solid fa-percent"></i><span class="num round">0</span></a>
             </div>
-            <a href="#" class="nav-opener text-center pull-right hidden visible-xs"><i class="fa fa-bars"></i></a>
+            <a href="javascript:void(0);" class="nav-opener text-center pull-right hidden visible-xs"><i class="fa fa-bars"></i></a>
           </div>
         </div>
       </div>
@@ -192,7 +192,7 @@
         <div class="container">
           <div class="row">
             <div class="col-xs-12" style="display: flex; justify-content: center;">
-              <a href="#" class="nav-opener text-center hidden visible-sm"><i class="fa fa-bars"></i></a>
+              <a href="javascript:void(0);" class="nav-opener text-center hidden visible-sm"><i class="fa fa-bars"></i></a>
               <!-- nav of the page -->
               <nav id="nav">
                 <ul class="list-unstyled">
@@ -204,12 +204,22 @@
                   <li class="">
                     <a href="/">Home</a>
                   </li>
-                  {{/if}}
+                  {{/if}} 
 
                   {{#if aboutPage}}
                   <li class="active"><a href="/about">About</a></li>
                   {{else}}
                   <li><a href="/about">About</a></li>
+                  {{/if}}
+                  {{#if singapore}}
+                  <li class="active"><a href="javascript:void(0);">Singapore</a></li>
+                  {{else}}
+                  <li><a href="javascript:void(0);">Singapore</a></li>
+                  {{/if}}
+                  {{#if mauritius}}
+                  <li class="active"><a href="javascript:void(0);">Mauritius</a></li>
+                  {{else}}
+                  <li><a href="javascript:void(0);">Mauritius</a></li>
                   {{/if}}
 
                   {{#if offerPage}}
@@ -304,10 +314,10 @@
               <ul class="list-unstyled socail-network">
                 <li><a href="https://www.facebook.com/profile.php?id=61550640344063" target="_blank"><i
                       class="fa-brands fa-facebook-f"></i></a></li>
-                <li><a href="#" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
+                <li><a href="javascript:void(0);" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
                 <li><a href="https://www.instagram.com/studydiscount/" target="_blank"><i
                       class="fa-brands fa-instagram"></i></a></li>
-                <li><a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                <li><a href="javascript:void(0);" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
               </ul>
             </div>
             <div class="col4">
