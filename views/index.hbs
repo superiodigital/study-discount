@@ -2,25 +2,6 @@
 <main id="main">
   <!-- banner of the page -->
   {{#if randomBanner}}
-  {{!-- <a href="{{randomBanner.url}}">
-    <section class="banner banner-bg-full" style="background-image: url(/uploads/{{randomBanner.filePath}});">
-      <div class="holder">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-6 text-left">
-              <h1 class="" style="text-align: left;">
-                {{randomBanner.description}}
-              </h1>
-              <div class="text-left">
-                <a href="{{randomBanner.url}}" class="btn-primary text-center md-round" style="">Apply for this offer
-                  <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </a> --}}
   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -135,7 +116,7 @@
   <section class="offer-sec container pad-top-lg pad-bottom-md" style="margin-bottom: 50px;">
     <div class="row">
       <header class="col-xs-12 text-center header">
-        <h2 class="heading">View more offers!</h2>
+        <h2 class="heading">View more!</h2>
         <ul class="list-unstyled filter-list">
           {{#each filteredCategory}}
           <li class=""><a href="#" data-filter=".{{_id}}">{{name}}</a></li>
@@ -164,8 +145,8 @@
               <strong class="heading6" id="description-cat-link-{{_id}}">{{shortDescription}}</strong>
               <span class="sub-title"><i class="fa-solid fa-user-check"></i> {{registrations}}</span>
               <div class="text-center">
-                <a href="/offers-details/{{slug}}" class="btn-primary text-center text-uppercase md-round">View
-                  offer<span class="code">Go <i class="fa-solid fa-arrow-right"></i></span></a>
+                <a href="/offers-details/{{slug}}" class="btn-primary text-center text-uppercase md-round">Know
+                  More<span class="code">Go <i class="fa-solid fa-arrow-right"></i></span></a>
                 <time class="time" datetime="2017-02-03 20:00">Expires On : {{expiresTo}}</time>
               </div>
             </div>
@@ -176,7 +157,7 @@
     </div>
   </section>
   {{/if}}
-  <!-- call out sec of the page -->
+  {{!-- <!-- call out sec of the page -->
   <section class="callout-sec pad-top-sm pad-bottom-sm">
     <div class="container">
       <div class="row">
@@ -188,10 +169,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
 
   <!-- store sec of the page -->
-  <section class="store-sec bg-grey pad-top-lg pad-bottom-lg">
+  {{!-- <section class="store-sec bg-grey pad-top-lg pad-bottom-lg">
     <div class="container">
       <div class="row">
         <header class="col-xs-12 text-center header">
@@ -221,7 +202,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
 
   <section class="subscribe-sec bg-full" style="background-image: url(/user//user/images/img20.jpg);">
     <div class="container">
